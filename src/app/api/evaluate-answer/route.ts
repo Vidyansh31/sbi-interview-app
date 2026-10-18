@@ -152,6 +152,9 @@ export async function POST(request: Request) {
       );
     }
 
+    const difficulty = body?.difficulty === "easy" || body?.difficulty === "hard" ? body.difficulty : "moderate";
+    const mode = body?.mode === "current_affairs" ? "current_affairs" : "full_mock";
+
     const apiKey = process.env.GEMINI_API_KEY;
 
     if (!apiKey) {
@@ -163,7 +166,26 @@ export async function POST(request: Request) {
 
     const ai = new GoogleGenAI({ apiKey });
 
-    const primaryPrompt = `You are a fair, constructive SBI PO interview evaluator.
+    const difficultyExpectation = {
+      easy: `EVALUATION EXPECTATION (EASY MODE):
+- Be encouraging and supportive. Expect clear fundamental understanding, honest personal reflection, and basic conceptual definitions.
+- If a candidate's answer covers the main core point simply and coherently, award generous credit.
+- Follow-up criteria: Only follow up gently if the answer completely missed the central question or was extremely vague.`,
+      moderate: `EVALUATION EXPECTATION (MODERATE MODE):
+- Standard SBI PO Phase-III interview standard. Expect structured thinking, balanced reasoning, accurate banking terms, and realistic examples.
+- Deduct marks if standard banking regulations, customer protection principles, or branch pragmatism are overlooked.
+- Follow-up criteria: Probe if key trade-offs, operational feasibility, or regulatory nuances are omitted.`,
+      hard: `EVALUATION EXPECTATION (HARD MODE):
+- Rigorous executive interview standard. Demand precise terminology, systemic awareness (RBI circulars, capital ratios, liquidity risks), and strategic managerial acumen.
+- Scrutinize superficial or memorized answers rigorously.
+- Follow-up criteria: Actively cross-examine subtle contradictions, weak assumptions, or oversimplified solutions.`,
+    }[difficulty as "easy" | "moderate" | "hard"];
+
+    const primaryPrompt = `You are a distinguished SBI PO interview board panelist.
+Interview Mode: ${mode === "current_affairs" ? "Dedicated Current Affairs Examination" : "Full Mock Interview"}
+Difficulty: ${difficulty.toUpperCase()}
+
+${difficultyExpectation}
 
 Evaluate the candidate's answer to the interview question below.
 Judge relevance, completeness, clarity and factual accuracy.
@@ -175,6 +197,11 @@ ${question.trim()}
 
 CANDIDATE ANSWER:
 ${answer.trim()}
+
+ADAPTIVE FOLLOW-UP RULE (CRITICAL):
+- In Current Affairs mode, any follow-up question MUST remain strictly connected to the exact same current affairs event/topic. Never introduce unrelated personal or static HR questions.
+- Only generate a "followUpQuestion" if the candidate's answer is incomplete, makes an unverified claim, skips a key regulatory/banking nuance, or genuinely warrants cross-examination under the ${difficulty.toUpperCase()} difficulty standard.
+- If the candidate's answer is comprehensive, well-structured, and strong (or if no follow-up is necessary), return an empty string: "" for "followUpQuestion". Do NOT force an artificial follow-up.
 
 CRITICAL INSTRUCTIONS:
 You must respond with ONLY a single valid JSON object.
@@ -189,7 +216,7 @@ Your output must strictly conform to this JSON schema:
   "strengths": ["<string: specific strength 1>", "<string: specific strength 2>"],
   "improvements": ["<string: specific improvement 1>", "<string: specific improvement 2>"],
   "suggestedAnswer": "<string: a stronger model answer>",
-  "followUpQuestion": "<string: one relevant follow-up question for the interview panel>"
+  "followUpQuestion": "<string: one targeted probe if genuinely warranted, otherwise empty string ''>"
 }`;
 
     // First attempt
@@ -224,7 +251,7 @@ SCHEMA REQUIRED:
   "strengths": ["string"],
   "improvements": ["string"],
   "suggestedAnswer": "string",
-  "followUpQuestion": "string"
+  "followUpQuestion": "string (empty string '' if answer is already complete)"
 }
 
 Ensure "score" is an integer between 1 and 10.

@@ -24,7 +24,19 @@
     - Follow-up counter resets to 0 on advancing to the next main question.
     - Main progress indicators strictly preserve "Question X of 10" and do not advance on follow-ups.
 
-## Recent Changes
+- **Browser Voice-to-Voice Interview Mode**:
+  - Created [`src/lib/useInterviewVoice.ts`](file:///d:/InterviewApp/src/lib/useInterviewVoice.ts):
+    - Browser Text-to-Speech (`SpeechSynthesis`) reading questions aloud at measured panel pace (rate 0.95, `en-IN` voice preference).
+    - Browser Speech-to-Text (`SpeechRecognition` / `webkitSpeechRecognition`) capturing spoken candidate answers in real time.
+    - **Acoustic Loop / Self-Pickup Prevention**: Automatically shuts off microphone during TTS playback and starts listening upon completion.
+    - Permission error handling, speech state transitions (`speaking`, `listening`, `idle`, `permission-denied`, `unsupported`).
+  - Integrated into [`src/app/interview/page.tsx`](file:///d:/InterviewApp/src/app/interview/page.tsx):
+    - "Read Question Aloud" & "Voice Mode: Active / Paused" toggles.
+    - Real-time spoken transcript synchronization into the candidate's answer box for instant review and editing.
+    - "Speak Your Answer" / "Stop Recording (Done Speaking)" one-click actions.
+    - Submits directly through the unchanged `/api/evaluate-answer` backend.
+    - 100% fallback to standard text input when microphone is unsupported or denied.
+  - Verified production build (`npm run build`, exit code 0).
 - **Full Dynamic 10-Question Session Generation by Gemini**:
   - Created `/api/generate-interview-session` ([`src/app/api/generate-interview-session/route.ts`](file:///d:/InterviewApp/src/app/api/generate-interview-session/route.ts)):
     - Prompts Gemini (`gemini-3.5-flash-lite`) to dynamically generate all 10 questions on the fly for every interview.
@@ -42,5 +54,18 @@
     - Seamless fallback to randomized curated questions if API key or network fails.
   - Verified production build (`npm run build`, exit code 0).
 
+- **Difficulty Modes (Easy, Moderate, Hard)**:
+  - Integrated into Full Mock Interview and Dedicated Current Affairs mode.
+  - Calibrates question generation, follow-up depth (need-based, max 2), and evaluation rigor across `/api/evaluate-answer` and `/api/generate-interview-session`.
+  - Easy: foundational concepts, gentle probes. Moderate: balanced Phase-III interview standard. Hard: rigorous macroeconomic and regulatory probing.
+- **Dedicated Current Affairs Interview**:
+  - Time windows: Last 3 Months (Aug–Oct 2026), Last 6 Months (May–Oct 2026), Last 12 Months (Nov 2025–Oct 2026).
+  - 6 categories: Banking and RBI; Indian economy and budget; National affairs; International affairs; Government schemes and policies; Appointments, awards, sports, reports, and major events.
+  - 100% grounded in verified official records from RBI, Ministry of Finance, NPCI, SEBI, NITI Aayog.
+  - Shows verified source name, source URL, event publication date, and verification timestamp on question cards.
+- **Final Performance Report**:
+  - Incorporates selected interview mode, difficulty level, and coverage window in header badges and qualitative narrative.
+
 ## Next Planned Steps
-- Project features complete (Session Flow, Adaptive Follow-ups, Skip/Close actions, Exam-Style Weighted Report, and Verified Current Affairs). Ready for user testing and deployment.
+- Conduct end-to-end user testing across desktop and mobile browsers.
+- Monitor Gemini API rate limits (15 RPM free tier) with the built-in randomized question bank fallback.

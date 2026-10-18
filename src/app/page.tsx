@@ -1,6 +1,64 @@
-import Link from "next/link";
+"use client";
+
+import { useState } from "react";
+import {
+  InterviewDifficulty,
+  InterviewMode,
+  TimeWindow,
+  CurrentAffairsCategory,
+} from "@/lib/currentAffairsTypes";
+
+import { useRouter } from "next/navigation";
+
+const CA_CATEGORIES: CurrentAffairsCategory[] = [
+  "Banking and RBI",
+  "Indian economy and budget",
+  "National affairs",
+  "International affairs",
+  "Government schemes and policies",
+  "Appointments, awards, sports, reports, and major events",
+];
 
 export default function Home() {
+  const router = useRouter();
+
+  // Practice configuration state
+  const [selectedMode, setSelectedMode] = useState<InterviewMode>("full_mock");
+  const [difficulty, setDifficulty] = useState<InterviewDifficulty>("moderate");
+  const [timeWindow, setTimeWindow] = useState<TimeWindow>("6_months");
+  const [selectedCategories, setSelectedCategories] = useState<CurrentAffairsCategory[]>([
+    "Banking and RBI",
+    "Indian economy and budget",
+    "Government schemes and policies",
+  ]);
+
+  const toggleCategory = (cat: CurrentAffairsCategory) => {
+    setSelectedCategories((prev) =>
+      prev.includes(cat) ? (prev.length > 1 ? prev.filter((c) => c !== cat) : prev) : [...prev, cat]
+    );
+  };
+
+  const startInterview = () => {
+    const params = new URLSearchParams();
+    // Unique session ID generated at user interaction time to guarantee fresh state
+    params.set("sid", Date.now().toString());
+
+    if (selectedMode === "full_mock") {
+      params.set("mode", "full_mock");
+      params.set("difficulty", difficulty);
+      router.push(`/interview?${params.toString()}`);
+      return;
+    }
+
+    params.set("mode", "current_affairs");
+    params.set("difficulty", difficulty);
+    params.set("timeWindow", timeWindow);
+    if (selectedCategories.length > 0) {
+      params.set("categories", selectedCategories.join(","));
+    }
+    router.push(`/interview?${params.toString()}`);
+  };
+
   return (
     <div className="min-h-screen bg-white text-slate-900 flex flex-col font-sans selection:bg-amber-100 selection:text-amber-900">
       {/* Top Notification Bar */}
@@ -81,11 +139,11 @@ export default function Home() {
 
           {/* CTA Button */}
           <div className="flex items-center gap-3">
-            <Link
-              href="/interview"
+            <a
+              href="#practice"
               className="inline-flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-[#0a2540] hover:bg-[#071b30] rounded-lg shadow-sm transition-all focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-[#0a2540]"
             >
-              <span>Start Mock Interview</span>
+              <span>Start Interview</span>
               <svg
                 className="w-4 h-4 text-amber-400"
                 fill="none"
@@ -96,7 +154,7 @@ export default function Home() {
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
               </svg>
-            </Link>
+            </a>
           </div>
         </nav>
       </header>
@@ -128,9 +186,10 @@ export default function Home() {
 
                 {/* Primary & Secondary Actions */}
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto mb-10">
-                  <Link
-                    href="/interview"
-                    className="inline-flex items-center justify-center gap-2 px-7 py-3.5 text-base font-bold text-white bg-[#0a2540] hover:bg-[#071b30] rounded-xl shadow-md hover:shadow-lg transition-all focus:outline-hidden focus:ring-2 focus:ring-[#0a2540] focus:ring-offset-2"
+                  <button
+                    type="button"
+                    onClick={startInterview}
+                    className="inline-flex items-center justify-center gap-2 px-7 py-3.5 text-base font-bold text-white bg-[#0a2540] hover:bg-[#071b30] rounded-xl shadow-md hover:shadow-lg transition-all focus:outline-hidden focus:ring-2 focus:ring-[#0a2540] focus:ring-offset-2 cursor-pointer"
                   >
                     <span>Start Mock Interview</span>
                     <svg
@@ -143,12 +202,12 @@ export default function Home() {
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                     </svg>
-                  </Link>
+                  </button>
                   <a
-                    href="#how-it-works"
+                    href="#practice"
                     className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-base font-semibold text-[#0a2540] bg-white hover:bg-slate-50 border border-slate-300 rounded-xl transition-colors focus:outline-hidden focus:ring-2 focus:ring-slate-400"
                   >
-                    <span>Explore How It Works</span>
+                    <span>Configure Modes</span>
                   </a>
                 </div>
 
@@ -238,6 +297,222 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ── INTERVIEW PRACTICE CONFIGURATION SECTION ── */}
+        <section id="practice" className="py-16 lg:py-20 bg-slate-50 border-b border-slate-200 scroll-mt-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-3xl mx-auto mb-12">
+              <span className="text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-100 border border-amber-300 px-3 py-1 rounded-full">
+                Customized Interview Modes
+              </span>
+              <h2 className="mt-4 text-3xl sm:text-4xl font-extrabold text-[#0a2540] tracking-tight">
+                Select Your Interview Experience
+              </h2>
+              <p className="mt-3 text-base text-slate-600">
+                Choose between a comprehensive 10-question Full Mock Panel or a dedicated deep-dive into verified Current Affairs.
+              </p>
+            </div>
+
+            <div className="max-w-4xl mx-auto bg-white rounded-3xl border border-slate-200 shadow-lg p-6 sm:p-10">
+              {/* Step 1: Mode Selection */}
+              <div className="mb-8">
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">
+                  Step 1: Choose Interview Format
+                </label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {/* Mode Card 1: Full Mock */}
+                  <button
+                    type="button"
+                    onClick={() => setSelectedMode("full_mock")}
+                    className={`text-left p-5 rounded-2xl border-2 transition-all ${
+                      selectedMode === "full_mock"
+                        ? "border-[#0a2540] bg-[#0a2540]/5 ring-2 ring-[#0a2540]/20"
+                        : "border-slate-200 hover:border-slate-300 bg-white"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="font-bold text-base text-[#0a2540]">Full Mock Interview</span>
+                      {selectedMode === "full_mock" && (
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#0a2540]" />
+                      )}
+                    </div>
+                    <p className="text-xs text-slate-600 leading-relaxed">
+                      Complete 10-question panel simulation spanning Personal Bio-Data, Banking &amp; RBI, SBI &amp; Digital Banking, Situational Judgment, and Current Affairs.
+                    </p>
+                    <div className="mt-3 flex items-center gap-1.5 text-[11px] font-semibold text-amber-700">
+                      <span>Standard SBI Phase-III Board</span>
+                    </div>
+                  </button>
+
+                  {/* Mode Card 2: Current Affairs Only */}
+                  <button
+                    type="button"
+                    onClick={() => setSelectedMode("current_affairs")}
+                    className={`text-left p-5 rounded-2xl border-2 transition-all ${
+                      selectedMode === "current_affairs"
+                        ? "border-[#0a2540] bg-[#0a2540]/5 ring-2 ring-[#0a2540]/20"
+                        : "border-slate-200 hover:border-slate-300 bg-white"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="font-bold text-base text-[#0a2540]">Dedicated Current Affairs</span>
+                      {selectedMode === "current_affairs" && (
+                        <span className="w-2.5 h-2.5 rounded-full bg-[#0a2540]" />
+                      )}
+                    </div>
+                    <p className="text-xs text-slate-600 leading-relaxed">
+                      10 questions 100% grounded in verified official news (RBI circulars, Ministry of Finance, PIB). Zero generic HR questions.
+                    </p>
+                    <div className="mt-3 flex items-center gap-1.5 text-[11px] font-semibold text-purple-700">
+                      <span>Verifiable facts with sources &amp; dates</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+
+              {/* Step 2: Difficulty Selection */}
+              <div className="mb-8">
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">
+                  Step 2: Calibrate Difficulty
+                </label>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  {/* Easy */}
+                  <button
+                    type="button"
+                    onClick={() => setDifficulty("easy")}
+                    className={`p-4 rounded-xl border text-left transition-all ${
+                      difficulty === "easy"
+                        ? "border-emerald-600 bg-emerald-50 text-emerald-950 ring-1 ring-emerald-500"
+                        : "border-slate-200 hover:border-slate-300 bg-white text-slate-700"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="font-bold text-sm">Easy</span>
+                      <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                    </div>
+                    <p className="text-[11px] text-slate-600 leading-snug">
+                      Foundational questions, core banking definitions, gentle follow-ups.
+                    </p>
+                  </button>
+
+                  {/* Moderate */}
+                  <button
+                    type="button"
+                    onClick={() => setDifficulty("moderate")}
+                    className={`p-4 rounded-xl border text-left transition-all ${
+                      difficulty === "moderate"
+                        ? "border-blue-600 bg-blue-50 text-blue-950 ring-1 ring-blue-500"
+                        : "border-slate-200 hover:border-slate-300 bg-white text-slate-700"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="font-bold text-sm">Moderate (Standard)</span>
+                      <span className="w-2 h-2 rounded-full bg-blue-500" />
+                    </div>
+                    <p className="text-[11px] text-slate-600 leading-snug">
+                      Realistic panel standard. Requires structured reasoning and examples.
+                    </p>
+                  </button>
+
+                  {/* Hard */}
+                  <button
+                    type="button"
+                    onClick={() => setDifficulty("hard")}
+                    className={`p-4 rounded-xl border text-left transition-all ${
+                      difficulty === "hard"
+                        ? "border-red-600 bg-red-50 text-red-950 ring-1 ring-red-500"
+                        : "border-slate-200 hover:border-slate-300 bg-white text-slate-700"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="font-bold text-sm">Hard</span>
+                      <span className="w-2 h-2 rounded-full bg-red-500" />
+                    </div>
+                    <p className="text-[11px] text-slate-600 leading-snug">
+                      Advanced policy analysis, deep cross-examinations, tough trade-offs.
+                    </p>
+                  </button>
+                </div>
+              </div>
+
+              {/* Step 3 (Only if Current Affairs Mode): Time Window & Category Filter */}
+              {selectedMode === "current_affairs" && (
+                <div className="p-5 bg-slate-50 border border-slate-200 rounded-2xl mb-8 space-y-6">
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
+                      Time Window (Relative to October 2026)
+                    </label>
+                    <div className="grid grid-cols-3 gap-2">
+                      {(["3_months", "6_months", "12_months"] as TimeWindow[]).map((tw) => (
+                        <button
+                          key={tw}
+                          type="button"
+                          onClick={() => setTimeWindow(tw)}
+                          className={`py-2 px-3 rounded-lg text-xs font-bold text-center transition-all ${
+                            timeWindow === tw
+                              ? "bg-[#0a2540] text-white shadow-xs"
+                              : "bg-white text-slate-700 border border-slate-200 hover:bg-slate-100"
+                          }`}
+                        >
+                          Last {tw === "3_months" ? "3 Months" : tw === "6_months" ? "6 Months" : "12 Months"}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
+                      Target Categories (Select at least 1)
+                    </label>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {CA_CATEGORIES.map((cat) => {
+                        const isSelected = selectedCategories.includes(cat);
+                        return (
+                          <button
+                            key={cat}
+                            type="button"
+                            onClick={() => toggleCategory(cat)}
+                            className={`p-2.5 rounded-lg border text-xs text-left font-medium transition-all flex items-center justify-between ${
+                              isSelected
+                                ? "bg-white border-[#0a2540] text-[#0a2540] font-bold shadow-2xs"
+                                : "bg-slate-100/70 border-slate-200 text-slate-600 hover:bg-white"
+                            }`}
+                          >
+                            <span>{cat}</span>
+                            <span
+                              className={`w-4 h-4 rounded flex items-center justify-center text-[10px] ${
+                                isSelected ? "bg-[#0a2540] text-white" : "border border-slate-300"
+                              }`}
+                            >
+                              {isSelected ? "✓" : ""}
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Action Start Button */}
+              <div className="pt-4 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="text-xs text-slate-500">
+                  Ready to launch: <strong className="text-slate-800">{selectedMode === "full_mock" ? "Full Mock Interview" : "Current Affairs Interview"}</strong> ({difficulty.toUpperCase()})
+                </div>
+                <button
+                  type="button"
+                  onClick={startInterview}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-bold text-white bg-[#0a2540] hover:bg-[#071b30] rounded-xl shadow-md transition-all focus:outline-hidden focus:ring-2 focus:ring-[#0a2540] focus:ring-offset-2 cursor-pointer"
+                >
+                  <span>Launch Interview Session</span>
+                  <svg className="w-4 h-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Features Section */}
         <section id="features" className="py-16 lg:py-24 bg-white border-b border-slate-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -299,18 +574,18 @@ export default function Home() {
                 <div>
                   <div className="w-12 h-12 rounded-xl bg-[#0a2540] text-white flex items-center justify-center mb-6 group-hover:scale-105 transition-transform">
                     <svg className="w-6 h-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                     </svg>
                   </div>
                   <h3 className="text-xl font-bold text-[#0a2540] mb-3">
-                    Banking &amp; RBI Questions
+                    Adaptive Follow-Ups
                   </h3>
                   <p className="text-sm text-slate-600 leading-relaxed">
-                    Master essential topics: Priority Sector Lending (PSL), NPA resolution, Basel III norms, Monetary Policy Committee (MPC) decisions, and financial inclusion.
+                    Face realistic board cross-examinations. The AI analyzes your responses dynamically, challenging vague assumptions with at-most 2 targeted probes.
                   </p>
                 </div>
                 <div className="mt-6 pt-4 border-t border-slate-100 flex items-center text-xs font-semibold text-amber-600">
-                  Curated banking syllabus
+                  Dynamic probing
                 </div>
               </div>
 
@@ -319,18 +594,18 @@ export default function Home() {
                 <div>
                   <div className="w-12 h-12 rounded-xl bg-[#0a2540] text-white flex items-center justify-center mb-6 group-hover:scale-105 transition-transform">
                     <svg className="w-6 h-6 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
                     </svg>
                   </div>
                   <h3 className="text-xl font-bold text-[#0a2540] mb-3">
-                    Follow-up Questions
+                    Verified Current Affairs
                   </h3>
                   <p className="text-sm text-slate-600 leading-relaxed">
-                    Test your composure against dynamic counter-questions and board drill-downs that probe deeper whenever your answer requires more justification.
+                    100% verified events from RBI, Ministry of Finance, and NPCI. Rigorous questions grounded with verified publication dates and sources.
                   </p>
                 </div>
                 <div className="mt-6 pt-4 border-t border-slate-100 flex items-center text-xs font-semibold text-amber-600">
-                  Adaptive cross-examination
+                  Official news grounding
                 </div>
               </div>
             </div>
@@ -342,10 +617,10 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-3xl mx-auto mb-16">
               <span className="text-xs font-bold uppercase tracking-wider text-amber-600 bg-amber-50 border border-amber-200 px-3 py-1 rounded-full">
-                Simple 3-Step Process
+                Preparation Workflow
               </span>
               <h2 className="mt-4 text-3xl sm:text-4xl font-extrabold text-[#0a2540] tracking-tight">
-                How It Works
+                Three Simple Steps to Success
               </h2>
               <p className="mt-4 text-base sm:text-lg text-slate-600">
                 A seamless structured workflow designed to build your knowledge, composure, and communication step-by-step.
@@ -399,7 +674,6 @@ export default function Home() {
         <section id="free-access" className="py-16 lg:py-24 bg-white border-b border-slate-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-gradient-to-br from-[#0a2540] to-[#071b30] rounded-3xl p-8 sm:p-12 lg:p-16 text-white relative overflow-hidden shadow-xl">
-              {/* Subtle Decorative Background Circles */}
               <div className="absolute top-0 right-0 -mr-16 -mt-16 w-80 h-80 rounded-full bg-amber-500/10 blur-3xl pointer-events-none" />
               <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-80 h-80 rounded-full bg-blue-500/10 blur-3xl pointer-events-none" />
 
@@ -428,9 +702,9 @@ export default function Home() {
                     </p>
                   </div>
                   <div>
-                    <h3 className="text-amber-400 font-bold text-lg mb-1">Open Access</h3>
+                    <h3 className="text-amber-400 font-bold text-lg mb-1">SBI Specific</h3>
                     <p className="text-slate-400 text-xs sm:text-sm">
-                      Practise at your own pace whenever you have time.
+                      Tailored specifically to SBI PO patterns, not generic corporate HR.
                     </p>
                   </div>
                 </div>
@@ -439,118 +713,43 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Practice Ready Anchor Section */}
-        <section id="practice" className="py-16 bg-slate-50 border-b border-slate-200">
+        {/* Final CTA Section */}
+        <section className="py-16 lg:py-20 bg-slate-50">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="bg-white rounded-2xl border border-slate-200 p-8 sm:p-12 shadow-sm">
-              <div className="w-16 h-16 rounded-2xl bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center mx-auto mb-6">
-                <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z" />
-                </svg>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0a2540] mb-3">
-                Ready to Begin Your Interview Practice?
-              </h2>
-              <p className="text-slate-600 text-base max-w-xl mx-auto mb-8">
-                Sharpen your answers on banking awareness, personal bio-data, and situational judgment scenarios before facing the actual interview panel.
-              </p>
-              <div className="inline-flex flex-col sm:flex-row items-center gap-4">
-                <Link
-                  href="/interview"
-                  className="w-full sm:w-auto px-8 py-3.5 bg-[#0a2540] hover:bg-[#071b30] text-white font-bold rounded-xl shadow-md transition-all focus:outline-hidden focus:ring-2 focus:ring-[#0a2540] focus:ring-offset-2 flex items-center justify-center gap-2"
-                >
-                  <span>Start Mock Interview</span>
-                  <svg className="w-4 h-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                  </svg>
-                </Link>
-                <a
-                  href="#how-it-works"
-                  className="w-full sm:w-auto px-6 py-3.5 bg-white border border-slate-300 text-slate-700 font-semibold rounded-xl hover:bg-slate-50 transition-colors"
-                >
-                  Review Guidelines
-                </a>
-              </div>
-            </div>
+            <h2 className="text-3xl font-extrabold text-[#0a2540] tracking-tight mb-4">
+              Begin Your SBI PO Mock Interview Now
+            </h2>
+            <p className="text-slate-600 text-base mb-8 max-w-xl mx-auto">
+              Simulate 10 panel questions, practise speech responses, face adaptive follow-ups, and receive an instant Phase-III evaluation report.
+            </p>
+            <button
+              type="button"
+              onClick={startInterview}
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-bold text-white bg-[#0a2540] hover:bg-[#071b30] rounded-xl shadow-md transition-all focus:outline-hidden focus:ring-2 focus:ring-[#0a2540] focus:ring-offset-2 cursor-pointer"
+            >
+              <span>Start Free Mock Interview</span>
+              <svg className="w-5 h-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </button>
           </div>
         </section>
       </main>
 
       {/* Footer */}
-      <footer className="bg-[#0a2540] text-slate-300 border-t border-[#122e50] py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-10">
-            {/* Brand Information */}
-            <div className="md:col-span-6 flex flex-col items-start">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center text-amber-400">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 21h18M3 10h18M5 10v11M9 10v11M15 10v11M19 10v11M12 2L3 7v3h18V7l-9-5z" />
-                  </svg>
-                </div>
-                <span className="text-xl font-bold text-white tracking-tight">
-                  SBI PO <span className="text-amber-400">Interview Coach</span>
-                </span>
-              </div>
-              <p className="text-slate-400 text-sm max-w-md leading-relaxed mb-4">
-                Empowering banking aspirants across India with realistic, AI-powered interview practice and actionable feedback to excel in the SBI PO Phase-III examination.
-              </p>
-              <div className="text-xs text-amber-400/90 font-medium">
-                100% Free Public Learning Initiative
-              </div>
-            </div>
-
-            {/* Quick Navigation */}
-            <div className="md:col-span-3">
-              <h3 className="text-white text-sm font-semibold tracking-wider uppercase mb-4">
-                Navigation
-              </h3>
-              <ul className="space-y-2.5 text-sm text-slate-400">
-                <li>
-                  <a href="#" className="hover:text-amber-400 transition-colors">
-                    Home
-                  </a>
-                </li>
-                <li>
-                  <a href="#practice" className="hover:text-amber-400 transition-colors">
-                    Practice Interviews
-                  </a>
-                </li>
-                <li>
-                  <a href="#how-it-works" className="hover:text-amber-400 transition-colors">
-                    How It Works
-                  </a>
-                </li>
-                <li>
-                  <a href="#free-access" className="hover:text-amber-400 transition-colors">
-                    Free Access Initiative
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Key Topics */}
-            <div className="md:col-span-3">
-              <h3 className="text-white text-sm font-semibold tracking-wider uppercase mb-4">
-                Interview Topics
-              </h3>
-              <ul className="space-y-2.5 text-sm text-slate-400">
-                <li>Banking Awareness &amp; RBI Circulars</li>
-                <li>Monetary Policy &amp; Inflation</li>
-                <li>Priority Sector Lending (PSL) &amp; NPA</li>
-                <li>Personal Profile &amp; Situational Scenarios</li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Bottom Bar & Disclaimer */}
-          <div className="pt-8 border-t border-slate-700/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-            <p>
-              Disclaimer: This is an independent educational platform created for interview preparation. It is not affiliated with, authorized, or endorsed by the State Bank of India (SBI) or IBPS.
-            </p>
-            <p className="shrink-0">
-              &copy; 2026 SBI PO Interview Coach.
-            </p>
+      <footer className="border-t border-slate-200 bg-white py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+          <p>© 2026 SBI PO Interview Coach. Free educational platform.</p>
+          <div className="flex items-center gap-6">
+            <a href="#practice" className="hover:text-slate-800 transition-colors">
+              Practice Modes
+            </a>
+            <a href="#how-it-works" className="hover:text-slate-800 transition-colors">
+              How It Works
+            </a>
+            <a href="#free-access" className="hover:text-slate-800 transition-colors">
+              Free Access
+            </a>
           </div>
         </div>
       </footer>

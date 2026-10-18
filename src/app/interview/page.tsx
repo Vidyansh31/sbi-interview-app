@@ -1,19 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useRef, useId, useEffect } from "react";
+import { useState, useRef, useId, useEffect, useMemo, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 
 import {
-  QUESTION_BANK,
-  buildBalancedInterviewSession,
-  buildRandomizedSession,
   type EvaluationFeedback,
   type InterviewTurn,
   type InterviewQuestion,
 } from "@/lib/questions";
+import { useInterviewVoice } from "@/lib/useInterviewVoice";
 
 const TOTAL_SESSION_QUESTIONS = 10;
-const MAX_FOLLOW_UPS_PER_MAIN = 3;
+const MAX_FOLLOW_UPS_PER_MAIN = 2; // Capped at at-most 2 follow-ups only when needed
 const MAX_CHARS = 5000;
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -21,44 +20,121 @@ const MAX_CHARS = 5000;
 ───────────────────────────────────────────────────────────────────────────── */
 
 export default function InterviewPage() {
-  // Session questions: initial balanced session safe for prerender
-  const [sessionQuestions, setSessionQuestions] = useState<InterviewQuestion[]>(() => buildBalancedInterviewSession());
-
-  // On client mount, dynamically generate all 10 questions via Gemini across all categories & CA pillars
-  // while initializing with a randomized curated session immediately for zero UI latency.
-  useEffect(() => {
-    let isMounted = true;
-
-    // 1. Immediately randomize base questions on client mount
-    const randomized = buildRandomizedSession();
-    setSessionQuestions(randomized);
-
-    // 2. Fetch all 10 dynamically generated AI questions on the fly
-    async function loadDynamicSession() {
-      try {
-        const res = await fetch("/api/generate-interview-session", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-        });
-        const data = await res.json();
-        if (isMounted && data?.success && Array.isArray(data.questions) && data.questions.length === 10) {
-          setSessionQuestions(data.questions);
-        }
-      } catch (err) {
-        console.warn("Could not generate full dynamic session, retained randomized curated session:", err);
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-white flex items-center justify-center">
+          <div className="flex flex-col items-center gap-3">
+            <div className="w-8 h-8 border-4 border-[#0a2540] border-t-transparent rounded-full animate-spin" />
+            <p className="text-sm font-semibold text-[#0a2540]">Initializing Interview Session...</p>
+          </div>
+        </div>
       }
-    }
+    >
+      <InterviewSessionRouter />
+    </Suspense>
+  );
+}
 
-    loadDynamicSession();
+function InterviewSessionRouter() {
+  const searchParams = useSearchParams();
+  // Using searchParams.toString() as a unique React key ensures that whenever a candidate
+  // begins a new interview session (with a fresh sid or changed configuration), React
+  // immediately unmounts the old session state and initializes a completely clean interview.
+  const sessionKey = searchParams.toString();
+  return <InterviewSessionContent key={sessionKey} />;
+}
 
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+function InterviewSessionContent() {
+  const searchParams = useSearchParams();
+  const interviewMode = searchParams.get("mode") === "current_affairs" ? "current_affairs" : "full_mock";
+  const difficulty = searchParams.get("difficulty") === "easy" || searchParams.get("difficulty") === "hard" ? searchParams.get("difficulty")! : "moderate";
+  const timeWindow = searchParams.get("timeWindow") === "3_months" || searchParams.get("timeWindow") === "12_months" ? searchParams.get("timeWindow")! : "6_months";
+  const categoryParam = searchParams.get("categories");
+  const selectedCategories = useMemo(
+    () => (categoryParam ? categoryParam.split(",").filter(Boolean) : []),
+    [categoryParam]
+  );
+
+  // Voice mode settings & hook
+  const [isVoiceMode, setIsVoiceMode] = useState<boolean>(true);
+  const [hasUserInteracted, setHasUserInteracted] = useState<boolean>(false);
+
+  // Hook handles TTS (speaking) and STT (microphone recognition) with self-pickup prevention
+  const {
+    isVoiceSupported,
+    isRecognitionSupported,
+    voiceState,
+    interimTranscript,
+    voiceErrorMessage,
+    speakText,
+    stopSpeaking,
+    startListening,
+    stopListening,
+    resetVoiceState,
+  } = useInterviewVoice({
+    onTranscriptUpdate: (newTranscript) => {
+      setAnswer(newTranscript);
+      if (validationError) setValidationError(null);
+      if (errorMessage) setErrorMessage(null);
+    },
+  });
 
   // Session tracking: current main question index and completed turns history
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [sessionTurns, setSessionTurns] = useState<InterviewTurn[]>([]);
+  const currentQuestionIndexRef = useRef(0);
+  useEffect(() => {
+    currentQuestionIndexRef.current = currentQuestionIndex;
+  }, [currentQuestionIndex]);
+
+  // Session questions: state starts null while Gemini generates 10 fresh questions
+  const [sessionQuestions, setSessionQuestions] = useState<InterviewQuestion[] | null>(null);
+  const [isSessionLoading, setIsSessionLoading] = useState<boolean>(true);
+  const [sessionLoadError, setSessionLoadError] = useState<string | null>(null);
+
+  // Prevent duplicate requests during React development double-mounts
+  const hasRequestedSessionRef = useRef<boolean>(false);
+
+  // Dynamically generate all 10 questions via Gemini across all categories & CA pillars
+  // Uses sessionStorage caching so page refreshes DO NOT burn API quota!
+  useEffect(() => {
+    if (hasRequestedSessionRef.current) return;
+    hasRequestedSessionRef.current = true;
+
+    // Fetch fresh dynamic AI questions from Gemini
+    async function loadDynamicSession() {
+      setIsSessionLoading(true);
+      setSessionLoadError(null);
+      try {
+        const res = await fetch("/api/generate-interview-session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            mode: interviewMode,
+            difficulty,
+            timeWindow,
+            categories: selectedCategories,
+          }),
+        });
+        const data = await res.json();
+        if (data?.success && Array.isArray(data.questions) && data.questions.length === 10) {
+          setSessionQuestions(data.questions);
+        } else {
+          throw new Error(data?.error || "Failed to generate interview questions.");
+        }
+      } catch (err) {
+        console.error("Session generation error:", err);
+        setSessionLoadError(
+          err instanceof Error ? err.message : "Unable to reach Gemini API. Please click retry below."
+        );
+      } finally {
+        setIsSessionLoading(false);
+      }
+    }
+
+    loadDynamicSession();
+  }, [interviewMode, difficulty, timeWindow, selectedCategories]);
 
   // Follow-up flow state for the CURRENT main question
   const [followUpCount, setFollowUpCount] = useState(0);
@@ -92,20 +168,23 @@ export default function InterviewPage() {
     improvementAreas: string[];
     priorityTopics: string[];
     answerImprovements: AnswerImprovement[];
+    interviewMode?: string;
+    difficulty?: string;
+    timeWindow?: string;
     readinessAssessment: string;
   }
   const [report, setReport] = useState<ReportData | null>(null);
   const [isGeneratingReport, setIsGeneratingReport] = useState(false);
   const [reportError, setReportError] = useState<string | null>(null);
 
-  // Current active main question from the balanced 10-question session
-  const currentMainQuestion: InterviewQuestion =
-    sessionQuestions[currentQuestionIndex] || sessionQuestions[0] || QUESTION_BANK[0];
+  // Current active main question from the dynamic session
+  const currentMainQuestion: InterviewQuestion | undefined =
+    sessionQuestions ? sessionQuestions[currentQuestionIndex] || sessionQuestions[0] : undefined;
 
   // Active question text displayed to the candidate
   const activeQuestionText = isFollowUpTurn && activeFollowUpQuestion
     ? activeFollowUpQuestion
-    : currentMainQuestion.question;
+    : currentMainQuestion?.question || "";
 
   const [answer, setAnswer] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -116,17 +195,52 @@ export default function InterviewPage() {
   const [showHint, setShowHint] = useState(false);
 
   const textareaId = useId();
-  const feedbackRef = useRef<HTMLDivElement>(null);
   const reportRef = useRef<HTMLDivElement>(null);
 
   const charCount = answer.length;
   const isOverLimit = charCount > MAX_CHARS;
+
+  // Track the last question that was spoken to avoid repeated triggers
+  const lastSpokenQuestionRef = useRef<string>("");
+
+  // Read the active question aloud when voice mode is enabled and the question changes
+  useEffect(() => {
+    if (!isVoiceMode || !isVoiceSupported || !hasUserInteracted || isCompleted) return;
+    if (lastSpokenQuestionRef.current === activeQuestionText) return;
+
+    lastSpokenQuestionRef.current = activeQuestionText;
+
+    const timer = setTimeout(() => {
+      speakText(activeQuestionText, () => {
+        if (isVoiceMode && isRecognitionSupported && !isCompleted) {
+          startListening("");
+        }
+      });
+    }, 400);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [
+    activeQuestionText,
+    isVoiceMode,
+    isVoiceSupported,
+    hasUserInteracted,
+    isCompleted,
+    isRecognitionSupported,
+    speakText,
+    startListening,
+  ]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     // Prevent submission if loading or completed
     if (isLoading || isCompleted) return;
+
+    // Ensure voice recording and speaking are stopped upon submission
+    stopListening();
+    stopSpeaking();
 
     // Reset previous errors
     setValidationError(null);
@@ -157,6 +271,8 @@ export default function InterviewPage() {
         body: JSON.stringify({
           question: activeQuestionText,
           answer: trimmed,
+          difficulty,
+          mode: interviewMode,
         }),
       });
 
@@ -167,6 +283,10 @@ export default function InterviewPage() {
       }
 
       const evalFeedback: EvaluationFeedback = data.feedback;
+
+      if (!currentMainQuestion) {
+        throw new Error("Interview question not loaded. Please try again.");
+      }
 
       // 2. Preserve turn in session history upon successful evaluation
       const completedTurn: InterviewTurn = {
@@ -182,23 +302,19 @@ export default function InterviewPage() {
         timestamp: Date.now(),
       };
 
-      // Keep full history
+      // Keep full history of evaluated turns
       const updatedTurns = [...sessionTurns, completedTurn];
       setSessionTurns(updatedTurns);
-      setFeedback(evalFeedback);
       setErrorMessage(null);
 
-      // Scroll feedback into view smoothly
-      setTimeout(() => {
-        feedbackRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 100);
+      // Reset input form state for the next turn
+      resetVoiceState();
+      setAnswer("");
+      setFeedback(null);
+      setValidationError(null);
+      setShowHint(false);
 
-      // 3. Adaptive follow-up decision — use the followUpQuestion already returned
-      //    by evaluate-answer (avoids a second Gemini call that may give inconsistent results).
-      //    followUpCount tracks how many follow-ups have been ANSWERED for this main question.
-      //    On a main question turn: followUpCount is still 0 (reset on advancing).
-      //    On a follow-up turn:     followUpCount equals the index of the CURRENT follow-up
-      //    being answered (e.g. 1 when answering follow-up 1, 2 for follow-up 2, etc.).
+      // 3. Adaptive follow-up decision — use the followUpQuestion returned by evaluate-answer
       const followUpsAnsweredSoFar = isFollowUpTurn ? followUpCount : 0;
       const canAskAnotherFollowUp = followUpsAnsweredSoFar < MAX_FOLLOW_UPS_PER_MAIN;
 
@@ -207,22 +323,32 @@ export default function InterviewPage() {
         typeof evalFeedback.followUpQuestion === "string" &&
         evalFeedback.followUpQuestion.trim().length > 0
       ) {
-        // evaluate-answer already produced a follow-up question — use it directly.
+        // Automatically proceed into the follow-up question
+        setIsFollowUpTurn(true);
+        setFollowUpCount((prev) => prev + 1);
         setActiveFollowUpQuestion(evalFeedback.followUpQuestion.trim());
         setFollowUpError(null);
+        window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
-        // No follow-up available (limit reached, or evaluate-answer returned none).
+        // No follow-up needed or allowed: advance to next main question or finish
         setActiveFollowUpQuestion(null);
         setFollowUpError(null);
+
         if (currentQuestionIndex + 1 >= TOTAL_SESSION_QUESTIONS) {
+          // Finished all 10 questions!
           setIsCompleted(true);
           generateReport(updatedTurns);
+        } else {
+          // Proceed to next main question
+          setCurrentQuestionIndex((prev) => prev + 1);
+          setFollowUpCount(0);
+          setIsFollowUpTurn(false);
+          window.scrollTo({ top: 0, behavior: "smooth" });
         }
       }
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "Unable to evaluate the answer. Please try again.";
       setErrorMessage(msg);
-      // Keep feedback hidden on failure and do not append a completed turn
       setFeedback(null);
     } finally {
       setIsLoading(false);
@@ -231,58 +357,12 @@ export default function InterviewPage() {
   }
 
   function handleReset() {
+    resetVoiceState();
     setAnswer("");
     setFeedback(null);
     setErrorMessage(null);
     setValidationError(null);
     setShowHint(false);
-  }
-
-  /**
-   * Transition into the newly prepared follow-up question
-   */
-  function handleProceedToFollowUp() {
-    if (!activeFollowUpQuestion) return;
-
-    setIsFollowUpTurn(true);
-    setFollowUpCount((prev) => prev + 1);
-    setAnswer("");
-    setFeedback(null);
-    setErrorMessage(null);
-    setValidationError(null);
-    setShowHint(false);
-
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-
-  /**
-   * Transition to the next MAIN question
-   */
-  function handleNextQuestion() {
-    if (currentQuestionIndex + 1 >= TOTAL_SESSION_QUESTIONS) {
-      setIsCompleted(true);
-      generateReport(sessionTurns);
-      return;
-    }
-
-    // Advance to next main question
-    setCurrentQuestionIndex((prev) => prev + 1);
-
-    // Reset per-main-question follow-up tracking
-    setFollowUpCount(0);
-    setIsFollowUpTurn(false);
-    setActiveFollowUpQuestion(null);
-    setFollowUpError(null);
-
-    // Clear active form state, feedback, and error messages
-    setAnswer("");
-    setFeedback(null);
-    setErrorMessage(null);
-    setValidationError(null);
-    setShowHint(false);
-
-    // Smooth scroll back to the top of the interview container
-    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   /**
@@ -315,7 +395,12 @@ export default function InterviewPage() {
       const res = await fetch("/api/generate-interview-report", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ turns: evaluatedTurns }),
+        body: JSON.stringify({
+          turns: evaluatedTurns,
+          interviewMode,
+          difficulty,
+          timeWindow,
+        }),
       });
       const data = await res.json();
       if (!res.ok || !data.success || !data.report) {
@@ -431,14 +516,27 @@ export default function InterviewPage() {
             </div>
           </div>
 
-          {/* Session badge */}
-          <div className="hidden md:flex items-center gap-2 px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-full text-xs text-slate-600 font-medium">
-            <span
-              className={`w-2 h-2 rounded-full ${
-                isCompleted ? "bg-emerald-600" : "bg-emerald-500 animate-pulse"
-              }`}
-            />
-            <span>{isCompleted ? "Interview Completed" : "Live Session"}</span>
+          {/* Session & AI Origin badge */}
+          <div className="hidden md:flex items-center gap-2">
+            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-full text-xs text-slate-600 font-medium">
+              <span
+                className={`w-2 h-2 rounded-full ${
+                  isCompleted ? "bg-emerald-600" : "bg-emerald-500 animate-pulse"
+                }`}
+              />
+              <span>{isCompleted ? "Interview Completed" : "Live Session"}</span>
+            </div>
+
+            {/* AI Source Indicator */}
+            {sessionQuestions && (
+              <div
+                className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold border bg-emerald-50 text-emerald-900 border-emerald-300"
+                title="Dynamically formulated by Google Gemini AI"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-ping" />
+                <span>Gemini AI: Dynamic Questions</span>
+              </div>
+            )}
           </div>
 
           {/* Header action buttons */}
@@ -553,8 +651,57 @@ export default function InterviewPage() {
       {/* ── Main Content ── */}
       <main className="flex-1 py-8 lg:py-12">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Category & Turn Badges */}
-          <div className="flex items-center gap-2 mb-6 flex-wrap">
+          {/* ── Question Generation Loading State ── */}
+          {isSessionLoading && (
+            <div className="rounded-3xl border border-slate-200 bg-white shadow-lg p-10 sm:p-14 text-center my-8">
+              <div className="w-16 h-16 rounded-2xl bg-[#0a2540]/5 border border-[#0a2540]/10 flex items-center justify-center mx-auto mb-6">
+                <svg className="w-8 h-8 animate-spin text-[#0a2540]" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                </svg>
+              </div>
+              <h2 className="text-xl sm:text-2xl font-extrabold text-[#0a2540] mb-2">
+                {interviewMode === "current_affairs"
+                  ? "Crafting 10 Verified Current Affairs Questions..."
+                  : "Generating Your 10-Question Dynamic Interview Session..."}
+              </h2>
+              <p className="text-sm text-slate-600 max-w-md mx-auto leading-relaxed mb-4">
+                {interviewMode === "current_affairs"
+                  ? "Selecting official developments from RBI, Ministry of Finance, and PIB within your time window. Grounding questions 100% in verified circulars."
+                  : "Google Gemini 3.5 is formulating a custom, non-repeating 10-question panel set calibrated to your selected difficulty standard."}
+              </p>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-900 text-xs font-semibold">
+                <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                <span>Zero pre-baked templates • Fresh AI generation</span>
+              </div>
+            </div>
+          )}
+
+          {/* ── Error State if generation completely fails ── */}
+          {!isSessionLoading && sessionLoadError && !currentMainQuestion && (
+            <div className="rounded-3xl border border-red-200 bg-red-50/70 p-10 text-center my-8">
+              <div className="w-12 h-12 rounded-full bg-red-100 text-red-700 flex items-center justify-center mx-auto mb-4">
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+              </div>
+              <h2 className="text-lg font-bold text-red-900 mb-2">Unable to Load Interview Questions</h2>
+              <p className="text-xs text-red-700 max-w-md mx-auto mb-6">{sessionLoadError}</p>
+              <button
+                type="button"
+                onClick={() => window.location.reload()}
+                className="px-6 py-2.5 bg-[#0a2540] text-white rounded-xl text-xs font-bold hover:bg-[#071b30] shadow-sm transition-all"
+              >
+                Retry Generation
+              </button>
+            </div>
+          )}
+
+          {/* ── Active Session Content (Visible once questions are loaded) ── */}
+          {!isSessionLoading && currentMainQuestion && (
+            <>
+              {/* Category & Turn Badges */}
+              <div className="flex items-center gap-2 mb-6 flex-wrap">
             <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#0a2540]/5 border border-[#0a2540]/20 text-[#0a2540] text-xs font-semibold rounded-full">
               <svg
                 className="w-4 h-4"
@@ -573,6 +720,27 @@ export default function InterviewPage() {
               {currentMainQuestion.category}
             </span>
 
+            {/* Difficulty Badge */}
+            <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold rounded-full border ${
+              difficulty === "hard"
+                ? "bg-red-50 text-red-800 border-red-300"
+                : difficulty === "easy"
+                ? "bg-emerald-50 text-emerald-800 border-emerald-300"
+                : "bg-blue-50 text-blue-800 border-blue-300"
+            }`}>
+              <span className={`w-1.5 h-1.5 rounded-full ${
+                difficulty === "hard" ? "bg-red-600" : difficulty === "easy" ? "bg-emerald-600" : "bg-blue-600"
+              }`} />
+              {difficulty.toUpperCase()}
+            </span>
+
+            {/* Mode badge if dedicated CA */}
+            {interviewMode === "current_affairs" && (
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold rounded-full bg-purple-50 text-purple-800 border border-purple-300">
+                Current Affairs ({timeWindow.replace("_", " ")})
+              </span>
+            )}
+
             {isFollowUpTurn ? (
               <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 border border-amber-300 text-amber-800 text-xs font-bold rounded-full">
                 <span className="w-1.5 h-1.5 rounded-full bg-amber-600 animate-pulse" />
@@ -584,6 +752,45 @@ export default function InterviewPage() {
               </span>
             )}
           </div>
+
+          {/* Verified Current Affairs Event Badge (if question is grounded in official news) */}
+          {currentMainQuestion.isCurrentAffairs && currentMainQuestion.sourceName && (
+            <div className="mb-3 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl flex flex-wrap items-center justify-between gap-2 text-xs">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 rounded font-bold bg-[#0a2540] text-amber-300 text-[10px] uppercase tracking-wide">
+                  Verified Official Source
+                </span>
+                <span className="font-semibold text-slate-800">
+                  {currentMainQuestion.sourceName}
+                </span>
+                {currentMainQuestion.sourceUrl && (
+                  <a
+                    href={currentMainQuestion.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:underline inline-flex items-center gap-0.5 text-[11px]"
+                  >
+                    Source Link
+                    <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                )}
+              </div>
+              <div className="flex items-center gap-3 text-slate-500 text-[11px]">
+                {currentMainQuestion.publishedAt && (
+                  <span>
+                    <strong>Event Date:</strong> {currentMainQuestion.publishedAt}
+                  </span>
+                )}
+                {currentMainQuestion.retrievedAt && (
+                  <span className="hidden sm:inline border-l border-slate-300 pl-3">
+                    <strong>Verified:</strong> {currentMainQuestion.retrievedAt}
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
 
           {/* Question Card */}
           <div className={`bg-white rounded-2xl border-2 shadow-sm p-6 sm:p-8 mb-6 ${
@@ -624,6 +831,61 @@ export default function InterviewPage() {
                 <p className="text-lg sm:text-xl font-semibold text-slate-900 leading-relaxed">
                   &ldquo;{activeQuestionText}&rdquo;
                 </p>
+
+                {/* Voice Assistant Audio Control Strip */}
+                {isVoiceSupported && (
+                  <div className="mt-4 flex flex-wrap items-center gap-2 pt-3 border-t border-slate-100">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setHasUserInteracted(true);
+                        if (voiceState === "speaking") {
+                          stopSpeaking();
+                        } else {
+                          speakText(activeQuestionText, () => {
+                            if (isVoiceMode && isRecognitionSupported && !feedback && !isCompleted) {
+                              startListening(answer);
+                            }
+                          });
+                        }
+                      }}
+                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                        voiceState === "speaking"
+                          ? "bg-amber-100 text-amber-900 border border-amber-300 animate-pulse"
+                          : "bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200"
+                      }`}
+                    >
+                      {voiceState === "speaking" ? (
+                        <>
+                          <span className="w-2 h-2 rounded-full bg-amber-600 animate-ping" />
+                          <span>Speaking... (Click to Stop)</span>
+                        </>
+                      ) : (
+                        <>
+                          <svg className="w-3.5 h-3.5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                          </svg>
+                          <span>Read Question Aloud</span>
+                        </>
+                      )}
+                    </button>
+
+                    {/* Mode Toggle Switch */}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setHasUserInteracted(true);
+                        setIsVoiceMode((prev) => !prev);
+                        if (voiceState === "speaking") stopSpeaking();
+                        if (voiceState === "listening") stopListening();
+                      }}
+                      className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-slate-500 hover:text-slate-800 hover:bg-slate-50 border border-slate-200 transition-colors ml-auto"
+                    >
+                      <span className={`w-2 h-2 rounded-full ${isVoiceMode ? "bg-emerald-500" : "bg-slate-400"}`} />
+                      <span>{isVoiceMode ? "Voice Mode: Active" : "Voice Mode: Paused"}</span>
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -657,21 +919,105 @@ export default function InterviewPage() {
             )}
           </div>
 
+          {/* Voice status or error alert */}
+          {voiceErrorMessage && (
+            <div className="mb-4 p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-start gap-3">
+              <span className="text-base">⚠️</span>
+              <div className="flex-1">
+                <p className="font-semibold">{voiceErrorMessage}</p>
+                <p className="mt-1 text-amber-700">You can continue answering by typing directly in the box below, or click retry to check microphone permissions.</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => startListening(answer)}
+                className="shrink-0 px-2.5 py-1 bg-amber-200/60 hover:bg-amber-200 rounded font-bold text-amber-900"
+              >
+                Retry Mic
+              </button>
+            </div>
+          )}
+
           {/* Answer Form */}
           <form onSubmit={handleSubmit} noValidate>
             <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
-              {/* Textarea header */}
-              <div className="px-5 py-3 border-b border-slate-100 flex items-center justify-between bg-slate-50/60">
-                <label
-                  htmlFor={textareaId}
-                  className="text-sm font-semibold text-slate-700"
-                >
-                  Your Answer {isFollowUpTurn && `(To Follow-Up ${followUpCount})`}
-                </label>
-                <span className="text-xs text-slate-400 font-medium">
-                  {feedback ? "Answer evaluated" : "Type your response below"}
-                </span>
+              {/* Textarea header with Voice Mic Controls */}
+              <div className="px-5 py-3 border-b border-slate-100 flex flex-wrap items-center justify-between gap-2 bg-slate-50/60">
+                <div className="flex items-center gap-2">
+                  <label
+                    htmlFor={textareaId}
+                    className="text-sm font-semibold text-slate-700"
+                  >
+                    Your Answer {isFollowUpTurn && `(To Follow-Up ${followUpCount})`}
+                  </label>
+                  {isRecognitionSupported && (
+                    <span className="text-[11px] font-medium text-slate-500 bg-slate-200/70 px-2 py-0.5 rounded-md">
+                      Voice + Text Review
+                    </span>
+                  )}
+                </div>
+
+                {/* Microphone action button */}
+                {isRecognitionSupported && !feedback && !isCompleted && (
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        // Mark that user interacted
+                        setHasUserInteracted(true);
+                        // Prevent the question from auto-reading when the user explicitly wants to answer
+                        lastSpokenQuestionRef.current = activeQuestionText;
+                        stopSpeaking();
+
+                        if (voiceState === "listening") {
+                          stopListening();
+                        } else {
+                          startListening(answer);
+                        }
+                      }}
+                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all shadow-xs ${
+                        voiceState === "listening"
+                          ? "bg-red-600 text-white animate-pulse hover:bg-red-700 ring-2 ring-red-400 ring-offset-1"
+                          : "bg-emerald-600 text-white hover:bg-emerald-700"
+                      }`}
+                    >
+                      {voiceState === "listening" ? (
+                        <>
+                          <span className="w-2 h-2 rounded-full bg-white animate-ping" />
+                          <span>Stop Recording (Done Speaking)</span>
+                        </>
+                      ) : (
+                        <>
+                          <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                          </svg>
+                          <span>{answer.trim().length > 0 ? "Add More by Voice" : "Speak Your Answer"}</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                )}
               </div>
+
+              {/* Live speech recording feedback indicator */}
+              {voiceState === "listening" && (
+                <div className="px-5 py-2.5 bg-emerald-50/80 border-b border-emerald-100 flex items-center justify-between text-xs text-emerald-900">
+                  <div className="flex items-center gap-2">
+                    <span className="relative flex h-2.5 w-2.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-600" />
+                    </span>
+                    <span className="font-semibold">Microphone active — Listening to your answer...</span>
+                    {interimTranscript && (
+                      <span className="italic text-emerald-700 bg-white/70 px-2 py-0.5 rounded border border-emerald-200">
+                        &ldquo;{interimTranscript}&rdquo;
+                      </span>
+                    )}
+                  </div>
+                  <span className="text-[11px] text-emerald-600 font-medium hidden sm:inline">
+                    Speak clearly into your mic
+                  </span>
+                </div>
+              )}
 
               <textarea
                 id={textareaId}
@@ -712,7 +1058,7 @@ export default function InterviewPage() {
                 </div>
 
                 <div className="flex items-center gap-3 w-full sm:w-auto justify-end">
-                  {feedback && !isCompleted && (
+                  {answer.trim().length > 0 && !isCompleted && (
                     <button
                       type="button"
                       onClick={handleReset}
@@ -876,7 +1222,21 @@ export default function InterviewPage() {
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                       <div>
                         <h2 className="text-lg font-extrabold text-white">Final Performance Report</h2>
-                        <p className="text-xs text-slate-300 mt-0.5">SBI PO Mock Interview — AI Assessment</p>
+                        <div className="flex flex-wrap items-center gap-2 mt-1">
+                          <span className="text-xs text-slate-300">
+                            {report.interviewMode === "current_affairs" ? "Dedicated Current Affairs Interview" : "SBI PO Full Mock Interview"}
+                          </span>
+                          {report.difficulty && (
+                            <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-amber-400 text-[#0a2540]">
+                              {report.difficulty} Standard
+                            </span>
+                          )}
+                          {report.timeWindow && (
+                            <span className="text-[10px] font-semibold px-2 py-0.5 rounded bg-blue-900/60 text-blue-200 border border-blue-400/30">
+                              {report.timeWindow.replace("_", " ")}
+                            </span>
+                          )}
+                        </div>
                       </div>
                       {/* Overall score and metrics */}
                       <div className="flex flex-wrap items-center gap-3">
@@ -1034,6 +1394,118 @@ export default function InterviewPage() {
                       <p className="text-sm text-blue-900 leading-relaxed">{report.readinessAssessment}</p>
                     </div>
 
+                    {/* Comprehensive Question-by-Question Evaluation Breakdown */}
+                    {sessionTurns.filter((t) => t.feedback).length > 0 && (
+                      <div>
+                        <h3 className="text-xs font-bold uppercase tracking-wider text-[#0a2540] mb-3 flex items-center gap-1.5">
+                          <span className="w-2 h-2 rounded-full bg-[#0a2540]" />
+                          Question-by-Question Evaluation
+                        </h3>
+                        <div className="space-y-4">
+                          {sessionTurns
+                            .filter((t) => t.feedback)
+                            .map((turn, idx) => {
+                              const fb = turn.feedback!;
+                              return (
+                                <div
+                                  key={turn.turnId || idx}
+                                  className="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-2xs"
+                                >
+                                  {/* Turn Header */}
+                                  <div className="bg-[#0a2540] text-white px-4 py-3 flex flex-wrap items-center justify-between gap-2">
+                                    <div className="flex items-center gap-2">
+                                      <span className="text-xs font-bold bg-amber-400 text-[#0a2540] px-2 py-0.5 rounded">
+                                        {turn.isFollowUp ? `Follow-Up ${turn.followUpIndex || 1}` : `Q${idx + 1}`}
+                                      </span>
+                                      <span className="text-xs font-semibold text-slate-200">
+                                        {turn.category}
+                                      </span>
+                                    </div>
+                                    <div className="flex items-center gap-1.5 bg-white/10 px-2.5 py-1 rounded text-xs">
+                                      <span className="text-slate-300 font-medium text-[11px]">Score:</span>
+                                      <span className="font-extrabold text-amber-400 font-mono text-sm">
+                                        {fb.score}
+                                      </span>
+                                      <span className="text-slate-400 text-[10px]">/ 10</span>
+                                    </div>
+                                  </div>
+
+                                  <div className="p-4 space-y-3 text-xs">
+                                    {/* Question & Candidate's Answer */}
+                                    <div>
+                                      <p className="font-bold text-[#0a2540] mb-1">
+                                        Question: &ldquo;{turn.question}&rdquo;
+                                      </p>
+                                      <div className="bg-white p-3 rounded border border-slate-200 text-slate-700 italic leading-relaxed">
+                                        <strong>Your Answer:</strong> &ldquo;{turn.answer}&rdquo;
+                                      </div>
+                                    </div>
+
+                                    {/* Relevance & Banking Knowledge */}
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+                                      <div className="bg-white p-2.5 rounded border border-slate-200">
+                                        <span className="font-bold text-[#0a2540] block mb-1">
+                                          Relevance &amp; Completeness
+                                        </span>
+                                        <p className="text-slate-600 leading-relaxed">{fb.relevance}</p>
+                                      </div>
+                                      <div className="bg-white p-2.5 rounded border border-slate-200">
+                                        <span className="font-bold text-[#0a2540] block mb-1">
+                                          Banking Knowledge
+                                        </span>
+                                        <p className="text-slate-600 leading-relaxed">{fb.bankingKnowledge}</p>
+                                      </div>
+                                    </div>
+
+                                    {/* Strengths & Improvements */}
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+                                      <div className="bg-emerald-50/70 border border-emerald-200 rounded p-2.5">
+                                        <span className="font-bold text-emerald-900 block mb-1">
+                                          Key Strengths
+                                        </span>
+                                        <ul className="space-y-1 text-slate-700">
+                                          {fb.strengths.map((str, sIdx) => (
+                                            <li key={sIdx} className="flex items-start gap-1">
+                                              <span className="text-emerald-600 font-bold">•</span>
+                                              <span>{str}</span>
+                                            </li>
+                                          ))}
+                                        </ul>
+                                      </div>
+                                      <div className="bg-amber-50/70 border border-amber-200 rounded p-2.5">
+                                        <span className="font-bold text-amber-900 block mb-1">
+                                          Areas for Improvement
+                                        </span>
+                                        <ul className="space-y-1 text-slate-700">
+                                          {fb.improvements.map((imp, iIdx) => (
+                                            <li key={iIdx} className="flex items-start gap-1">
+                                              <span className="text-amber-600 font-bold">•</span>
+                                              <span>{imp}</span>
+                                            </li>
+                                          ))}
+                                        </ul>
+                                      </div>
+                                    </div>
+
+                                    {/* Suggested Model Response */}
+                                    {fb.suggestedAnswer && (
+                                      <div className="bg-blue-50/50 border border-blue-200/80 rounded p-3">
+                                        <span className="font-bold text-blue-900 block mb-1">
+                                          Suggested High-Scoring Response:
+                                        </span>
+                                        <p className="text-slate-700 italic leading-relaxed">
+                                          &ldquo;{fb.suggestedAnswer}&rdquo;
+                                        </p>
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                              );
+                            })}
+                        </div>
+                      </div>
+                    )}
+
                     {/* CTA */}
                     <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
                       <Link
@@ -1048,165 +1520,8 @@ export default function InterviewPage() {
               )}
             </div>
           )}
-
-          {/* ── Feedback Section (Rendered only on successful evaluation) ── */}
-          <div ref={feedbackRef} className="mt-8">
-            {feedback && (
-              <div className="rounded-2xl border border-slate-200 bg-white shadow-md overflow-hidden">
-                {/* Header with Score */}
-                <div className="px-6 py-5 bg-[#0a2540] text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center text-amber-400">
-                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h2 className="text-base font-bold text-white">
-                        AI Evaluation &amp; Feedback {isFollowUpTurn ? `(Follow-Up ${followUpCount})` : ""}
-                      </h2>
-                      <p className="text-xs text-slate-300">Detailed assessment of your answer</p>
-                    </div>
-                  </div>
-
-                  {/* Score Pill */}
-                  <div className="flex items-center gap-2 self-start sm:self-auto bg-white/10 border border-white/20 px-3.5 py-1.5 rounded-xl">
-                    <span className="text-xs uppercase tracking-wider text-slate-300 font-semibold">Panel Score:</span>
-                    <span className="text-lg font-extrabold text-amber-400 font-mono">
-                      {feedback.score} <span className="text-xs text-slate-400 font-normal">/ 10</span>
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-6 sm:p-8 space-y-6">
-                  {/* Relevance & Completeness */}
-                  <div className="bg-slate-50 rounded-xl p-4 border border-slate-200/80">
-                    <h3 className="text-xs font-bold uppercase tracking-wider text-[#0a2540] mb-1.5 flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-[#0a2540]" />
-                      Relevance &amp; Completeness
-                    </h3>
-                    <p className="text-sm text-slate-700 leading-relaxed">{feedback.relevance}</p>
-                  </div>
-
-                  {/* Banking Knowledge */}
-                  <div className="bg-slate-50 rounded-xl p-4 border border-slate-200/80">
-                    <h3 className="text-xs font-bold uppercase tracking-wider text-[#0a2540] mb-1.5 flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-amber-600" />
-                      Banking Knowledge
-                    </h3>
-                    <p className="text-sm text-slate-700 leading-relaxed">{feedback.bankingKnowledge}</p>
-                  </div>
-
-                  {/* Strengths & Improvements Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {/* Strengths */}
-                    <div className="bg-emerald-50/60 border border-emerald-200/80 rounded-xl p-4">
-                      <h3 className="text-xs font-bold uppercase tracking-wider text-emerald-900 mb-2.5 flex items-center gap-1.5">
-                        <svg className="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                        </svg>
-                        Key Strengths
-                      </h3>
-                      <ul className="space-y-1.5 text-xs text-slate-700">
-                        {feedback.strengths.map((item, index) => (
-                          <li key={index} className="flex items-start gap-1.5">
-                            <span className="text-emerald-600 font-bold">•</span>
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* Improvements */}
-                    <div className="bg-amber-50/60 border border-amber-200/80 rounded-xl p-4">
-                      <h3 className="text-xs font-bold uppercase tracking-wider text-amber-900 mb-2.5 flex items-center gap-1.5">
-                        <svg className="w-4 h-4 text-amber-600" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                        </svg>
-                        Areas for Improvement
-                      </h3>
-                      <ul className="space-y-1.5 text-xs text-slate-700">
-                        {feedback.improvements.map((item, index) => (
-                          <li key={index} className="flex items-start gap-1.5">
-                            <span className="text-amber-600 font-bold">•</span>
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-
-                  {/* Suggested Answer */}
-                  <div className="bg-slate-50 border border-slate-200 rounded-xl p-5">
-                    <h3 className="text-xs font-bold uppercase tracking-wider text-[#0a2540] mb-2 flex items-center gap-1.5">
-                      <svg className="w-4 h-4 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                      </svg>
-                      Suggested High-Scoring Response
-                    </h3>
-                    <p className="text-sm text-slate-700 leading-relaxed italic bg-white p-4 rounded-lg border border-slate-200/60">
-                      &ldquo;{feedback.suggestedAnswer}&rdquo;
-                    </p>
-                  </div>
-
-                  {/* Progression Action Row */}
-                  {!isCompleted && (
-                    <div className="pt-4 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 bg-slate-50/50 -mx-6 sm:-mx-8 -mb-6 sm:-mb-8 p-6 sm:p-8">
-                      {activeFollowUpQuestion ? (
-                        // Case A: A follow-up question is active and ready to be answered
-                        <>
-                          <div className="text-xs text-slate-700 font-medium max-w-md">
-                            <span className="font-bold text-[#0a2540] block mb-0.5">
-                              The Panel has a Follow-Up Cross-Question ({followUpCount + 1} of {MAX_FOLLOW_UPS_PER_MAIN}):
-                            </span>
-                            &ldquo;{activeFollowUpQuestion}&rdquo;
-                          </div>
-                          <button
-                            type="button"
-                            onClick={handleProceedToFollowUp}
-                            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3 text-sm font-bold text-white bg-amber-600 hover:bg-amber-700 rounded-xl shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2"
-                          >
-                            <span>Answer Follow-Up Question</span>
-                            <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
-                              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                            </svg>
-                          </button>
-                        </>
-                      ) : currentQuestionIndex + 1 < TOTAL_SESSION_QUESTIONS ? (
-                        // Case B: No follow-up pending, more main questions remain
-                        <>
-                          <div className="text-xs text-slate-600 font-medium">
-                            Ready to proceed? Move to Question {currentQuestionIndex + 2} of {TOTAL_SESSION_QUESTIONS}.
-                          </div>
-                          <button
-                            type="button"
-                            onClick={handleNextQuestion}
-                            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3 text-sm font-bold text-white bg-[#0a2540] hover:bg-[#071b30] rounded-xl shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#0a2540] focus:ring-offset-2"
-                          >
-                            <span>Next Question</span>
-                            <svg
-                              className="w-4 h-4 text-amber-400"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                              strokeWidth="2.5"
-                              aria-hidden="true"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                              />
-                            </svg>
-                          </button>
-                        </>
-                      ) : null}
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
-          </div>
+        </>
+      )}
         </div>
       </main>
 

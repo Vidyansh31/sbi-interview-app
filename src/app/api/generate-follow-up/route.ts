@@ -143,8 +143,8 @@ export async function POST(request: Request) {
       );
     }
 
-    // If already at or above maximum 3 follow-ups, immediately return decision false
-    if (currentFollowUpCount >= 3) {
+    // If already at or above maximum 2 follow-ups, immediately return decision false
+    if (currentFollowUpCount >= 2) {
       return NextResponse.json({
         success: true,
         shouldAskFollowUp: false,
@@ -177,12 +177,12 @@ export async function POST(request: Request) {
       ? `\nEVALUATION OF LATEST ANSWER:\n${evaluationSummary.trim()}\n`
       : "";
 
-    const remainingAllowed = 3 - currentFollowUpCount;
+    const remainingAllowed = 2 - currentFollowUpCount;
 
     const primaryPrompt = `You are an expert, observant State Bank of India (SBI) Probationary Officer interview board panelist.
 
 You are evaluating whether to ask an adaptive follow-up question or conclude this topic and move to the next interview question.
-Follow-ups already asked for this topic: ${currentFollowUpCount} (Maximum allowed: 3, remaining permitted: ${remainingAllowed}).
+Follow-ups already asked for this topic: ${currentFollowUpCount} (Maximum allowed: 2, remaining permitted: ${remainingAllowed}).
 
 LATEST QUESTION ASKED:
 ${question.trim()}

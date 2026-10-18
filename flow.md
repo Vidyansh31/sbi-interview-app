@@ -4,6 +4,7 @@
 - **Framework**: Next.js 16.4.2 (App Router, Turbopack, React 19)
 - **Language**: TypeScript (`tsconfig.json` with `@/*` path aliases)
 - **Styling**: Tailwind CSS v4 (`@tailwindcss/turbopack`, `@import "tailwindcss"` in `globals.css`)
+- **Voice Engine**: Browser Web Speech API (`SpeechSynthesis` & `SpeechRecognition` via [`src/lib/useInterviewVoice.ts`](file:///d:/InterviewApp/src/lib/useInterviewVoice.ts)) enabling authentic voice-to-voice interview simulation with zero server latency, acoustic loop prevention, live transcript review, and text fallback.
 - **Theme Palette**:
   - Primary Background: Clean White (`#ffffff`)
   - Primary Theme: Deep Navy Blue (`#0a2540`, `#071b30`)
@@ -106,40 +107,34 @@ flowchart TD
 
 ### Route: `/api/evaluate-answer` (`src/app/api/evaluate-answer/route.ts`)
 - **Method**: `POST`
-- **Request Body**: `{ question: string, answer: string }`
-- **Response**: `{ success: true, feedback: { score, relevance, bankingKnowledge, strengths, improvements, suggestedAnswer, followUpQuestion } }` or `{ error: string }`
-
-### Route: `/api/generate-current-affairs` (`src/app/api/generate-current-affairs/route.ts`)
+### Route: `/api/generate-interview-session` (`src/app/api/generate-interview-session/route.ts`)
 - **Method**: `POST`
-- **Request Body**: `{ count?: number }` (default: 2)
-- **Logic**: Randomly samples verified official developments from `VERIFIED_CURRENT_AFFAIRS` (RBI, PIB, NPCI) and uses Gemini to formulate fresh, non-repetitive SBI PO interview questions strictly grounded in those facts. Includes an automatic offline fallback if upstream fails.
-- **Response**: `{ success: true, questions: InterviewQuestion[], sourceEvents?: Array<{ id, title, source, date }> }`
+- **Request Body**: `{ mode?: "full_mock" | "current_affairs", difficulty?: "easy" | "moderate" | "hard", timeWindow?: "3_months" | "6_months" | "12_months", categories?: string[] }`
+- **Modes Supported**:
+  1. `full_mock`: 10 dynamic, balanced questions (Q1–Q2 HR, Q3–Q4 Banking/RBI, Q5–Q6 SBI Digital, Q7–Q8 Situational, Q9–Q10 Verified CA). Calibrated to `easy`, `moderate`, or `hard`.
+  2. `current_affairs`: 100% verified current affairs interview. 10 questions grounded strictly in official verified items matching the selected time window (3, 6, 12 months) and selected categories. Shows source name, event date, and verification date. Zero generic HR questions.
+- **Response**: `{ success: true, mode, difficulty, questions: InterviewQuestion[], sourceEvents }`
 
-### Route: `/api/generate-follow-up` (`src/app/api/generate-follow-up/route.ts`)
+### Route: `/api/evaluate-answer` (`src/app/api/evaluate-answer/route.ts`)
 - **Method**: `POST`
-- **Request Body**: `{ question: string, answer: string, evaluationSummary?: string }`
-- **Response**: `{ success: true, followUpQuestion: string }` or `{ error: string }`
+- **Request Body**: `{ question: string, answer: string, difficulty?: "easy" | "moderate" | "hard", mode?: "full_mock" | "current_affairs" }`
+- **Calibrated Rigor**:
+  - `easy`: Encouraging tone, rewards core fundamental definitions, gentle follow-ups only if central point is missed.
+  - `moderate`: Standard SBI PO Phase-III standard, probes trade-offs and standard regulations.
+  - `hard`: Rigorous executive standard, scrutinizes superficial answers, probes regulatory and systemic nuances.
+- **Adaptive Follow-Up**: Only generated if candidate's answer is incomplete or warrants cross-examination. In Current Affairs mode, follow-ups remain strictly anchored to the same verified news event.
 
 ### Route: `/api/generate-interview-report` (`src/app/api/generate-interview-report/route.ts`)
 - **Method**: `POST`
-- **Request Body**: `{ turns: InterviewTurn[] }` — array of successfully evaluated turns (main and follow-up) with populated `feedback` fields.
-- **Limits**: 1–40 turns; question ≤ 1 000 chars; answer ≤ 5 000 chars; score must be integer 1–10.
-- **Scoring (Option A - Completion-Weighted SBI PO Exam Style)**:
-  - 10 main questions total = 100 maximum exam points (10 points per question).
-  - Unanswered or skipped questions contribute 0 points.
-  - Overall Exam Score = sum of points earned across completed question topics (e.g. 1 question scored 9/10 results in 9/100).
-  - Quality Rate = average performance on questions actually answered (e.g. 90%).
-  - Completion Rate = answered questions out of 10 (e.g. 10%).
-- **Response**: `{ success: true, report: { overallScore, answeredCount, totalSessionQuestions, completionRate, answerQualityRate, overallAssessment, categoryBreakdown, strengths, improvementAreas, priorityTopics, answerImprovements, readinessAssessment } }` or `{ error: string }`
-- **Safety**: Does not expose stack traces, API keys, or internal prompts. Includes mandatory AI disclaimer in `readinessAssessment`.
+- **Request Body**: `{ turns: InterviewTurn[], interviewMode?: string, difficulty?: string, timeWindow?: string }`
+- **Response**: Returns deterministic scores (completion-weighted SBI PO exam score 0–100, quality rate, completion rate) merged with Gemini qualitative narrative tailored to the selected mode and difficulty.
 
 ### Route: `/interview` (`src/app/interview/page.tsx`)
-- **Type**: Client Component (`"use client"`).
-- **Session State**:
-  - `currentQuestionIndex`: Number (0 to 9) selecting from the first 10 questions in `QUESTION_BANK`.
-  - `isFollowUpTurn`: Boolean indicating whether active question is an adaptive follow-up.
-  - `activeFollowUpQuestion`: String containing the generated follow-up prompt.
-  - `sessionTurns`: Array of `InterviewTurn` recording each submitted answer and evaluation (with `isFollowUp: false` or `true`).
-  - `isCompleted`: Boolean tracking completion after the 10th question (and its follow-up) is evaluated.
-  - `isLoading`: Boolean controlling evaluation and generation spinners.
-  - `feedback`: Structured AI evaluation object.
+- **Type**: Client Component (`"use client"`) wrapped in a React `Suspense` boundary.
+- **URL Parameters**: Reads `?mode=...&difficulty=...&timeWindow=...&categories=...`
+- **Features**:
+  - Voice-to-voice interview (TTS with self-pickup prevention, STT with live review).
+  - Mode & difficulty indicators and verified source/event date badges.
+  - Adaptive follow-ups (need-based, at-most 2 per main question).
+  - Skip Question & Close Interview options.
+  - Generates comprehensive final performance report.

@@ -82,6 +82,12 @@ interface InterviewReport {
   improvementAreas: string[];
   priorityTopics: string[];
   answerImprovements: AnswerImprovement[];
+  /** Mode of the interview conducted */
+  interviewMode?: string;
+  /** Difficulty level of the interview */
+  difficulty?: string;
+  /** Selected time window if current affairs mode */
+  timeWindow?: string;
   /**
    * Cautious guidance about current preparation level.
    * Always includes the mandatory disclaimer that this is AI practice
@@ -482,7 +488,10 @@ function parseNarrative(
 function buildNarrativePrompt(
   turns: TurnInput[],
   metrics: SessionScoreMetrics,
-  categoryStats: Map<string, { totalScore: number; count: number }>
+  categoryStats: Map<string, { totalScore: number; count: number }>,
+  interviewMode: string = "full_mock",
+  difficulty: string = "moderate",
+  timeWindow?: string
 ): string {
   // Serialise the turn digest — trim answer to 500 chars to keep prompt concise
   const turnDigest = turns
@@ -516,7 +525,14 @@ function buildNarrativePrompt(
 
   return `You are a senior, experienced SBI (State Bank of India) Probationary Officer interview board evaluator writing a final performance report for a mock interview candidate.
 
+INTERVIEW CONFIGURATION:
+- Mode: ${interviewMode === "current_affairs" ? "Dedicated Current Affairs Interview" : "Full Mock Interview"}
+- Difficulty Level: ${difficulty.toUpperCase()}
+${timeWindow ? `- Current Affairs Coverage Period: ${timeWindow.replace("_", " ")}` : ""}
+
 Below are the candidate's evaluated interview turns, pre-computed scores, and category statistics.
+
+Evaluate their performance taking into account the selected difficulty standard (${difficulty.toUpperCase()})${interviewMode === "current_affairs" ? " and ensure qualitative advice concentrates specifically on mastery of verified current events, RBI circulars, national schemes, and economic policies" : ""}.
 
 IMPORTANT — DO NOT invent or change any numerical scores. All scores have already been calculated deterministically. Your task is ONLY to provide qualitative narrative insights based on the evidence below.
 
@@ -594,8 +610,12 @@ export async function POST(request: Request) {
       );
     }
 
-    // 2. Validate turns array
+    // 2. Validate turns array and optional configuration
     const turnsRaw = (body as Record<string, unknown>)?.turns;
+    const interviewMode = typeof (body as Record<string, unknown>)?.interviewMode === "string" ? ((body as Record<string, unknown>).interviewMode as string) : "full_mock";
+    const difficulty = typeof (body as Record<string, unknown>)?.difficulty === "string" ? ((body as Record<string, unknown>).difficulty as string) : "moderate";
+    const timeWindow = typeof (body as Record<string, unknown>)?.timeWindow === "string" ? ((body as Record<string, unknown>).timeWindow as string) : undefined;
+
     const validationResult = validateTurns(turnsRaw);
     if (!validationResult.ok) {
       return NextResponse.json(
@@ -622,7 +642,7 @@ export async function POST(request: Request) {
     const ai = new GoogleGenAI({ apiKey });
 
     // 5. Build prompt and call Gemini for qualitative narrative
-    const prompt = buildNarrativePrompt(turns, metrics, categoryStats);
+    const prompt = buildNarrativePrompt(turns, metrics, categoryStats, interviewMode, difficulty, timeWindow);
 
     const firstResponse = await ai.models.generateContent({
       model: "gemini-3.5-flash-lite",
@@ -707,6 +727,9 @@ Provide a concise but helpful interview performance report. Minimum 2 strengths,
       totalSessionQuestions: metrics.totalSessionQuestions,
       completionRate: metrics.completionRate,
       answerQualityRate: metrics.answerQualityRate,
+      interviewMode,
+      difficulty,
+      timeWindow,
       overallAssessment: narrative.overallAssessment,
       categoryBreakdown,
       strengths: narrative.strengths,
