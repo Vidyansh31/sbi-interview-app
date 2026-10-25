@@ -10,6 +10,7 @@ import {
   type InterviewQuestion,
 } from "@/lib/questions";
 import { useInterviewVoice } from "@/lib/useInterviewVoice";
+import { generateInterviewReportPdf } from "@/lib/pdfReportGenerator";
 
 const TOTAL_SESSION_QUESTIONS = 10;
 const MAX_FOLLOW_UPS_PER_MAIN = 2; // Capped at at-most 2 follow-ups only when needed
@@ -176,6 +177,26 @@ function InterviewSessionContent() {
   const [report, setReport] = useState<ReportData | null>(null);
   const [isGeneratingReport, setIsGeneratingReport] = useState(false);
   const [reportError, setReportError] = useState<string | null>(null);
+  const [isDownloadingPdf, setIsDownloadingPdf] = useState(false);
+
+  function handleDownloadPdf() {
+    if (!report) return;
+    try {
+      setIsDownloadingPdf(true);
+      generateInterviewReportPdf({
+        report,
+        sessionTurns,
+        sessionQuestions: sessionQuestions || [],
+        interviewMode,
+        difficulty,
+      });
+    } catch (err) {
+      console.error("PDF generation error:", err);
+      alert("Failed to generate PDF. Please try again.");
+    } finally {
+      setIsDownloadingPdf(false);
+    }
+  }
 
   // Current active main question from the dynamic session
   const currentMainQuestion: InterviewQuestion | undefined =
@@ -423,6 +444,10 @@ function InterviewSessionContent() {
   function handleSkipQuestion() {
     if (isLoading || isCompleted) return;
 
+    // Immediately stop mic and audio on skip
+    stopListening();
+    stopSpeaking();
+
     // If skipping a follow-up, just exit follow-up mode without advancing main index
     if (isFollowUpTurn) {
       setIsFollowUpTurn(false);
@@ -473,6 +498,11 @@ function InterviewSessionContent() {
    */
   function handleCloseInterview() {
     if (isLoading || isCompleted) return;
+
+    // Immediately stop mic and audio on close
+    stopListening();
+    stopSpeaking();
+
     setIsCompleted(true);
     generateReport(sessionTurns);
   }
@@ -1240,6 +1270,20 @@ function InterviewSessionContent() {
                       </div>
                       {/* Overall score and metrics */}
                       <div className="flex flex-wrap items-center gap-3">
+                        {/* Download PDF Button in Header */}
+                        <button
+                          type="button"
+                          onClick={handleDownloadPdf}
+                          disabled={isDownloadingPdf}
+                          className="inline-flex items-center gap-2 px-3.5 py-2.5 bg-amber-400 hover:bg-amber-300 text-[#0a2540] font-bold text-xs rounded-xl shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-amber-300 focus:ring-offset-2 disabled:opacity-60 cursor-pointer"
+                          title="Download Comprehensive PDF Report"
+                        >
+                          <svg className="w-4 h-4 text-[#0a2540]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.2" aria-hidden="true">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                          </svg>
+                          <span>{isDownloadingPdf ? "Preparing PDF..." : "Download Report (PDF)"}</span>
+                        </button>
+
                         {/* Overall exam score */}
                         <div className="flex items-center gap-3 bg-white/10 border border-white/20 px-4 py-2.5 rounded-xl">
                           <div className="text-center">
@@ -1507,7 +1551,18 @@ function InterviewSessionContent() {
                     )}
 
                     {/* CTA */}
-                    <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
+                    <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center items-center">
+                      <button
+                        type="button"
+                        onClick={handleDownloadPdf}
+                        disabled={isDownloadingPdf}
+                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 text-sm font-bold text-[#0a2540] bg-amber-400 hover:bg-amber-300 rounded-xl shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-amber-300 focus:ring-offset-2 disabled:opacity-60 cursor-pointer"
+                      >
+                        <svg className="w-4 h-4 text-[#0a2540]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.2" aria-hidden="true">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        <span>{isDownloadingPdf ? "Preparing PDF Report..." : "Download Full Report (PDF)"}</span>
+                      </button>
                       <Link
                         href="/"
                         className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 text-sm font-bold text-white bg-[#0a2540] hover:bg-[#071b30] rounded-xl shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#0a2540] focus:ring-offset-2"

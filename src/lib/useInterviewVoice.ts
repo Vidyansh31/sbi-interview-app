@@ -80,8 +80,17 @@ export function useInterviewVoice(options?: UseInterviewVoiceOptions) {
   const [voiceErrorMessage, setVoiceErrorMessage] = useState<string | null>(null);
 
   const recognitionRef = useRef<SpeechRecognitionInstanceLike | null>(null);
-  const isManuallyStoppingRef = useRef<boolean>(false);
+  const isManuallyStoppingRef = useRef<boolean>(true); // Default to true so mic never rogue-restarts
+  const silenceTimerRef = useRef<NodeJS.Timeout | null>(null);
   const accumulatedTranscriptRef = useRef<string>("");
+
+  // Helper to safely clear silence detection timer
+  const clearSilenceTimer = () => {
+    if (silenceTimerRef.current) {
+      clearTimeout(silenceTimerRef.current);
+      silenceTimerRef.current = null;
+    }
+  };
 
   // Store options in a ref so event callbacks never capture stale props
   const optionsRef = useRef<UseInterviewVoiceOptions | undefined>(options);
@@ -140,31 +149,42 @@ export function useInterviewVoice(options?: UseInterviewVoiceOptions) {
           if (optionsRef.current?.onTranscriptUpdate) {
             optionsRef.current.onTranscriptUpdate(fullText);
           }
+
+          // Restart silence timer: if user speaks and then pauses for 3 seconds,
+          // auto-stop the microphone so it doesn't linger active indefinitely.
+          clearSilenceTimer();
+          if (fullText.length > 0) {
+            silenceTimerRef.current = setTimeout(() => {
+              isManuallyStoppingRef.current = true;
+              try {
+                recognitionRef.current?.stop();
+              } catch {
+                // ignore
+              }
+              setVoiceState("idle");
+            }, 3000);
+          }
         };
 
         recognition.onerror = (event: SpeechRecognitionErrorEventLike) => {
+          clearSilenceTimer();
           console.warn("Speech recognition error:", event.error);
           if (event.error === "not-allowed" || event.error === "service-not-allowed") {
             setVoiceState("permission-denied");
             setVoiceErrorMessage("Microphone access was denied. Please allow microphone permissions in your browser address bar.");
           } else if (event.error === "no-speech") {
-            // Keep listening or gracefully return to idle
+            // Gracefully stop listening on silence
+            isManuallyStoppingRef.current = true;
+            setVoiceState("idle");
           } else {
             setVoiceErrorMessage(`Speech recognition error: ${event.error}`);
+            setVoiceState("idle");
           }
         };
 
         recognition.onend = () => {
+          clearSilenceTimer();
           setInterimTranscript("");
-          // In Chromium, continuous recognition may stop after silence pauses; auto-restart if still in listening mode
-          if (!isManuallyStoppingRef.current && recognitionRef.current) {
-            try {
-              recognitionRef.current.start();
-              return;
-            } catch {
-              // ignore restart conflicts
-            }
-          }
           setVoiceState("idle");
         };
 
@@ -325,13 +345,16 @@ export function useInterviewVoice(options?: UseInterviewVoiceOptions) {
    * Stop microphone recording
    */
   const stopListening = useCallback(() => {
-    if (!recognitionRef.current) return;
+    clearSilenceTimer();
     isManuallyStoppingRef.current = true;
-    try {
-      recognitionRef.current.stop();
-    } catch {
-      // ignore
+    if (recognitionRef.current) {
+      try {
+        recognitionRef.current.stop();
+      } catch {
+        // ignore
+      }
     }
+    setInterimTranscript("");
     setVoiceState("idle");
   }, []);
 
