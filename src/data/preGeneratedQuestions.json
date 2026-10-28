@@ -934,5 +934,1855 @@
     "expectedKeyPoints": [
       "Government e-Marketplace"
     ]
+  },
+  {
+    "id": "pre-exp-g0-q1",
+    "chunkId": "chunk-4",
+    "approxPage": 5,
+    "topic": "Small Finance Banks",
+    "questionType": "definition",
+    "question": "Under which legislation are Small Finance Banks (SFBs) licensed?",
+    "hint": "Think about the general banking regulation legislation enacted pre-independence.",
+    "expectedKeyPoints": [
+      "Licensed under the Banking Regulation Act, 1949."
+    ]
+  },
+  {
+    "id": "pre-exp-g0-q2",
+    "chunkId": "chunk-4",
+    "approxPage": 5,
+    "topic": "Small Finance Banks",
+    "questionType": "factual",
+    "question": "What are the primary target groups specified for Small Finance Banks?",
+    "hint": "They focus on micro units, marginalized farmers, and unserved sections.",
+    "expectedKeyPoints": [
+      "Small business units",
+      "Small and marginal farmers",
+      "Micro and Small Enterprises (MSEs)",
+      "Unserved and underserved sections of society"
+    ]
+  },
+  {
+    "id": "pre-exp-g0-q3",
+    "chunkId": "chunk-4",
+    "approxPage": 5,
+    "topic": "Payments Banks",
+    "questionType": "conceptual",
+    "question": "How are Payments Banks structured and what is their key operational restriction regarding lending?",
+    "hint": "Check their corporate structure and whether they are allowed to extend loans.",
+    "expectedKeyPoints": [
+      "Structured as Public Limited Companies",
+      "Licensed under the Banking Regulation Act, 1949",
+      "Can accept demand deposits only",
+      "No lending is permitted"
+    ]
+  },
+  {
+    "id": "pre-exp-g0-q4",
+    "chunkId": "chunk-4",
+    "approxPage": 5,
+    "topic": "Private Sector Banks",
+    "questionType": "factual",
+    "question": "Currently, how many private sector banks are recognized by the RBI in India, and name two prominent ones mentioned along with their key traits?",
+    "hint": "Look at the count of private sector banks and the examples given for HDFC and ICICI.",
+    "expectedKeyPoints": [
+      "21 private sector banks recognized by the RBI",
+      "HDFC Bank is India's largest private sector bank known for innovation and retail lending",
+      "ICICI Bank pioneered digital banking services and diversified financial products"
+    ]
+  },
+  {
+    "id": "pre-exp-g0-q5",
+    "chunkId": "chunk-5",
+    "approxPage": 7,
+    "topic": "Urban Cooperative Banks",
+    "questionType": "definition",
+    "question": "What types of loans and services do Urban Cooperative Banks (UCBs) provide, and what percentage of them are on Core Banking Solutions (CBS)?",
+    "hint": "They operate in urban/semi-urban areas and offer housing and personal loans.",
+    "expectedKeyPoints": [
+      "Provide housing loans, personal loans, MSME credit, and deposits",
+      "90%+ of UCBs are on Core Banking Solutions (CBS) (2024–25)"
+    ]
+  },
+  {
+    "id": "pre-exp-g0-q6",
+    "chunkId": "chunk-5",
+    "approxPage": 7,
+    "topic": "Urban Cooperative Banks",
+    "questionType": "factual",
+    "question": "What is the distinction between Scheduled UCBs and Non-Scheduled UCBs?",
+    "hint": "It relates to the Second Schedule of a specific RBI Act.",
+    "expectedKeyPoints": [
+      "Scheduled UCBs are listed in the Second Schedule of the RBI Act, 1934",
+      "Non-Scheduled UCBs are not listed but are regulated by the Reserve Bank of India"
+    ]
+  },
+  {
+    "id": "pre-exp-g0-q7",
+    "chunkId": "chunk-6",
+    "approxPage": 9,
+    "topic": "Capital Adequacy Ratio",
+    "questionType": "factual",
+    "question": "What are the minimum Capital Adequacy Ratio (CAR) requirements for Tier 1 UCBs versus Tier 2 to Tier 4 UCBs?",
+    "hint": "Tier 1 has a lower percentage requirement than Tiers 2 to 4.",
+    "expectedKeyPoints": [
+      "Tier 1 UCBs shall maintain a minimum CAR of 9 per cent of risk-weighted assets (RWAs)",
+      "Tier 2 to Tier 4 UCBs shall maintain a minimum CAR of 12 per cent of risk-weighted assets (RWAs)"
+    ]
+  },
+  {
+    "id": "pre-exp-g0-q8",
+    "chunkId": "chunk-6",
+    "approxPage": 9,
+    "topic": "Priority Sector Lending",
+    "questionType": "factual",
+    "question": "What is the revised Priority Sector Lending (PSL) target for Urban Cooperative Banks (UCBs), and how is the denominator defined?",
+    "hint": "It was reduced from 75% to a lower percentage of ANBC or CEOBE.",
+    "expectedKeyPoints": [
+      "Revised PSL target is reduced to 60% of ANBC or CEOBE, whichever is higher",
+      "ANBC is total net bank credit after necessary deductions and adjustments",
+      "CEOBE represents credit risk exposure of off-balance sheet items like guarantees and letters of credit"
+    ]
+  },
+  {
+    "id": "pre-exp-g0-q9",
+    "chunkId": "chunk-6",
+    "approxPage": 9,
+    "topic": "Lead Bank Scheme",
+    "questionType": "definition",
+    "question": "Which committee proposed the 'Area Approach' that led to the Lead Bank Scheme (LBS)?",
+    "hint": "It is named after a prominent economist and was formed in 1969.",
+    "expectedKeyPoints": [
+      "The Gadgil Committee (1969) proposed the 'Area Approach'",
+      "Led to the Lead Bank Scheme (LBS) for regional credit planning"
+    ]
+  },
+  {
+    "id": "pre-exp-g0-q10",
+    "chunkId": "chunk-6",
+    "approxPage": 9,
+    "topic": "Lead Bank Scheme",
+    "questionType": "conceptual",
+    "question": "What role did the Nariman Committee play in the evolution of Priority Sector Lending and the Lead Bank Scheme in 1969?",
+    "hint": "It supported earlier recommendations regarding public sector banks adopting districts.",
+    "expectedKeyPoints": [
+      "Supported the Gadgil Committee's recommendations",
+      "Recommended that each Public Sector Bank should adopt certain districts as 'Lead Banks' to boost PSL"
+    ]
+  },
+  {
+    "id": "sbi-po-q1",
+    "chunkId": "chunk-18",
+    "approxPage": 29,
+    "topic": "Bank Agency Functions",
+    "questionType": "factual",
+    "question": "What kind of charges do banks levy for agency services such as the collection of cheques and purchase of shares?",
+    "hint": "Think about how banks monetize value-added or agency services provided to customers.",
+    "expectedKeyPoints": [
+      "Banks charge commission or service fees for these services."
+    ]
+  },
+  {
+    "id": "sbi-po-q2",
+    "chunkId": "chunk-18",
+    "approxPage": 29,
+    "topic": "Utility Functions",
+    "questionType": "conceptual",
+    "question": "What are utility functions of a bank, and how do they benefit customers?",
+    "hint": "Utility functions are additional services for customer convenience.",
+    "expectedKeyPoints": [
+      "They are additional services provided by banks for customer convenience.",
+      "Examples include issuing Letters of Credit, locker facilities, underwriting of shares, foreign exchange assistance, and digital banking services."
+    ]
+  },
+  {
+    "id": "sbi-po-q3",
+    "chunkId": "chunk-18",
+    "approxPage": 29,
+    "topic": "Savings Account",
+    "questionType": "definition",
+    "question": "How is a Savings Account typically characterized in terms of timing and customer experience?",
+    "hint": "Consider when individuals usually open this account for the first time.",
+    "expectedKeyPoints": [
+      "It is usually the first bank account opened by individuals, often during school or college.",
+      "It provides the first banking experience for most people."
+    ]
+  },
+  {
+    "id": "sbi-po-q4",
+    "chunkId": "chunk-19",
+    "approxPage": 30,
+    "topic": "BSBD Account Withdrawal Rules",
+    "questionType": "factual",
+    "question": "Are digital transactions like UPI, IMPS, NEFT, and RTGS counted towards the minimum free withdrawals in BSBD accounts?",
+    "hint": "The rule exists to avoid discouraging digital payments.",
+    "expectedKeyPoints": [
+      "No, digital transactions such as UPI, IMPS, NEFT, and RTGS are not counted as withdrawals.",
+      "This ensures customers are not discouraged from digital payments."
+    ]
+  },
+  {
+    "id": "sbi-po-q5",
+    "chunkId": "chunk-19",
+    "approxPage": 30,
+    "topic": "BSBD Account Conversion",
+    "questionType": "scenario",
+    "question": "A regular savings account holder wants to convert their account into a BSBD account. What is the key eligibility condition they must satisfy regarding other banks?",
+    "hint": "Check the restriction on holding multiple BSBD accounts.",
+    "expectedKeyPoints": [
+      "They must not already hold a BSBD account with another bank."
+    ]
+  },
+  {
+    "id": "sbi-po-q6",
+    "chunkId": "chunk-19",
+    "approxPage": 30,
+    "topic": "Current Account",
+    "questionType": "definition",
+    "question": "What is the primary purpose of a Current Account and who utilizes it?",
+    "hint": "Think about commercial activities versus personal savings.",
+    "expectedKeyPoints": [
+      "It is mainly meant for businesses and commercial activities.",
+      "It is used by businessmen, professionals, firms, companies, trusts, and institutions."
+    ]
+  },
+  {
+    "id": "sbi-po-q7",
+    "chunkId": "chunk-19",
+    "approxPage": 30,
+    "topic": "Current Account Features",
+    "questionType": "factual",
+    "question": "Do Current Accounts earn interest, and what is the nature of transactions allowed?",
+    "hint": "Compare its features with a traditional savings account.",
+    "expectedKeyPoints": [
+      "No Interest Earned.",
+      "Flexible deposits and withdrawals with unlimited transactions."
+    ]
+  },
+  {
+    "id": "sbi-po-q8",
+    "chunkId": "chunk-20",
+    "approxPage": 32,
+    "topic": "DEMAT Account",
+    "questionType": "conceptual",
+    "question": "How does electronic processing impact transaction costs and paperwork in a DEMAT account?",
+    "hint": "Focus on operational efficiency for traders and investors.",
+    "expectedKeyPoints": [
+      "Transaction costs are reduced due to electronic processing and minimal paperwork.",
+      "Transfer of securities becomes faster."
+    ]
+  },
+  {
+    "id": "sbi-po-q9",
+    "chunkId": "chunk-20",
+    "approxPage": 32,
+    "topic": "Exchange Earners Foreign Currency Account",
+    "questionType": "definition",
+    "question": "What is an Exchange Earners Foreign Currency Account (EEFC)?",
+    "hint": "It is designed for entities dealing with foreign exchange earnings like exporters.",
+    "expectedKeyPoints": [
+      "It is a facility provided to foreign exchange earners, including exporters.",
+      "It allows them to credit 100 per cent of their foreign exchange earnings directly to the account."
+    ]
+  },
+  {
+    "id": "sbi-po-q10",
+    "chunkId": "chunk-20",
+    "approxPage": 32,
+    "topic": "Exchange Earners Foreign Currency Account",
+    "questionType": "conceptual",
+    "question": "What is the primary advantage of holding an EEFC account for an exporter regarding currency conversion?",
+    "hint": "Think about avoiding frequent conversion cycles between Rupees and foreign currencies.",
+    "expectedKeyPoints": [
+      "Account holders do not have to convert foreign exchange into Rupees and vice versa.",
+      "It minimizes transaction costs."
+    ]
+  },
+  {
+    "id": "sbi-po-int-q1",
+    "chunkId": "chunk-35",
+    "approxPage": 57,
+    "topic": "Negotiable Instruments Act",
+    "questionType": "factual",
+    "question": "Under the Negotiable Instruments Act, 1881, is a transferee required to give a notice of transfer to the person liable to pay the amount?",
+    "hint": "Refer to the rules regarding notice of transfer under Section 5.",
+    "expectedKeyPoints": [
+      "No, the transferee is not required to give notice of transfer to the person who is liable to pay the amount."
+    ]
+  },
+  {
+    "id": "sbi-po-int-q2",
+    "chunkId": "chunk-35",
+    "approxPage": 57,
+    "topic": "Negotiable Instruments Act",
+    "questionType": "conceptual",
+    "question": "What does the Court presume regarding the 'Consideration' of a negotiable instrument under Section 118 unless proved otherwise?",
+    "hint": "Think about how every negotiable instrument is presumed to be made, drawn, accepted, or endorsed.",
+    "expectedKeyPoints": [
+      "Every negotiable instrument is presumed to have been made, drawn, accepted, or endorsed for consideration."
+    ]
+  },
+  {
+    "id": "sbi-po-int-q3",
+    "chunkId": "chunk-35",
+    "approxPage": 57,
+    "topic": "Negotiable Instruments Act",
+    "questionType": "factual",
+    "question": "In the event that a negotiable instrument is lost, what does the Court presume regarding its stamping under Section 118/119?",
+    "hint": "Focus on the presumption related to stamps for lost instruments.",
+    "expectedKeyPoints": [
+      "It is presumed that the lost instrument was duly stamped."
+    ]
+  },
+  {
+    "id": "sbi-po-int-q4",
+    "chunkId": "chunk-36",
+    "approxPage": 58,
+    "topic": "Negotiable Instruments",
+    "questionType": "conceptual",
+    "question": "What is the key fundamental difference between a Promissory Note and a Bill of Exchange?",
+    "hint": "Look at the wording of the core obligation (promise versus order).",
+    "expectedKeyPoints": [
+      "A Promissory Note contains a promise to pay.",
+      "A Bill of Exchange contains an order to pay."
+    ]
+  },
+  {
+    "id": "sbi-po-int-q5",
+    "chunkId": "chunk-36",
+    "approxPage": 58,
+    "topic": "Cheques",
+    "questionType": "definition",
+    "question": "How is a 'Cheque' defined under Section 6 of the Negotiable Instruments Act?",
+    "hint": "It is a specific type of bill of exchange with distinct features regarding bankers and payment.",
+    "expectedKeyPoints": [
+      "A Cheque is a Bill of Exchange.",
+      "It is drawn on a specified banker.",
+      "It is not expressed to be payable otherwise than on demand."
+    ]
+  },
+  {
+    "id": "sbi-po-int-q6",
+    "chunkId": "chunk-36",
+    "approxPage": 58,
+    "topic": "Cheques",
+    "questionType": "conceptual",
+    "question": "Are all cheques bills of exchange, and conversely, are all bills of exchange cheques? Explain based on special features.",
+    "hint": "Consider the two additional qualifications that define a cheque.",
+    "expectedKeyPoints": [
+      "All cheques are bills of exchange.",
+      "All bills of exchange are not cheques because a cheque must be drawn on a specified banker and always payable on demand."
+    ]
+  },
+  {
+    "id": "sbi-po-int-q7",
+    "chunkId": "chunk-36",
+    "approxPage": 58,
+    "topic": "Parties to a Cheque",
+    "questionType": "factual",
+    "question": "Identify and define the three main parties involved in a cheque.",
+    "hint": "Think about who draws it, who it is drawn upon, and who receives payment.",
+    "expectedKeyPoints": [
+      "Drawer: The person who draws the cheque.",
+      "Drawee: The banker of the drawer on whom the cheque is drawn.",
+      "Payee: The person entitled to receive payment of the cheque."
+    ]
+  },
+  {
+    "id": "sbi-po-int-q8",
+    "chunkId": "chunk-37",
+    "approxPage": 60,
+    "topic": "Dishonour of Negotiable Instruments",
+    "questionType": "conceptual",
+    "question": "What must a holder do when a negotiable instrument is dishonoured in order to make the previous parties liable?",
+    "hint": "Action required by the holder towards previous parties upon dishonour.",
+    "expectedKeyPoints": [
+      "The holder must give a notice of dishonour to all the previous parties in order to make them liable."
+    ]
+  },
+  {
+    "id": "sbi-po-int-q9",
+    "chunkId": "chunk-37",
+    "approxPage": 60,
+    "topic": "Dishonour of Negotiable Instruments",
+    "questionType": "factual",
+    "question": "How does a bill of exchange get dishonoured by non-acceptance under Section 91 with respect to timeframes?",
+    "hint": "Check the time given to the drawee for acceptance after presentment.",
+    "expectedKeyPoints": [
+      "A bill of exchange is dishonoured by non-acceptance when it is duly presented and the drawee does not accept the bill within 48 hours of presentment."
+    ]
+  },
+  {
+    "id": "sbi-po-int-q10",
+    "chunkId": "chunk-37",
+    "approxPage": 60,
+    "topic": "Dishonour of Negotiable Instruments",
+    "questionType": "conceptual",
+    "question": "Besides non-payment, what other way can a bill of exchange be dishonoured compared to standard negotiable instruments?",
+    "hint": "Look at the dual ways a bill of exchange can face dishonour.",
+    "expectedKeyPoints": [
+      "A bill of exchange can be dishonoured by non-acceptance, in addition to dishonour by non-payment."
+    ]
+  },
+  {
+    "id": "sbi-po-int-q1",
+    "chunkId": "chunk-49",
+    "approxPage": 80,
+    "topic": "Banking Regulation Act",
+    "questionType": "factual",
+    "question": "What was the earlier name of the Banking Regulation Act, 1949, and when was it renamed?",
+    "hint": "Recall the original name given in 1949 and the year it was changed to Banking Regulation Act.",
+    "expectedKeyPoints": [
+      "Earlier name was Banking Companies Act, 1949",
+      "Renamed on 1 March 1966"
+    ]
+  },
+  {
+    "id": "sbi-po-int-q2",
+    "chunkId": "chunk-49",
+    "approxPage": 80,
+    "topic": "Banking Regulation Act",
+    "questionType": "definition",
+    "question": "What is the primary purpose and scope of the Banking Regulation Act, 1949 regarding the Reserve Bank of India?",
+    "hint": "It provides a legal framework empowering RBI for governance, licensing, and supervision.",
+    "expectedKeyPoints": [
+      "Provides a legal framework for regulation, supervision, and governance of banks in India",
+      "Empowers RBI to license banks, regulate management, supervise operations, protect depositors, and maintain financial stability"
+    ]
+  },
+  {
+    "id": "sbi-po-int-q3",
+    "chunkId": "chunk-49",
+    "approxPage": 80,
+    "topic": "Scheduled Banks",
+    "questionType": "conceptual",
+    "question": "How are scheduled banks classified, and what groups do scheduled commercial banks comprise according to the excerpt?",
+    "hint": "Scheduled banks include cooperative and commercial banks, with commercial banks comprising urban and state cooperative banks as per the text.",
+    "expectedKeyPoints": [
+      "Scheduled banks include scheduled cooperative banks and scheduled commercial banks",
+      "Scheduled commercial banks comprise urban cooperative banks and state cooperative banks"
+    ]
+  },
+  {
+    "id": "sbi-po-int-q4",
+    "chunkId": "chunk-50",
+    "approxPage": 81,
+    "topic": "Non-Performing Assets (NPAs)",
+    "questionType": "definition",
+    "question": "How is a Non-Performing Asset (NPA) defined based on the duration of overdue payments, and when was this norm introduced?",
+    "hint": "Look at the overdue period in days and the introduction year by RBI.",
+    "expectedKeyPoints": [
+      "Interest or principal overdue for more than 90 days",
+      "The 90-day norm was introduced by RBI in 2004 to align with international standards"
+    ]
+  },
+  {
+    "id": "sbi-po-int-q5",
+    "chunkId": "chunk-50",
+    "approxPage": 81,
+    "topic": "Non-Performing Assets (NPAs)",
+    "questionType": "scenario",
+    "question": "If a borrower fails to repay a bank loan for over 90 days, what immediate operational and financial impact does it have on the bank?",
+    "hint": "Consider income generation, provisions, and profitability.",
+    "expectedKeyPoints": [
+      "NPAs stop generating interest income",
+      "Banks must make provisions, reducing profitability",
+      "Leads to reduced lending capacity, higher credit risk, and pressure on capital adequacy"
+    ]
+  },
+  {
+    "id": "sbi-po-int-q6",
+    "chunkId": "chunk-50",
+    "approxPage": 81,
+    "topic": "Non-Performing Assets (NPAs)",
+    "questionType": "conceptual",
+    "question": "What are the systemic risks associated with a high NPA ratio in the banking system?",
+    "hint": "Think about defaults, write-offs, and public impact.",
+    "expectedKeyPoints": [
+      "Increased probability of loan defaults",
+      "Possibility of write-offs affecting the public"
+    ]
+  },
+  {
+    "id": "sbi-po-int-q7",
+    "chunkId": "chunk-51",
+    "approxPage": 83,
+    "topic": "Asset Resolution / S4A",
+    "questionType": "definition",
+    "question": "What is the Sustainable Structuring of Stressed Assets (S4A) framework?",
+    "hint": "It is an optional framework involving independent evaluation of sustainable versus unsustainable debt.",
+    "expectedKeyPoints": [
+      "An optional framework for the resolution of largely stressed accounts and a tool for financial restructuring",
+      "An independent agency evaluates sustainable and unsustainable debt, converting unsustainable debt into equity without changing company ownership"
+    ]
+  },
+  {
+    "id": "sbi-po-int-q8",
+    "chunkId": "chunk-51",
+    "approxPage": 83,
+    "topic": "Bad Banks",
+    "questionType": "definition",
+    "question": "What is the primary objective of a 'Bad Bank' in the financial system?",
+    "hint": "Focus on what it buys from other financial institutions and what it does with them.",
+    "expectedKeyPoints": [
+      "Set up to buy bad loans and other illiquid holdings of another financial institution",
+      "Performs loan restructuring and absorbs losses"
+    ]
+  },
+  {
+    "id": "sbi-po-int-q9",
+    "chunkId": "chunk-51",
+    "approxPage": 83,
+    "topic": "Asset Resolution / PARA",
+    "questionType": "factual",
+    "question": "Which Economic Survey suggested the Public Sector Asset Rehabilitation Agency (PARA), and what twin problems is it meant to resolve?",
+    "hint": "Check the Economic Survey years mentioned and the balance sheet syndrome.",
+    "expectedKeyPoints": [
+      "Suggested by the Economic Survey 2016 – 17",
+      "Meant to resolve the twin problems of 'balance sheet syndrome' of the banks as well as the corporate sector"
+    ]
+  },
+  {
+    "id": "sbi-po-int-q10",
+    "chunkId": "chunk-51",
+    "approxPage": 83,
+    "topic": "Loan Recovery Acts",
+    "questionType": "factual",
+    "question": "Which legislative acts are mentioned in the text for the recovery of stressed assets and loans?",
+    "hint": "Look at the recovery section in chunk-51 which highlights two major acts enacted in 2002 and 2016.",
+    "expectedKeyPoints": [
+      "SARFAESI Act, 2002",
+      "Insolvency and Bankruptcy Code, 2016"
+    ]
+  },
+  {
+    "id": "sbi-po-int-chunk66-q1",
+    "chunkId": "chunk-66",
+    "approxPage": 108,
+    "topic": "ATM Basics & Definition",
+    "questionType": "definition",
+    "question": "How would you define an ATM in the context of modern banking operations?",
+    "hint": "Mention computerised machine, access accounts, dispensing cash, financial and non-financial transactions.",
+    "expectedKeyPoints": [
+      "It is a computerised machine.",
+      "Provides customers facility to access their accounts for dispensing cash.",
+      "Allows carrying out other financial and non-financial transactions without visiting a bank branch."
+    ]
+  },
+  {
+    "id": "sbi-po-int-chunk66-q2",
+    "chunkId": "chunk-66",
+    "approxPage": 108,
+    "topic": "History of ATMs",
+    "questionType": "factual",
+    "question": "Could you state the historical facts regarding the very first ATM installed globally and the first ATM installed in India?",
+    "hint": "Recall the years, banks, locations, and inventors for both global and Indian milestones.",
+    "expectedKeyPoints": [
+      "World's first ATM: Installed in 1967 at Barclays Bank, London, invented by John Shepherd-Barron.",
+      "India's first ATM: Installed in 1987 by HSBC in Mumbai."
+    ]
+  },
+  {
+    "id": "sbi-po-int-chunk66-q3",
+    "chunkId": "chunk-66",
+    "approxPage": 108,
+    "topic": "ATM Transactions",
+    "questionType": "scenario",
+    "question": "A customer of Bank A uses an ATM belonging to Bank A to withdraw cash. What classification does this transaction fall under, and what would it be called if they used Bank B's ATM instead?",
+    "hint": "Distinguish between transactions using the card-issuing bank's ATM versus another bank's ATM.",
+    "expectedKeyPoints": [
+      "Using Bank A's ATM with a Bank A card is called an On-Us transaction.",
+      "Using any other bank's ATM is called an Off-Us transaction."
+    ]
+  },
+  {
+    "id": "sbi-po-int-chunk67-q4",
+    "chunkId": "chunk-67",
+    "approxPage": 109,
+    "topic": "ATM Charges and Limits",
+    "questionType": "factual",
+    "question": "Effective May 1, 2025, what is the maximum charge authorized by the RBI for cash withdrawals exceeding the free monthly limit?",
+    "hint": "Check the RBI authorization rule regarding cash withdrawals past free limits effective May 1, 2025.",
+    "expectedKeyPoints": [
+      "Maximum of ₹23 (plus taxes) per transaction."
+    ]
+  },
+  {
+    "id": "sbi-po-int-chunk67-q5",
+    "chunkId": "chunk-67",
+    "approxPage": 109,
+    "topic": "Interchange Fees",
+    "questionType": "factual",
+    "question": "How much do banks pay each other as an interchange fee when customers use 'off-us' ATMs for financial versus non-financial transactions?",
+    "hint": "Different rates apply for financial and non-financial off-us transactions.",
+    "expectedKeyPoints": [
+      "₹17 per financial transaction.",
+      "₹6 per non-financial transaction."
+    ]
+  },
+  {
+    "id": "sbi-po-int-chunk67-q6",
+    "chunkId": "chunk-67",
+    "approxPage": 109,
+    "topic": "Cardless Withdrawals",
+    "questionType": "factual",
+    "question": "What is the typical per-transaction limit for UPI-ATM (Interoperable Cardless Cash Withdrawal) services?",
+    "hint": "Look at the cardless withdrawal limits mentioned in connection with UPI-ATM.",
+    "expectedKeyPoints": [
+      "Typically allows up to ₹10,000 per transaction."
+    ]
+  },
+  {
+    "id": "sbi-po-int-chunk67-q7",
+    "chunkId": "chunk-67",
+    "approxPage": 109,
+    "topic": "ATM Compliance Targets",
+    "questionType": "conceptual",
+    "question": "Explain the mandatory low-denomination targets set for banks regarding their ATM networks for the years 2025 and 2026.",
+    "hint": "There are two milestones: September 30, 2025 (75%) and March 31, 2026 (90%) for dispensing specific currency notes.",
+    "expectedKeyPoints": [
+      "September 30, 2025: At least 75% compliance requiring ATMs to dispense ₹100 or ₹200 notes from at least one cassette.",
+      "March 31, 2026: 90% compliance deadline for ATMs to routinely dispense ₹100 or ₹200 banknotes."
+    ]
+  },
+  {
+    "id": "sbi-po-int-chunk68-q8",
+    "chunkId": "chunk-68",
+    "approxPage": 111,
+    "topic": "AePS (Aadhaar Enabled Payment System)",
+    "questionType": "definition",
+    "question": "What is the primary purpose of the Aadhaar Enabled Payment System (AePS), and what authentication method does it use?",
+    "hint": "Focus on empowering bank customers via Business Correspondents using a specific type of authentication.",
+    "expectedKeyPoints": [
+      "Purpose is to empower bank customers to access their Aadhaar-linked bank accounts.",
+      "Accessed through a Business Correspondent (BC) using biometric authentication."
+    ]
+  },
+  {
+    "id": "sbi-po-int-chunk68-q9",
+    "chunkId": "chunk-68",
+    "approxPage": 111,
+    "topic": "AePS Limits and Codes",
+    "questionType": "factual",
+    "question": "What are the standard transaction and monthly limits generally set for AePS, and what is the function of the IIN?",
+    "hint": "Think about daily limits, public sector bank monthly caps, and the 6-digit identification number.",
+    "expectedKeyPoints": [
+      "Standard daily limit is generally capped at ₹10,000 per transaction.",
+      "Monthly limit by public sector banks (like SBI) is typically ₹50,000 or 4-5 transactions.",
+      "IIN (Issuer Identification Number) is a 6-digit number that identifies the customer's bank."
+    ]
+  },
+  {
+    "id": "sbi-po-int-chunk68-q10",
+    "chunkId": "chunk-68",
+    "approxPage": 111,
+    "topic": "Fintech Infrastructure in AePS",
+    "questionType": "conceptual",
+    "question": "In the backend infrastructure of AePS, what is the difference between an AUA and a Sub-AUA?",
+    "hint": "Differentiate between entities providing AePS directly versus smaller fintechs utilizing a larger bank's gateway.",
+    "expectedKeyPoints": [
+      "AUAs (Authentication User Agencies) are entities providing AePS in the backend.",
+      "Sub-AUAs are smaller fintechs that use a larger bank's gateway."
+    ]
+  },
+  {
+    "id": "sbi-po-chunk80-q1",
+    "chunkId": "chunk-80",
+    "approxPage": 131,
+    "topic": "Currency Management - Printing & Minting",
+    "questionType": "factual",
+    "question": "Could you name the banknote printing presses owned by the Government under SPMCIL and the subsidiary of RBI, along with their locations?",
+    "hint": "Refer to SPMCIL and BRBNMPL locations mentioned in the notes.",
+    "expectedKeyPoints": [
+      "SPMCIL (Govt owned) presses are located at Nashik (Maharashtra) and Dewas (Madhya Pradesh).",
+      "BRBNMPL (RBI subsidiary) presses are located at Mysuru (Karnataka) and Salboni (West Bengal)."
+    ]
+  },
+  {
+    "id": "sbi-po-chunk80-q2",
+    "chunkId": "chunk-80",
+    "approxPage": 131,
+    "topic": "Currency Management - Coin Mints",
+    "questionType": "factual",
+    "question": "Where are the coin mints belonging to SPMCIL located in India, and who has the sole authority to issue coins into circulation?",
+    "hint": "Check the Coin Mints section and circulation rules.",
+    "expectedKeyPoints": [
+      "Coin mints are located in Mumbai, Hyderabad, Kolkata, and Noida.",
+      "Coins are issued into circulation only through the RBI."
+    ]
+  },
+  {
+    "id": "sbi-po-chunk80-q3",
+    "chunkId": "chunk-80",
+    "approxPage": 131,
+    "topic": "Currency Chest & Small Coin Depot",
+    "questionType": "definition",
+    "question": "What is a Currency Chest, and how does it differ functionally from a Small Coin Depot?",
+    "hint": "Look at the definitions and functions of Currency Chests and Small Coin Depots as of Feb 28, 2025.",
+    "expectedKeyPoints": [
+      "Currency chests are storehouses authorised by RBI in scheduled banks to hold banknotes and rupee coins on behalf of RBI and supply currency to nearby branches.",
+      "Small Coin Depots store coins below ₹1 and supply them to bank branches."
+    ]
+  },
+  {
+    "id": "sbi-po-chunk81-q1",
+    "chunkId": "chunk-81",
+    "approxPage": 132,
+    "topic": "Central Bank Digital Currency (CBDC)",
+    "questionType": "definition",
+    "question": "How would you define the Digital Rupee (e₹) and what is its official tagline?",
+    "hint": "Check the introductory bullet points for CBDC.",
+    "expectedKeyPoints": [
+      "Digital Rupee (e₹) is India's Central Bank Digital Currency (CBDC) issued by the Reserve Bank of India.",
+      "It is a digital form of physical Indian currency, at par with cash, guaranteed by the Central Government.",
+      "Tagline is 'Cash but Digital'."
+    ]
+  },
+  {
+    "id": "sbi-po-chunk81-q2",
+    "chunkId": "chunk-81",
+    "approxPage": 132,
+    "topic": "Central Bank Digital Currency (CBDC)",
+    "questionType": "conceptual",
+    "question": "What are the key cash-like features of the Digital Rupee (e₹)? Does it earn any interest?",
+    "hint": "Review the features listed under CBDC in the text.",
+    "expectedKeyPoints": [
+      "Cash-like features include finality of settlement, RBI guarantee, legal tender status.",
+      "It does not earn any interest.",
+      "It is stored in an e₹ wallet."
+    ]
+  },
+  {
+    "id": "sbi-po-chunk81-q3",
+    "chunkId": "chunk-81",
+    "approxPage": 132,
+    "topic": "Central Bank Digital Currency (CBDC)",
+    "questionType": "factual",
+    "question": "What are the two pilot segments in which CBDC is currently being tested in India, and who uses them?",
+    "hint": "Distinguish between Retail and Wholesale CBDC.",
+    "expectedKeyPoints": [
+      "Retail CBDC (e₹-R): Used by general public and merchants for daily transactions like P2P and P2M.",
+      "Wholesale CBDC (e₹-W): Used by banks and financial institutions for large-value and interbank settlements."
+    ]
+  },
+  {
+    "id": "sbi-po-chunk85-q1",
+    "chunkId": "chunk-85",
+    "approxPage": 139,
+    "topic": "Capital Markets - Preference Shares",
+    "questionType": "conceptual",
+    "question": "Why are preference shares called so, and do they carry voting rights?",
+    "hint": "Check the opening lines of Section 3 regarding preference shares.",
+    "expectedKeyPoints": [
+      "They offer a share in earnings/profits with fixed dividends, but they have no voting rights.",
+      "They are termed preference shares because in case of company winding up, they have the preferential right to get back capital paid before equity shareholders."
+    ]
+  },
+  {
+    "id": "sbi-po-chunk85-q2",
+    "chunkId": "chunk-85",
+    "approxPage": 139,
+    "topic": "Capital Markets - Preference Shares",
+    "questionType": "factual",
+    "question": "Can you list the different types of preference shares mentioned in the module?",
+    "hint": "Look under the 'Types:' heading below preference shares.",
+    "expectedKeyPoints": [
+      "Cumulative Preference Shares",
+      "Non-Cumulative Preference Shares",
+      "Participatory Preference Shares",
+      "Convertible Preference Shares"
+    ]
+  },
+  {
+    "id": "sbi-po-chunk85-q3",
+    "chunkId": "chunk-85",
+    "approxPage": 139,
+    "topic": "Capital Markets - Rights Issues",
+    "questionType": "definition",
+    "question": "What is a Rights Issue, and how is it distinct from an IPO?",
+    "hint": "Refer to the RIGHT ISSUES section.",
+    "expectedKeyPoints": [
+      "A rights issue is a mechanism by which companies can raise additional capital from existing shareholders.",
+      "It is distinct from a public issue (Initial Public Offer) or private placement."
+    ]
+  },
+  {
+    "id": "sbi-po-chunk85-q4",
+    "chunkId": "chunk-85",
+    "approxPage": 139,
+    "topic": "Capital Markets - QIB",
+    "questionType": "definition",
+    "question": "What is a Qualified Institutional Placement (QIP), and which categories of investors qualify as QIBs?",
+    "hint": "Look at the Qualified Institutional Placement section.",
+    "expectedKeyPoints": [
+      "Shares are offered to a specific category of investors deemed financially sophisticated and capable of making informed investment decisions.",
+      "QIB examples include Mutual funds, Venture capital funds, Foreign institutional investors registered with SEBI, Insurance companies, Banks, Provident funds, and Pension funds."
+    ]
+  },
+  {
+    "id": "sbi-po-ch97-q1",
+    "chunkId": "chunk-97",
+    "approxPage": 159,
+    "topic": "Agri-Business Centres Subsidy",
+    "questionType": "factual",
+    "question": "What is the percentage of subsidy provided under Agri-Business Centres for Women, SC/ST, North Eastern, and Hill states?",
+    "hint": "Refer to the subsidy breakdown for Agri-Business Centres based on category.",
+    "expectedKeyPoints": [
+      "44% subsidy",
+      "Applicable to Women, SC/ST, NE & Hill states"
+    ]
+  },
+  {
+    "id": "sbi-po-ch97-q2",
+    "chunkId": "chunk-97",
+    "approxPage": 159,
+    "topic": "Agri-Business Centres Eligibility",
+    "questionType": "conceptual",
+    "question": "Are retired officials eligible for a subsidy to start an Agri-Business Centre? Explain their eligibility status.",
+    "hint": "Check the specific note regarding retired officials under Agri-Business Centres eligibility.",
+    "expectedKeyPoints": [
+      "Retired officials get no subsidy",
+      "They can start a business using their own funds"
+    ]
+  },
+  {
+    "id": "sbi-po-ch97-q3",
+    "chunkId": "chunk-97",
+    "approxPage": 159,
+    "topic": "Agri-Business Centres Training",
+    "questionType": "factual",
+    "question": "Which agency is responsible for providing free training to agriculture graduates under the Agri-Business Centres scheme?",
+    "hint": "Look for the training agency and Nodal Training Institutes mentioned in the text.",
+    "expectedKeyPoints": [
+      "MANAGE",
+      "Through Nodal Training Institutes (NTIs)"
+    ]
+  },
+  {
+    "id": "sbi-po-ch97-q4",
+    "chunkId": "chunk-97",
+    "approxPage": 159,
+    "topic": "Agri-Business Centres Project Cost",
+    "questionType": "factual",
+    "question": "What is the project cost limit for an individual to be eligible for a subsidy under Agri-Business Centres?",
+    "hint": "Check the project cost limit for individuals vs group projects.",
+    "expectedKeyPoints": [
+      "₹20 lakh for individuals",
+      "Up to ₹25 lakh in special cases"
+    ]
+  },
+  {
+    "id": "sbi-po-ch98-q1",
+    "chunkId": "chunk-98",
+    "approxPage": 160,
+    "topic": "Weavers Mudra Scheme",
+    "questionType": "definition",
+    "question": "Which Ministry administers the Weavers Mudra Scheme (WMS), and what is its primary purpose?",
+    "hint": "Identify the ministry at the top of the Weavers Mudra Scheme details and its objective.",
+    "expectedKeyPoints": [
+      "Ministry of Textiles",
+      "Business loan scheme for handloom sector providing financial assistance and easy credit to handloom weavers"
+    ]
+  },
+  {
+    "id": "sbi-po-ch98-q2",
+    "chunkId": "chunk-98",
+    "approxPage": 160,
+    "topic": "Weavers Mudra Scheme Eligibility",
+    "questionType": "conceptual",
+    "question": "What are the major uses of the loan provided under the Weavers Mudra Scheme?",
+    "hint": "Check the 'Uses of Loan' section under WMS.",
+    "expectedKeyPoints": [
+      "Working capital for day-to-day expenses",
+      "Purchase of tools and equipment",
+      "Investment in plant and machinery"
+    ]
+  },
+  {
+    "id": "sbi-po-ch98-q3",
+    "chunkId": "chunk-98",
+    "approxPage": 160,
+    "topic": "Weavers Mudra Scheme Implementation",
+    "questionType": "factual",
+    "question": "Name the national-level implementation agency for the relevant schemes mentioned alongside state/district level agencies like KVIB and DICs.",
+    "hint": "Look under 'Implementation Agencies'.",
+    "expectedKeyPoints": [
+      "KVIC (National level)"
+    ]
+  },
+  {
+    "id": "sbi-po-ch99-q1",
+    "chunkId": "chunk-99",
+    "approxPage": 162,
+    "topic": "Street Vendors Loan Scheme",
+    "questionType": "factual",
+    "question": "What are the progressive loan amounts offered for subsequent cycles upon timely repayment under the street vendors scheme?",
+    "hint": "Look at 'Higher Loan on Repayment'.",
+    "expectedKeyPoints": [
+      "2nd loan: ₹20,000",
+      "3rd loan: ₹50,000"
+    ]
+  },
+  {
+    "id": "sbi-po-ch99-q2",
+    "chunkId": "chunk-99",
+    "approxPage": 162,
+    "topic": "NAMASTE Scheme",
+    "questionType": "definition",
+    "question": "What is the full form and objective of the NAMASTE scheme?",
+    "hint": "Check the Central Sector Scheme details under NAMASTE.",
+    "expectedKeyPoints": [
+      "National Action for Mechanized Sanitation Ecosystem",
+      "A scheme to end unsafe manual sanitation work",
+      "Promotes mechanized cleaning of sewers & septic tanks"
+    ]
+  },
+  {
+    "id": "sbi-po-ch99-q3",
+    "chunkId": "chunk-99",
+    "approxPage": 162,
+    "topic": "NAMASTE Ministries",
+    "questionType": "factual",
+    "question": "Which two ministries are jointly responsible for the NAMASTE scheme?",
+    "hint": "Look under 'Ministries' in the NAMASTE section.",
+    "expectedKeyPoints": [
+      "Ministry of Social Justice & Empowerment (MoSJE)",
+      "Ministry of Housing & Urban Affairs (MoHUA)"
+    ]
+  },
+  {
+    "id": "sbi-po-q1",
+    "chunkId": "chunk-111",
+    "approxPage": 182,
+    "topic": "Crop Insurance",
+    "questionType": "conceptual",
+    "question": "What is the fundamental difference between Crop Yield Insurance and Crop Revenue Insurance?",
+    "hint": "Think about harvest volume versus market price fluctuations.",
+    "expectedKeyPoints": [
+      "Crop Yield Insurance protects expected harvest volume against loss of crop yield.",
+      "Crop Revenue Insurance protects expected revenue due to market price fluctuations."
+    ]
+  },
+  {
+    "id": "sbi-po-q2",
+    "chunkId": "chunk-111",
+    "approxPage": 182,
+    "topic": "Term Life Insurance",
+    "questionType": "definition",
+    "question": "Can you explain what a Term Life Insurance Policy is and what happens upon survival of the policy term?",
+    "hint": "Consider the death risk cover and the exception regarding TROPS.",
+    "expectedKeyPoints": [
+      "It provides death risk cover for a specified period.",
+      "A lump sum is paid to the nominee if the life assured dies during the term.",
+      "Normally, there is no pay-out if the life assured survives the term.",
+      "Exception is TROPS (Term Plan with Return of Premium) where premiums may be returned."
+    ]
+  },
+  {
+    "id": "sbi-po-q3",
+    "chunkId": "chunk-111",
+    "approxPage": 182,
+    "topic": "Term Life Insurance Types",
+    "questionType": "factual",
+    "question": "Name and describe the three types of Term Life Insurance mentioned in the text based on coverage structure.",
+    "hint": "Level, Decreasing, and Increasing.",
+    "expectedKeyPoints": [
+      "Level Term: Constant premium and constant death benefit.",
+      "Decreasing Term: Premium remains constant while the death benefit decreases (e.g., mortgage redemption).",
+      "Increasing Term: Coverage and premium increase over time."
+    ]
+  },
+  {
+    "id": "sbi-po-q4",
+    "chunkId": "chunk-111",
+    "approxPage": 182,
+    "topic": "Term Insurance Benefits",
+    "questionType": "factual",
+    "question": "What are the key benefits associated with a Term Life Insurance policy?",
+    "hint": "Look at coverage, premiums, riders, and tax benefits.",
+    "expectedKeyPoints": [
+      "High coverage at low premium.",
+      "Optional rider benefits.",
+      "Flexible payout options.",
+      "Tax benefits under Section 80C."
+    ]
+  },
+  {
+    "id": "sbi-po-q5",
+    "chunkId": "chunk-112",
+    "approxPage": 183,
+    "topic": "Principle of Insurable Interest",
+    "questionType": "conceptual",
+    "question": "How does the Principle of Insurable Interest apply to an insurance contract?",
+    "hint": "The insured must benefit from the existence of the subject matter.",
+    "expectedKeyPoints": [
+      "The insured must benefit from the existence of the subject matter.",
+      "There must be a financial or recognized loss if death or damage occurs to the insured subject."
+    ]
+  },
+  {
+    "id": "sbi-po-q6",
+    "chunkId": "chunk-112",
+    "approxPage": 183,
+    "topic": "Principle of Causa Proxima",
+    "questionType": "definition",
+    "question": "What is the 'Principle of Causa Proxima' (Proximate Cause) in insurance claims?",
+    "hint": "It relates to the direct, main, natural, and unbroken cause of the loss.",
+    "expectedKeyPoints": [
+      "The insurer is liable only for loss caused directly by the peril insured against.",
+      "Proximate cause is defined as the main, natural, unbroken cause of the loss."
+    ]
+  },
+  {
+    "id": "sbi-po-q7",
+    "chunkId": "chunk-112",
+    "approxPage": 183,
+    "topic": "Principle of Subrogation",
+    "questionType": "scenario",
+    "question": "If an insurer compensates a policyholder for damage to a property under fire insurance, what happens to the rights over the damaged property according to the Principle of Subrogation?",
+    "hint": "It is derived from the principle of indemnity.",
+    "expectedKeyPoints": [
+      "After compensation, the right to the damaged property passes to the insurer.",
+      "It is applied mainly in fire and marine insurance and derived from the principle of indemnity."
+    ]
+  },
+  {
+    "id": "sbi-po-q8",
+    "chunkId": "chunk-112",
+    "approxPage": 183,
+    "topic": "Principle of Contribution",
+    "questionType": "conceptual",
+    "question": "Explain how the Principle of Contribution works when multiple insurers cover the same risk.",
+    "hint": "Proportional payment and recovery.",
+    "expectedKeyPoints": [
+      "Each insurer pays proportionally to the insured sum.",
+      "If one insurer pays the full loss, they have the right to claim contribution from the other insurers."
+    ]
+  },
+  {
+    "id": "sbi-po-q9",
+    "chunkId": "chunk-113",
+    "approxPage": 185,
+    "topic": "Insurance Terminology",
+    "questionType": "definition",
+    "question": "Define 'Facultative Reinsurance' and 'Grace Period' in the context of insurance policies.",
+    "hint": "Accept/reject individual risks vs extra time for premium payment.",
+    "expectedKeyPoints": [
+      "Facultative Reinsurance: A arrangement where the reinsurer can accept or reject individual risks offered by the insurer.",
+      "Grace Period: Extra time provided after the premium due date to pay without causing the policy to lapse."
+    ]
+  },
+  {
+    "id": "sbi-po-q10",
+    "chunkId": "chunk-113",
+    "approxPage": 185,
+    "topic": "Insurance Terminology",
+    "questionType": "factual",
+    "question": "What do 'Keyman Insurance' and 'Occurrence Policy' mean?",
+    "hint": "Key employee critical to a business vs claims for incidents occurring during policy period.",
+    "expectedKeyPoints": [
+      "Keyman Insurance: Life insurance taken on a key employee who is critical to a business.",
+      "Occurrence Policy: Covers claims for incidents occurring during the policy period, irrespective of when the claim is made."
+    ]
+  },
+  {
+    "id": "pre-exp-g8-q1",
+    "chunkId": "chunk-125",
+    "approxPage": 205,
+    "topic": "Banking Definition and Core Function",
+    "questionType": "definition",
+    "question": "What is the fundamental legal and economic feature that distinguishes a commercial bank from other financial institutions like NBFCs or investment firms?",
+    "hint": "Think about the unique authority banks have regarding public funds and credit creation.",
+    "expectedKeyPoints": [
+      "Legal authority to accept deposits from the public",
+      "Ability to deploy funds as loans and advances",
+      "Financial intermediation role converting idle savings into productive capital",
+      "Capability to create credit based on deposits"
+    ]
+  },
+  {
+    "id": "pre-exp-g8-q2",
+    "chunkId": "chunk-125",
+    "approxPage": 205,
+    "topic": "Bank Revenue Model",
+    "questionType": "conceptual",
+    "question": "How do banks primarily generate their income based on their core financial intermediation role?",
+    "hint": "It relates to the transformation process of deposits into loans.",
+    "expectedKeyPoints": [
+      "Income is primarily generated through interest charged on loans",
+      "Reflects the deposit-credit linkage and transformation process"
+    ]
+  },
+  {
+    "id": "pre-exp-g8-q3",
+    "chunkId": "chunk-125",
+    "approxPage": 205,
+    "topic": "Ancillary Banking Services",
+    "questionType": "conceptual",
+    "question": "Are payment services, investment options, and advisory functions considered the core distinguishing features of a bank? Explain.",
+    "hint": "Contrast these services with the deposit-credit linkage.",
+    "expectedKeyPoints": [
+      "No, they are ancillary services",
+      "The deposit-credit linkage remains the core economic function separating banks from other institutions"
+    ]
+  },
+  {
+    "id": "pre-exp-g8-q4",
+    "chunkId": "chunk-126",
+    "approxPage": 206,
+    "topic": "Financial Inclusion (PMJDY)",
+    "questionType": "factual",
+    "question": "In which year was the Pradhan Mantri Jan Dhan Yojana (PMJDY) launched, and what was its primary objective?",
+    "hint": "It is recognized as India's largest financial inclusion initiative.",
+    "expectedKeyPoints": [
+      "Launched in 2014",
+      "India's largest financial inclusion initiative"
+    ]
+  },
+  {
+    "id": "pre-exp-g8-q5",
+    "chunkId": "chunk-126",
+    "approxPage": 206,
+    "topic": "Basic Savings Bank Deposit Accounts (BSBDA)",
+    "questionType": "definition",
+    "question": "What are the key characteristics of Basic Savings Bank Deposit Accounts (BSBDA) opened under PMJDY regarding balance requirements and accessibility?",
+    "hint": "Think about minimum balance rules and universal access.",
+    "expectedKeyPoints": [
+      "Require no minimum balance",
+      "Ensure universal accessibility"
+    ]
+  },
+  {
+    "id": "pre-exp-g8-q6",
+    "chunkId": "chunk-126",
+    "approxPage": 206,
+    "topic": "PMJDY Overdraft Facility",
+    "questionType": "factual",
+    "question": "What is the maximum overdraft ceiling applicable to eligible account holders under PMJDY-linked BSBDA accounts?",
+    "hint": "Look at the credit inclusion feature provided up to a certain monetary limit.",
+    "expectedKeyPoints": [
+      "Overdraft facility of up to ₹10,000",
+      "Available to eligible account holders as a credit inclusion feature"
+    ]
+  },
+  {
+    "id": "pre-exp-g8-q7",
+    "chunkId": "chunk-127",
+    "approxPage": 208,
+    "topic": "Savings Accounts",
+    "questionType": "conceptual",
+    "question": "Why do banks pay interest on savings account balances even though the rate is usually low?",
+    "hint": "Consider the primary purpose of savings accounts for individuals.",
+    "expectedKeyPoints": [
+      "Savings accounts encourage individuals to save a portion of their income",
+      "Banks pay interest on the balance maintained for this purpose"
+    ]
+  },
+  {
+    "id": "pre-exp-g8-q8",
+    "chunkId": "chunk-127",
+    "approxPage": 208,
+    "topic": "Current Accounts vs Savings Accounts",
+    "questionType": "conceptual",
+    "question": "What is the fundamental distinction between savings accounts and current accounts regarding the applicability of interest?",
+    "hint": "Consider the nature of transactions associated with each account type.",
+    "expectedKeyPoints": [
+      "Savings accounts pay interest to encourage saving",
+      "Current accounts are meant for business/commercial transactions with frequent deposits and withdrawals, hence no interest is paid",
+      "Interest applicability creates the most fundamental distinction"
+    ]
+  },
+  {
+    "id": "pre-exp-g8-q9",
+    "chunkId": "chunk-127",
+    "approxPage": 208,
+    "topic": "Deposit Products",
+    "questionType": "definition",
+    "question": "Which deposit product requires an account holder to make regular monthly contributions until a predetermined maturity date, and what is its primary objective?",
+    "hint": "It is designed to promote systematic and disciplined savings.",
+    "expectedKeyPoints": [
+      "Recurring Deposit (RD)",
+      "Promotes systematic and disciplined savings",
+      "Requires the depositor to contribute a fixed amount every month until maturity"
+    ]
+  },
+  {
+    "id": "pre-exp-g8-q10",
+    "chunkId": "chunk-127",
+    "approxPage": 208,
+    "topic": "Common Features of Bank Accounts",
+    "questionType": "factual",
+    "question": "What are some of the common features shared between savings and current accounts despite their fundamental differences?",
+    "hint": "These are common service features provided to account holders regardless of account type.",
+    "expectedKeyPoints": [
+      "Cheque facilities",
+      "Digital banking",
+      "Branch access"
+    ]
+  },
+  {
+    "id": "sbi-po-int-q1",
+    "chunkId": "chunk-142",
+    "approxPage": 233,
+    "topic": "Priority Sector Lending",
+    "questionType": "factual",
+    "question": "What is the maximum aggregate exposure per borrower permitted from the banking system under Agriculture Infrastructure within Priority Sector Lending (PSL)?",
+    "hint": "Think about the high ceiling intended to support capital-intensive investments in agricultural infrastructure.",
+    "expectedKeyPoints": [
+      "Maximum aggregate exposure per borrower is ₹100 crore",
+      "Falls under Agriculture Infrastructure within Priority Sector Lending framework",
+      "Intended to support capital-intensive investments in agricultural infrastructure"
+    ]
+  },
+  {
+    "id": "sbi-po-int-q2",
+    "chunkId": "chunk-142",
+    "approxPage": 233,
+    "topic": "Priority Sector Lending",
+    "questionType": "conceptual",
+    "question": "Why does the Priority Sector Lending framework include specific sub-targets such as lending to Small and Marginal Farmers?",
+    "hint": "Consider the role of agriculture and allied activities in rural livelihoods.",
+    "expectedKeyPoints": [
+      "Ensures adequate flow of institutional credit to agriculture and allied activities",
+      "Supports rural livelihoods and economic stability",
+      "Strengthens inclusiveness and balanced agricultural credit distribution"
+    ]
+  },
+  {
+    "id": "sbi-po-int-q3",
+    "chunkId": "chunk-143",
+    "approxPage": 234,
+    "topic": "Priority Sector Housing",
+    "questionType": "factual",
+    "question": "What is the maximum PSL-eligible loan amount for repairs to damaged dwelling units in centers with a population of 50 lakh and above?",
+    "hint": "It is higher than small towns to account for large metropolitan areas.",
+    "expectedKeyPoints": [
+      "Maximum PSL-eligible loan amount is ₹15 lakh",
+      "Applicable for centres with population of 50 lakh and above",
+      "Ensures support remains focused on essential repairs rather than luxury upgrades"
+    ]
+  },
+  {
+    "id": "sbi-po-int-q4",
+    "chunkId": "chunk-143",
+    "approxPage": 234,
+    "topic": "Priority Sector Housing",
+    "questionType": "scenario",
+    "question": "If a borrower in a metropolitan city with a population of 60 lakh applies for a priority sector loan for home renovation, how does the RBI maintain developmental intent while setting limits?",
+    "hint": "Look at how RBI balances human capital and credit allocation.",
+    "expectedKeyPoints": [
+      "By prescribing a clear ceiling (e.g., ₹15 lakh for repairs in large centers)",
+      "Balancing the objective of promoting human capital formation with prudent credit allocation",
+      "Preventing high-value loans from diluting the developmental intent of PSL"
+    ]
+  },
+  {
+    "id": "sbi-po-int-q5",
+    "chunkId": "chunk-144",
+    "approxPage": 236,
+    "topic": "Financial Inclusion",
+    "questionType": "factual",
+    "question": "What is the general cap maintained to ensure that weaker section benefits remain focused on inclusion-oriented lending?",
+    "hint": "Check the cap value mentioned in the context of Urban Cooperative Banks (UCBs) and weaker sections.",
+    "expectedKeyPoints": [
+      "General ₹2 lakh cap",
+      "Ensures weaker section benefits remain focused on small-value, inclusion-oriented lending"
+    ]
+  },
+  {
+    "id": "sbi-po-int-q6",
+    "chunkId": "chunk-144",
+    "approxPage": 236,
+    "topic": "Financial Inclusion",
+    "questionType": "conceptual",
+    "question": "How does the general ₹2 lakh cap impact UCBs and women borrowers?",
+    "hint": "Think about gender-focused financial inclusion and institutional flexibility.",
+    "expectedKeyPoints": [
+      "Strengthens gender-focused financial inclusion",
+      "Allows UCBs greater flexibility in supporting women borrowers within their specific regulatory framework"
+    ]
+  },
+  {
+    "id": "sbi-po-int-q7",
+    "chunkId": "chunk-144",
+    "approxPage": 236,
+    "topic": "Central Banking",
+    "questionType": "definition",
+    "question": "How would you describe the institutional position of the Reserve Bank of India (RBI) in the Indian financial system?",
+    "hint": "It is neither a standard commercial bank nor a development finance institution.",
+    "expectedKeyPoints": [
+      "The apex monetary authority and central bank of India",
+      "Does not accept public deposits or lend like commercial banks"
+    ]
+  },
+  {
+    "id": "sbi-po-int-q8",
+    "chunkId": "chunk-142",
+    "approxPage": 233,
+    "topic": "Priority Sector Lending",
+    "questionType": "definition",
+    "question": "What is the primary objective of institutional credit flow towards agriculture and allied activities under priority sector guidelines?",
+    "hint": "Look at the opening lines of section 1 regarding rural areas.",
+    "expectedKeyPoints": [
+      "Ensuring adequate flow of institutional credit",
+      "Supporting rural livelihoods",
+      "Maintaining economic stability"
+    ]
+  },
+  {
+    "id": "sbi-po-int-q9",
+    "chunkId": "chunk-143",
+    "approxPage": 234,
+    "topic": "Priority Sector Housing",
+    "questionType": "conceptual",
+    "question": "What factors determine the PSL-eligible loan limits for housing repairs under the RBI guidelines?",
+    "hint": "The text mentions population-based thresholds and specific ceilings.",
+    "expectedKeyPoints": [
+      "Population-based thresholds (e.g., centres with population of 50 lakh and above)",
+      "Clear monetary ceilings to prevent misuse or dilution of developmental intent"
+    ]
+  },
+  {
+    "id": "sbi-po-int-q10",
+    "chunkId": "chunk-144",
+    "approxPage": 236,
+    "topic": "Central Banking",
+    "questionType": "conceptual",
+    "question": "In what fundamental way does the Reserve Bank of India differ from commercial banks regarding public interaction?",
+    "hint": "Focus on deposits and lending operations as stated in the text.",
+    "expectedKeyPoints": [
+      "Unlike commercial banks, RBI does not accept public deposits",
+      "RBI does not lend to the general public in the manner commercial banks do",
+      "Functions as the apex monetary authority"
+    ]
+  },
+  {
+    "id": "sbi-po-g10-q1",
+    "chunkId": "chunk-156",
+    "approxPage": 255,
+    "topic": "Statutory Reserve Requirements",
+    "questionType": "definition",
+    "question": "Why are Cash Reserve Ratio (CRR) and Statutory Liquidity Ratio (SLR) referred to as statutory reserve requirements?",
+    "hint": "They are mandated under specific laws like the RBI Act and Banking Regulation Act.",
+    "expectedKeyPoints": [
+      "Banks are legally required to maintain them under specific laws",
+      "Mandated under the RBI Act, 1934 and Banking Regulation Act, 1949"
+    ]
+  },
+  {
+    "id": "sbi-po-g10-q2",
+    "chunkId": "chunk-156",
+    "approxPage": 255,
+    "topic": "Cash Reserve Ratio (CRR)",
+    "questionType": "factual",
+    "question": "Under which specific legislation is the Cash Reserve Ratio (CRR) mandated?",
+    "hint": "Look at the act that empowers the RBI to prescribe minimum cash reserves.",
+    "expectedKeyPoints": [
+      "Reserve Bank of India Act, 1934"
+    ]
+  },
+  {
+    "id": "sbi-po-g10-q3",
+    "chunkId": "chunk-156",
+    "approxPage": 255,
+    "topic": "Statutory Liquidity Ratio (SLR)",
+    "questionType": "conceptual",
+    "question": "What does the Banking Regulation Act, 1949 require banks to do regarding the Statutory Liquidity Ratio (SLR)?",
+    "hint": "It relates to holding a portion of net demand and time liabilities in liquid assets.",
+    "expectedKeyPoints": [
+      "Hold a certain portion of net demand and time liabilities in liquid assets",
+      "Assets include cash, gold, or approved securities"
+    ]
+  },
+  {
+    "id": "sbi-po-g10-q4",
+    "chunkId": "chunk-157",
+    "approxPage": 257,
+    "topic": "Monetary Policy",
+    "questionType": "factual",
+    "question": "What is the current Policy Repo Rate fixed by the Reserve Bank of India according to the prevailing monetary policy rates?",
+    "hint": "Check the options provided in the prevailing policy rates excerpt (5.25%).",
+    "expectedKeyPoints": [
+      "5.25 per cent"
+    ]
+  },
+  {
+    "id": "sbi-po-g10-q5",
+    "chunkId": "chunk-157",
+    "approxPage": 257,
+    "topic": "Repo Rate",
+    "questionType": "definition",
+    "question": "How is the repo rate defined as a key policy instrument of the RBI?",
+    "hint": "It involves lending short-term funds to commercial banks against approved securities.",
+    "expectedKeyPoints": [
+      "Key policy instrument through which the RBI lends short-term funds to commercial banks",
+      "Lending is done against approved securities"
+    ]
+  },
+  {
+    "id": "sbi-po-g10-q6",
+    "chunkId": "chunk-157",
+    "approxPage": 257,
+    "topic": "Repo Rate",
+    "questionType": "conceptual",
+    "question": "What are the economic impacts of changes in the repo rate by the RBI?",
+    "hint": "Think about liquidity, borrowing costs, inflation management, and economic growth.",
+    "expectedKeyPoints": [
+      "Influence overall liquidity, borrowing costs, and credit conditions",
+      "Manage inflation while supporting economic growth"
+    ]
+  },
+  {
+    "id": "sbi-po-g10-q7",
+    "chunkId": "chunk-158",
+    "approxPage": 259,
+    "topic": "Statutory Liquidity Ratio (SLR)",
+    "questionType": "conceptual",
+    "question": "Apart from holding a specified portion of liabilities in cash, gold, or approved securities, what other vital purposes does SLR serve for banks?",
+    "hint": "It ensures solvency and meeting withdrawal demands.",
+    "expectedKeyPoints": [
+      "Ensures solvency",
+      "Ensures the ability to meet withdrawal demands"
+    ]
+  },
+  {
+    "id": "sbi-po-g10-q8",
+    "chunkId": "chunk-158",
+    "approxPage": 259,
+    "topic": "Cash Reserve Ratio (CRR)",
+    "questionType": "scenario",
+    "question": "An increase in the Cash Reserve Ratio (CRR) is most likely to result in which immediate outcome regarding bank lending?",
+    "hint": "Consider what happens when banks must keep a higher proportion of deposits as cash with the RBI.",
+    "expectedKeyPoints": [
+      "Decrease in the amount of money available for lending",
+      "Directly reduces banks' lendable funds"
+    ]
+  },
+  {
+    "id": "sbi-po-g10-q9",
+    "chunkId": "chunk-157",
+    "approxPage": 257,
+    "topic": "Reserve Requirements",
+    "questionType": "conceptual",
+    "question": "What do statutory reserve requirements like CRR and SLR actually calculate against, and what do they not represent?",
+    "hint": "They calculate against liabilities, not assets or capital funds.",
+    "expectedKeyPoints": [
+      "Calculated based on specified liabilities (such as net demand and time liabilities)",
+      "Do not represent assets, loans, capital funds, or currency in circulation"
+    ]
+  },
+  {
+    "id": "sbi-po-g10-q10",
+    "chunkId": "chunk-156",
+    "approxPage": 255,
+    "topic": "Cash Reserve Ratio (CRR)",
+    "questionType": "definition",
+    "question": "What specific responsibility does the RBI Act, 1934 grant to the Reserve Bank of India regarding cash reserves?",
+    "hint": "It empowers the RBI to prescribe something regarding minimum cash reserves.",
+    "expectedKeyPoints": [
+      "Empowers the RBI to prescribe the minimum cash reserves that banks must keep with it"
+    ]
+  },
+  {
+    "id": "sbi-po-exp-c173-q1",
+    "chunkId": "chunk-173",
+    "approxPage": 283,
+    "topic": "Retail Direct Scheme",
+    "questionType": "definition",
+    "question": "What is a Retail Direct Gilt (RDG) Account and how can individuals open it under the RBI Retail Direct Scheme?",
+    "hint": "Launched in 2021, opened with RBI free of cost.",
+    "expectedKeyPoints": [
+      "Launched in 2021 by RBI.",
+      "Opened and maintained free of cost through the RBI Retail Direct portal.",
+      "Allows retail investors to invest directly in T-Bills, Dated G-Secs, SDLs, and Sovereign Gold Bonds.",
+      "Does not require a demat account with NSDL/CDSL."
+    ]
+  },
+  {
+    "id": "sbi-po-exp-c173-q2",
+    "chunkId": "chunk-173",
+    "approxPage": 283,
+    "topic": "Retail Direct Scheme",
+    "questionType": "conceptual",
+    "question": "How does the Retail Direct Gilt (RDG) account function in terms of market participation, and what are its broader economic objectives?",
+    "hint": "Think about primary auctions, secondary market, financial inclusion, and government borrowing.",
+    "expectedKeyPoints": [
+      "Functions similar to a securities account held directly with RBI.",
+      "Enables participation in primary auctions via Non-Competitive Bidding.",
+      "Allows secondary market trading.",
+      "Enhances retail participation in Government borrowing programmes.",
+      "Promotes financial inclusion and direct access to sovereign-backed securities."
+    ]
+  },
+  {
+    "id": "sbi-po-exp-c174-q1",
+    "chunkId": "chunk-174",
+    "approxPage": 285,
+    "topic": "Monetary Policy Tools",
+    "questionType": "conceptual",
+    "question": "How do reserve requirements like CRR and SLR impact the banking system, and how do they differ from Open Market Operations (OMOs)?",
+    "hint": "Affect lendable resources; do not involve buying/selling securities.",
+    "expectedKeyPoints": [
+      "Comprise liquid, unencumbered Government Securities and directly affect lendable resources of banks.",
+      "Unlike OMOs, CRR and SLR do not involve buying or selling securities in the market.",
+      "An increase in CRR/SLR typically leads to liquidity contraction in the banking system.",
+      "Distinct from selective credit controls which target specific sectors."
+    ]
+  },
+  {
+    "id": "sbi-po-exp-c174-q2",
+    "chunkId": "chunk-174",
+    "approxPage": 285,
+    "topic": "Legal Tender",
+    "questionType": "definition",
+    "question": "In the Indian monetary system, how is the term 'legal tender' defined regarding its mandatory acceptance?",
+    "hint": "Refers to money that must be accepted for debts or financial obligations.",
+    "expectedKeyPoints": [
+      "Legal tender refers to money that must be accepted if offered for the payment of a debt or financial obligation."
+    ]
+  },
+  {
+    "id": "sbi-po-exp-c174-q3",
+    "chunkId": "chunk-174",
+    "approxPage": 285,
+    "topic": "Central Bank Digital Currency",
+    "questionType": "factual",
+    "question": "What is the Digital Rupee (e₹) in the context of the Indian financial system?",
+    "hint": "Introduced by RBI.",
+    "expectedKeyPoints": [
+      "Digital Rupee (e₹) is India’s Central Bank Digital Currency (CBDC).",
+      "It is introduced by the Reserve Bank of India (RBI)."
+    ]
+  },
+  {
+    "id": "sbi-po-exp-c175-q1",
+    "chunkId": "chunk-175",
+    "approxPage": 287,
+    "topic": "Currency Issuance",
+    "questionType": "factual",
+    "question": "Under which legislative act are banknotes issued in India, and who issues them?",
+    "hint": "Check the RBI Act.",
+    "expectedKeyPoints": [
+      "Banknotes in India are issued by the Reserve Bank of India (RBI).",
+      "They are issued under the RBI Act, 1934."
+    ]
+  },
+  {
+    "id": "sbi-po-exp-c175-q2",
+    "chunkId": "chunk-175",
+    "approxPage": 287,
+    "topic": "Currency Guarantee",
+    "questionType": "conceptual",
+    "question": "Whose guarantee backs the value of Indian banknotes, and what significance does the 'I Promise to Pay' clause hold?",
+    "hint": "Central Government guarantee; public trust.",
+    "expectedKeyPoints": [
+      "The value of banknotes is guaranteed by the Central Government of India.",
+      "This government guarantee ensures public trust and credibility in the currency.",
+      "The 'I Promise to Pay the Bearer...' clause reflects this guarantee."
+    ]
+  },
+  {
+    "id": "sbi-po-exp-c175-q3",
+    "chunkId": "chunk-175",
+    "approxPage": 287,
+    "topic": "Currency System",
+    "questionType": "scenario",
+    "question": "Why are Indian banknotes universally accepted as legal tender across the country?",
+    "hint": "Government backing and monetary system confidence.",
+    "expectedKeyPoints": [
+      "Because of the backing and government guarantee standing behind the value printed on the note.",
+      "The arrangement strengthens confidence and trust in India’s monetary system."
+    ]
+  },
+  {
+    "id": "sbi-po-exp-c175-q4",
+    "chunkId": "chunk-175",
+    "approxPage": 287,
+    "topic": "Banknote Printing",
+    "questionType": "factual",
+    "question": "Which corporate body owns and operates presses for printing certain Indian banknotes on behalf of the Government of India?",
+    "hint": "Acronym SPMCIL.",
+    "expectedKeyPoints": [
+      "Security Printing and Minting Corporation of India Limited (SPMCIL)."
+    ]
+  },
+  {
+    "id": "sbi-po-exp-c173-q3",
+    "chunkId": "chunk-173",
+    "approxPage": 283,
+    "topic": "Retail Direct Scheme",
+    "questionType": "factual",
+    "question": "Can retail investors trade Sovereign Gold Bonds or Treasury Bills via the RDG account without an NSDL or CDSL demat account?",
+    "hint": "Direct access with RBI without NSDL/CDSL.",
+    "expectedKeyPoints": [
+      "Yes, investors do not require a demat account with NSDL/CDSL for investing through the RDG account.",
+      "The RDG account functions directly with RBI."
+    ]
+  },
+  {
+    "id": "sbi-po-exp-chunk187-q1",
+    "chunkId": "chunk-187",
+    "approxPage": 306,
+    "topic": "Prepaid Payment Instruments (PPIs)",
+    "questionType": "factual",
+    "question": "Is cash withdrawal generally permitted for standard PPIs?",
+    "hint": "Refer to the rules on cash withdrawal for PPIs.",
+    "expectedKeyPoints": [
+      "Cash withdrawal is generally not permitted",
+      "Exception exists in Full-KYC PPIs as allowed"
+    ]
+  },
+  {
+    "id": "sbi-po-exp-chunk187-q2",
+    "chunkId": "chunk-187",
+    "approxPage": 306,
+    "topic": "Prepaid Payment Instruments (PPIs)",
+    "questionType": "conceptual",
+    "question": "What are the core use cases and restrictions of Semi-Closed PPIs like Paytm or PhonePe wallets?",
+    "hint": "Think about purchases, fund transfers, and ATM cash withdrawals.",
+    "expectedKeyPoints": [
+      "Allows purchase of goods/services and fund transfers subject to KYC norms",
+      "Cannot be used for withdrawal of cash from ATMs in normal cases"
+    ]
+  },
+  {
+    "id": "sbi-po-exp-chunk187-q3",
+    "chunkId": "chunk-187",
+    "approxPage": 306,
+    "topic": "Prepaid Payment Instruments (PPIs)",
+    "questionType": "definition",
+    "question": "How do Closed System PPIs differ from Semi-Closed or Open PPIs regarding regulatory approvals?",
+    "hint": "Consider authorization requirements and usability.",
+    "expectedKeyPoints": [
+      "Closed PPIs are usable only at the issuing entity (single merchant)",
+      "They do not require RBI authorisation, unlike Semi-Closed or Open PPIs"
+    ]
+  },
+  {
+    "id": "sbi-po-exp-chunk188-q4",
+    "chunkId": "chunk-188",
+    "approxPage": 308,
+    "topic": "PPI-MTS Instruments",
+    "questionType": "factual",
+    "question": "What is the maximum permissible balance for a PPI-MTS (Mass Transit System) instrument at any time?",
+    "hint": "Look at the low-value transportation transaction instrument limits.",
+    "expectedKeyPoints": [
+      "The maximum permissible balance is ₹3,000 at any time",
+      "Designed for metro, bus, and transit-related payments"
+    ]
+  },
+  {
+    "id": "sbi-po-exp-chunk188-q5",
+    "chunkId": "chunk-188",
+    "approxPage": 308,
+    "topic": "PPI-MTS Instruments",
+    "questionType": "conceptual",
+    "question": "What are the primary features and restrictions associated with PPI-MTS instruments under RBI's Master Directions?",
+    "hint": "Consider KYC, cash withdrawal, and merchant transaction capabilities.",
+    "expectedKeyPoints": [
+      "Primarily meant for low-value transportation transactions",
+      "Generally issued with minimal KYC requirements",
+      "Not intended for general-purpose merchant transactions",
+      "Cash withdrawal facility is not permitted"
+    ]
+  },
+  {
+    "id": "sbi-po-exp-chunk188-q6",
+    "chunkId": "chunk-188",
+    "approxPage": 308,
+    "topic": "Non-bank PPI Issuers Regulation",
+    "questionType": "factual",
+    "question": "According to latest regulatory directions, non-bank PPI issuers must appoint whom, with full compliance required by a specific date?",
+    "hint": "Check the appointment mandate for non-bank PPI issuers.",
+    "expectedKeyPoints": [
+      "Must appoint an Internal Ombudsman",
+      "Full compliance required by June 30"
+    ]
+  },
+  {
+    "id": "sbi-po-exp-chunk189-q7",
+    "chunkId": "chunk-189",
+    "approxPage": 310,
+    "topic": "Small PPIs",
+    "questionType": "factual",
+    "question": "Within what timeframe must Small PPIs be converted to Full-KYC from the date of issuance?",
+    "hint": "Look at the conversion timeline for cash-loaded Small PPIs.",
+    "expectedKeyPoints": [
+      "Must be converted to Full-KYC within 24 months from issuance"
+    ]
+  },
+  {
+    "id": "sbi-po-exp-chunk189-q8",
+    "chunkId": "chunk-189",
+    "approxPage": 310,
+    "topic": "Small PPIs",
+    "questionType": "scenario",
+    "question": "What happens if a cash-loaded Small PPI is not upgraded to Full-KYC within the mandated 24-month period?",
+    "hint": "Consider credits, reloads, and existing balances.",
+    "expectedKeyPoints": [
+      "No further credits or reloads are allowed",
+      "The existing balance can still be used for permitted transactions"
+    ]
+  },
+  {
+    "id": "sbi-po-exp-chunk189-q9",
+    "chunkId": "chunk-189",
+    "approxPage": 310,
+    "topic": "Non-bank PPI Issuers Capital",
+    "questionType": "factual",
+    "question": "What is the minimum paid-up capital requirement for a non-bank entity to issue PPIs in India?",
+    "hint": "Check the financial soundness requirement for non-bank entities seeking RBI authorization.",
+    "expectedKeyPoints": [
+      "Minimum paid-up capital of ₹5 crore"
+    ]
+  },
+  {
+    "id": "sbi-po-exp-chunk189-q10",
+    "chunkId": "chunk-189",
+    "approxPage": 310,
+    "topic": "Non-bank PPI Issuers Capital",
+    "questionType": "conceptual",
+    "question": "Why does the RBI mandate a minimum paid-up capital requirement for non-bank entities seeking to issue PPIs?",
+    "hint": "Think about institutional stability and operational soundness.",
+    "expectedKeyPoints": [
+      "Ensures financial soundness",
+      "Ensures operational stability for entities incorporated in India seeking RBI authorisation"
+    ]
+  },
+  {
+    "id": "sbi-po-gic-q1",
+    "chunkId": "chunk-204",
+    "approxPage": 334,
+    "topic": "General Insurance",
+    "questionType": "factual",
+    "question": "When was the General Insurance Corporation of India (GIC) incorporated, and under which legislation was it formed?",
+    "hint": "Refer to the incorporation year under the Companies Act and Section 9(1) of GIBNA.",
+    "expectedKeyPoints": [
+      "Incorporated on 22 November 1972 under the Companies Act, 1956.",
+      "Formed under Section 9(1) of GIBNA (General Insurance Business (Nationalisation) Act)."
+    ]
+  },
+  {
+    "id": "sbi-po-gic-q2",
+    "chunkId": "chunk-204",
+    "approxPage": 334,
+    "topic": "General Insurance",
+    "questionType": "factual",
+    "question": "Which four companies remained as fully owned subsidiary companies of GIC after the mergers of Indian insurance companies?",
+    "hint": "Name the four major national/oriental/united/new india companies.",
+    "expectedKeyPoints": [
+      "National Insurance Company Ltd.",
+      "New India Assurance Company Ltd.",
+      "Oriental Insurance Company Ltd.",
+      "United India Insurance Company Ltd."
+    ]
+  },
+  {
+    "id": "sbi-po-gic-q3",
+    "chunkId": "chunk-204",
+    "approxPage": 334,
+    "topic": "General Insurance",
+    "questionType": "conceptual",
+    "question": "What major regulatory change occurred for GIC in the year 2000 following the IRDA Act amendments?",
+    "hint": "Think about GIC's shift from a supervisory role to a reinsurer.",
+    "expectedKeyPoints": [
+      "IRDA Act amendments in 2000 ended GIC’s supervisory role.",
+      "GIC became the Indian Reinsurer."
+    ]
+  },
+  {
+    "id": "sbi-po-health-q4",
+    "chunkId": "chunk-205",
+    "approxPage": 336,
+    "topic": "Health Insurance",
+    "questionType": "definition",
+    "question": "How is Health Insurance defined in the context of financial services, and what payment modes does it typically offer?",
+    "hint": "It covers medical or surgical expenses and offers cashless treatment or reimbursement.",
+    "expectedKeyPoints": [
+      "Covers medical/surgical expenses due to illness or injury.",
+      "Offers cashless treatment or reimbursement."
+    ]
+  },
+  {
+    "id": "sbi-po-health-q5",
+    "chunkId": "chunk-205",
+    "approxPage": 336,
+    "topic": "Health Insurance",
+    "questionType": "factual",
+    "question": "What are the primary types of Health Insurance mentioned in the text based on target coverage groups?",
+    "hint": "There are three categories covering individuals, families, and senior citizens.",
+    "expectedKeyPoints": [
+      "Individual Health Insurance (covers one person)",
+      "Family Health Insurance (covers all family members under one policy)",
+      "Senior Citizen Health Insurance (for age 60–65 years)"
+    ]
+  },
+  {
+    "id": "sbi-po-health-q6",
+    "chunkId": "chunk-205",
+    "approxPage": 336,
+    "topic": "Health Insurance",
+    "questionType": "conceptual",
+    "question": "What are some of the standard exclusions listed under Health Insurance policies?",
+    "hint": "Think about elective surgeries, wars, and specific therapies not covered.",
+    "expectedKeyPoints": [
+      "War and terminal illnesses",
+      "Cosmetic surgery and dental/eye surgery",
+      "Pre-existing conditions during waiting period",
+      "Non-allopathic therapies and unconfirmed diagnostic charges"
+    ]
+  },
+  {
+    "id": "sbi-po-travel-q7",
+    "chunkId": "chunk-206",
+    "approxPage": 338,
+    "topic": "Travel Insurance",
+    "questionType": "factual",
+    "question": "What is the maximum specified duration for a Single Trip travel insurance policy in India?",
+    "hint": "Check the duration limit for single journey travel insurance.",
+    "expectedKeyPoints": [
+      "Does not exceed 240 days."
+    ]
+  },
+  {
+    "id": "sbi-po-travel-q8",
+    "chunkId": "chunk-206",
+    "approxPage": 338,
+    "topic": "Travel Insurance",
+    "questionType": "definition",
+    "question": "What does an Annual Multi-Trip travel insurance policy allow for policyholders?",
+    "hint": "It relates to frequency and duration of trips within a year.",
+    "expectedKeyPoints": [
+      "Allows multiple trips within a period of one year."
+    ]
+  },
+  {
+    "id": "sbi-po-fire-q9",
+    "chunkId": "chunk-206",
+    "approxPage": 338,
+    "topic": "Fire Insurance",
+    "questionType": "factual",
+    "question": "What are the valid types of Fire Insurance in India as per the text?",
+    "hint": "Valued, Floating, Comprehensive, Specific, and Valuable policies.",
+    "expectedKeyPoints": [
+      "Valued",
+      "Floating",
+      "Comprehensive",
+      "Specific",
+      "Valuable policies"
+    ]
+  },
+  {
+    "id": "sbi-po-fire-q10",
+    "chunkId": "chunk-206",
+    "approxPage": 338,
+    "topic": "Fire Insurance",
+    "questionType": "conceptual",
+    "question": "What covered risks and exclusions apply to property/goods under standard property and fire insurance guidelines?",
+    "hint": "Covered risks include natural disasters and terrorism; exclusions include driving under influence.",
+    "expectedKeyPoints": [
+      "Covered risks include riot, strike, fire, burglary, terrorism, earthquake, landslide, flood, storm, cyclone, lightning, explosion, aircraft damage, and water tank overflow.",
+      "Exclusions include driving under influence, illegal activities, invalid license, and damage outside India."
+    ]
   }
 ]

@@ -35,14 +35,17 @@ export default function BankingAwarenessPage() {
   const [attemptedCount, setAttemptedCount] = useState<number>(0);
   const [isDownloadingPdf, setIsDownloadingPdf] = useState<boolean>(false);
 
-  // Excluded history to guarantee no duplicate questions across sessions
-  const [askedQuestionTexts, setAskedQuestionTexts] = useState<string[]>(() => {
+  // In-session exclusion (prevents ANY question seen or skipped from repeating in the current session)
+  const [currentSessionSeenQuestions, setCurrentSessionSeenQuestions] = useState<string[]>([]);
+
+  // Persistent exclusion for ANSWERED questions across past sessions
+  const [persistedAnsweredQuestions] = useState<string[]>(() => {
     if (typeof window === "undefined") return [];
     try {
       const stored = localStorage.getItem(SESSION_HISTORY_STORAGE_KEY);
       if (stored) {
         const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed)) return parsed.slice(-50);
+        if (Array.isArray(parsed)) return parsed.slice(-80);
       }
     } catch {
       // ignore
@@ -117,6 +120,11 @@ export default function BankingAwarenessPage() {
       ? [...visitedChunkIds, excludeChunkId]
       : visitedChunkIds;
 
+    // Combine in-session seen questions + persisted answered questions
+    const allExcludedQuestions = Array.from(
+      new Set([...persistedAnsweredQuestions, ...currentSessionSeenQuestions])
+    );
+
     // 1. If we already have a preloaded question waiting in memory, use it INSTANTLY
     if (preloadedQuestionRef.current) {
       const preloaded = preloadedQuestionRef.current;
@@ -125,22 +133,14 @@ export default function BankingAwarenessPage() {
       setIsLoadingQuestion(false);
 
       const nextChunks = [...currentChunks.slice(-30), preloaded.chunkId];
-      const nextAsked = [...askedQuestionTexts, preloaded.question];
+      const nextSessionSeen = [...currentSessionSeenQuestions, preloaded.question];
 
       setVisitedChunkIds(nextChunks);
-      setAskedQuestionTexts(nextAsked);
-
-      if (typeof window !== "undefined") {
-        try {
-          localStorage.setItem(SESSION_HISTORY_STORAGE_KEY, JSON.stringify(nextAsked.slice(-60)));
-        } catch {
-          // ignore
-        }
-      }
+      setCurrentSessionSeenQuestions(nextSessionSeen);
 
       // Prefetch the one after that
       setTimeout(() => {
-        prefetchNextQuestion(nextChunks, nextAsked);
+        prefetchNextQuestion(nextChunks, Array.from(new Set([...persistedAnsweredQuestions, ...nextSessionSeen])));
       }, 300);
       return;
     }
@@ -153,7 +153,7 @@ export default function BankingAwarenessPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           excludedChunkIds: currentChunks,
-          excludedQuestions: askedQuestionTexts,
+          excludedQuestions: allExcludedQuestions,
         }),
       });
 
@@ -165,22 +165,14 @@ export default function BankingAwarenessPage() {
       const q: BankingAwarenessQuestion = data.question;
       setCurrentQuestion(q);
       const nextChunks = [...currentChunks.slice(-30), q.chunkId];
-      const nextAsked = [...askedQuestionTexts, q.question];
+      const nextSessionSeen = [...currentSessionSeenQuestions, q.question];
 
       setVisitedChunkIds(nextChunks);
-      setAskedQuestionTexts(nextAsked);
-
-      if (typeof window !== "undefined") {
-        try {
-          localStorage.setItem(SESSION_HISTORY_STORAGE_KEY, JSON.stringify(nextAsked.slice(-60)));
-        } catch {
-          // ignore
-        }
-      }
+      setCurrentSessionSeenQuestions(nextSessionSeen);
 
       // Start prefetching the following question in the background right away!
       setTimeout(() => {
-        prefetchNextQuestion(nextChunks, nextAsked);
+        prefetchNextQuestion(nextChunks, Array.from(new Set([...persistedAnsweredQuestions, ...nextSessionSeen])));
       }, 500);
     } catch (err: unknown) {
       console.error("Fetch question error:", err);
@@ -188,7 +180,7 @@ export default function BankingAwarenessPage() {
     } finally {
       setIsLoadingQuestion(false);
     }
-  }, [visitedChunkIds, askedQuestionTexts, resetVoiceState, prefetchNextQuestion]);
+  }, [visitedChunkIds, currentSessionSeenQuestions, persistedAnsweredQuestions, resetVoiceState, prefetchNextQuestion]);
 
   // Initial load
   const hasInitializedRef = useRef(false);
@@ -266,6 +258,17 @@ export default function BankingAwarenessPage() {
         timestamp: Date.now(),
       };
       setSessionTurns((prev) => [...prev, newTurn]);
+
+      // Only save ANSWERED questions permanently across future sessions so skipped ones can reappear in later sessions!
+      if (typeof window !== "undefined") {
+        try {
+          const currentStored = JSON.parse(localStorage.getItem(SESSION_HISTORY_STORAGE_KEY) || "[]");
+          const updated = Array.from(new Set([...currentStored, activeQuestionText])).slice(-80);
+          localStorage.setItem(SESSION_HISTORY_STORAGE_KEY, JSON.stringify(updated));
+        } catch {
+          // ignore
+        }
+      }
     } catch (err: unknown) {
       console.error("Evaluation error:", err);
       setSubmitError(err instanceof Error ? err.message : "Failed to evaluate answer.");
