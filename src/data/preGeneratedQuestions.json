@@ -1,0 +1,938 @@
+[
+  {
+    "id": "sbi-po-q1",
+    "chunkId": "chunk-3",
+    "approxPage": 4,
+    "topic": "Definition of Bank",
+    "questionType": "definition",
+    "question": "How is a bank legally defined in the context of the Indian banking system?",
+    "hint": "Refer to the governing act mentioned in the text.",
+    "expectedKeyPoints": [
+      "A financial organisation",
+      "Involved in banking as per the Banking Regulation Act, 1949"
+    ]
+  },
+  {
+    "id": "sbi-po-q2",
+    "chunkId": "chunk-3",
+    "approxPage": 4,
+    "topic": "Definition of Banking",
+    "questionType": "conceptual",
+    "question": "What constitutes the core process of 'Banking' according to regulatory definitions?",
+    "hint": "Think about deposits, withdrawals, cheques, and loans.",
+    "expectedKeyPoints": [
+      "Accepting deposits from the public",
+      "Facility to withdraw on demand, payable through cheque",
+      "Providing loans to the public"
+    ]
+  },
+  {
+    "id": "sbi-po-q3",
+    "chunkId": "chunk-3",
+    "approxPage": 4,
+    "topic": "Indian Banking History - First Bank",
+    "questionType": "factual",
+    "question": "Which was India's first bank established in 1683, and where did it eventually merge?",
+    "hint": "It was established in Madras and later merged into SBI.",
+    "expectedKeyPoints": [
+      "Madras Bank was India's first bank established in 1683",
+      "It was later merged into Bank of Madras and eventually SBI"
+    ]
+  },
+  {
+    "id": "sbi-po-q4",
+    "chunkId": "chunk-3",
+    "approxPage": 4,
+    "topic": "Indian Banking History - Foreign Bank",
+    "questionType": "factual",
+    "question": "Name the first foreign bank in India and state the year of its establishment.",
+    "hint": "It was established by Comptoir national d'escompte de Paris.",
+    "expectedKeyPoints": [
+      "Comptoir national d'escompte de Paris (Grindlays Bank)",
+      "Established in 1860"
+    ]
+  },
+  {
+    "id": "sbi-po-q5",
+    "chunkId": "chunk-3",
+    "approxPage": 4,
+    "topic": "Indian Banking History - Joint Stock Bank",
+    "questionType": "factual",
+    "question": "Which bank holds the distinction of being India’s first Joint Stock Bank, and where was it established?",
+    "hint": "It was established in Uttar Pradesh.",
+    "expectedKeyPoints": [
+      "Oudh Commercial Bank",
+      "Established in Faizabad, Uttar Pradesh"
+    ]
+  },
+  {
+    "id": "sbi-po-q6",
+    "chunkId": "chunk-3",
+    "approxPage": 4,
+    "topic": "Indian Banking History - Swadeshi Bank",
+    "questionType": "factual",
+    "question": "Which was the first commercial Indian bank completely owned and managed by Indians under the 'Swadeshi' movement?",
+    "hint": "It has 'Central' in its name.",
+    "expectedKeyPoints": [
+      "Central Bank of India",
+      "Completely owned and managed by Indians 'Swadeshi'"
+    ]
+  },
+  {
+    "id": "sbi-po-q7",
+    "chunkId": "chunk-3",
+    "approxPage": 4,
+    "topic": "Regulatory Body",
+    "questionType": "factual",
+    "question": "Which institution regulates and manages the Indian banking system?",
+    "hint": "It is India's central banking institution.",
+    "expectedKeyPoints": [
+      "Reserve Bank of India (RBI)"
+    ]
+  },
+  {
+    "id": "sbi-po-q8",
+    "chunkId": "chunk-3",
+    "approxPage": 4,
+    "topic": "Types of Banks",
+    "questionType": "conceptual",
+    "question": "Broadly, how are banks classified under the Indian Banking System structure based on the chapter details?",
+    "hint": "Check the final classification breakdown in the excerpt.",
+    "expectedKeyPoints": [
+      "Scheduled Banks",
+      "Non-Scheduled Banks"
+    ]
+  },
+  {
+    "id": "sbi-po-q9",
+    "chunkId": "chunk-1",
+    "approxPage": 1,
+    "topic": "Ebook Content Structure",
+    "questionType": "factual",
+    "question": "According to the contents index, which chapters cover Development Banks & AIFIs, and Deposits in Banking respectively?",
+    "hint": "Look at chapters 3 and 4 in the table of contents.",
+    "expectedKeyPoints": [
+      "Chapter 3 covers Development Banks and AIFIs : The Big Boys",
+      "Chapter 4 covers Deposits and Types of Deposits in Banking"
+    ]
+  },
+  {
+    "id": "sbi-po-q10",
+    "chunkId": "chunk-2",
+    "approxPage": 2,
+    "topic": "Digital Banking & Forex",
+    "questionType": "factual",
+    "question": "Based on the table of contents, what are the primary topics covered under Chapter 21 and Chapter 23?",
+    "hint": "Chapter 21 relates to UPI/NFC/CTS, and Chapter 23 relates to FEMA/Forex.",
+    "expectedKeyPoints": [
+      "Chapter 21 covers Digital Banking, UPI and Products, TReDs, NFC, and Cheque Truncation System",
+      "Chapter 23 covers Forex Exchange Market, SVRA, FEMA Act Rules, LRS, ECB, FDI Limits, and Foreign Codes"
+    ]
+  },
+  {
+    "id": "pre-g1-q1",
+    "chunkId": "chunk-28",
+    "approxPage": 45,
+    "topic": "SME Collateral-Free Loan",
+    "questionType": "definition",
+    "question": "What are SME Collateral-Free Loans, and who are the eligible beneficiaries for them?",
+    "hint": "Loans provided without collateral to specific entrepreneurs and businesses.",
+    "expectedKeyPoints": [
+      "Loans provided to Small and Medium Enterprises (SMEs) without collateral",
+      "Available to startup entrepreneurs and existing SMEs",
+      "Used for working capital needs, business expansion, and purchase of machinery/equipment"
+    ]
+  },
+  {
+    "id": "pre-g1-q2",
+    "chunkId": "chunk-28",
+    "approxPage": 45,
+    "topic": "Construction Equipment Loan",
+    "questionType": "factual",
+    "question": "What is the typical loan tenure and collateral requirement for a Construction Equipment Loan?",
+    "hint": "Check the tenure range and what acts as the security itself.",
+    "expectedKeyPoints": [
+      "Loan tenure is generally 12 to 60 months",
+      "It is usually a secured loan",
+      "The equipment itself acts as collateral"
+    ]
+  },
+  {
+    "id": "pre-g1-q3",
+    "chunkId": "chunk-28",
+    "approxPage": 45,
+    "topic": "Construction Equipment Loan",
+    "questionType": "conceptual",
+    "question": "Give examples of machinery for which a Construction Equipment Loan can be provided, and state whether it is secured or unsecured.",
+    "hint": "Think of heavy machinery used at construction sites.",
+    "expectedKeyPoints": [
+      "Examples include excavators, cranes, and backhoe loaders",
+      "It is usually a secured loan where the equipment acts as collateral"
+    ]
+  },
+  {
+    "id": "pre-g1-q4",
+    "chunkId": "chunk-28",
+    "approxPage": 45,
+    "topic": "SME Credit Card",
+    "questionType": "factual",
+    "question": "In what forms is a credit facility offered under the SME Credit Card, and what is the maximum credit limit mentioned?",
+    "hint": "Look at the forms of credit facility and the limit up to ₹10 lakh.",
+    "expectedKeyPoints": [
+      "Offered in the form of cash credit or term loan",
+      "Credit limit is up to ₹10 lakh"
+    ]
+  },
+  {
+    "id": "pre-g1-q5",
+    "chunkId": "chunk-29",
+    "approxPage": 47,
+    "topic": "Mortgages in Banking",
+    "questionType": "definition",
+    "question": "How is a mortgage defined in banking, and what happens to the property and the lender's rights during the loan tenure?",
+    "hint": "Pledging immovable property as security.",
+    "expectedKeyPoints": [
+      "A legal agreement where the borrower pledges an immovable property as security to obtain a loan",
+      "The property remains with the borrower",
+      "The lender gets a legal right over it until the loan is fully repaid"
+    ]
+  },
+  {
+    "id": "pre-g1-q6",
+    "chunkId": "chunk-29",
+    "approxPage": 47,
+    "topic": "Mortgages in Banking",
+    "questionType": "conceptual",
+    "question": "Why do mortgage loans generally carry a lower interest rate compared to unsecured loans, and what are their typical features?",
+    "hint": "It is a secured loan involving immovable property.",
+    "expectedKeyPoints": [
+      "It is a secured loan, hence carrying lower interest rates",
+      "They usually allow higher loan amounts and longer repayment tenures",
+      "Having home insurance can sometimes help in availing a higher loan amount or better terms"
+    ]
+  },
+  {
+    "id": "pre-g1-q7",
+    "chunkId": "chunk-29",
+    "approxPage": 47,
+    "topic": "Components of a Mortgage",
+    "questionType": "factual",
+    "question": "From a banking lens, what are the critical elements or components that make up a mortgage?",
+    "hint": "Look at the key components listed right after explaining mortgage elements.",
+    "expectedKeyPoints": [
+      "Principal: The original amount borrowed by the customer",
+      "Interest"
+    ]
+  },
+  {
+    "id": "pre-g1-q8",
+    "chunkId": "chunk-30",
+    "approxPage": 48,
+    "topic": "Simple Mortgage",
+    "questionType": "definition",
+    "question": "What is a Simple Mortgage, and how does it differ in terms of borrower possession and lender rights upon default?",
+    "hint": "It is the most common and widely used mortgage in India.",
+    "expectedKeyPoints": [
+      "The borrower retains ownership and possession of the property",
+      "The lender gets the right to sell the property if the borrower defaults",
+      "No income from the property is enjoyed by the lender during the loan period"
+    ]
+  },
+  {
+    "id": "pre-g1-q9",
+    "chunkId": "chunk-30",
+    "approxPage": 48,
+    "topic": "Subprime Mortgage",
+    "questionType": "conceptual",
+    "question": "Who are Subprime Mortgages offered to, and why do they carry a higher interest rate?",
+    "hint": "Borrowers with low credit scores.",
+    "expectedKeyPoints": [
+      "Offered to borrowers with low credit scores or weak credit history",
+      "They come with a higher interest rate due to higher risk",
+      "Risk for both borrower and lender is relatively high"
+    ]
+  },
+  {
+    "id": "pre-g1-q10",
+    "chunkId": "chunk-30",
+    "approxPage": 48,
+    "topic": "English Mortgage",
+    "questionType": "definition",
+    "question": "How is ownership handled in an English Mortgage compared to other types?",
+    "hint": "Ownership is temporarily transferred.",
+    "expectedKeyPoints": [
+      "The ownership of the property is temporarily transferred to the lender"
+    ]
+  },
+  {
+    "id": "sbi-po-q1",
+    "chunkId": "chunk-55",
+    "approxPage": 89,
+    "topic": "e-Kuber Usage",
+    "questionType": "factual",
+    "question": "What is the new rule regarding Central Government Department payments through RBI's e-Kuber system introduced from 16 July, and how does it compare to the earlier rule?",
+    "hint": "Think about the threshold limit for Central Government payments routed through e-Kuber.",
+    "expectedKeyPoints": [
+      "Payments exceeding ₹75 crore must be routed through the e-Kuber system.",
+      "The earlier rule was mandatory only for payments above ₹500 crore.",
+      "Revised thresholds include ₹75 crore for the general category and ₹100 crore for certain categories, with a proposed future target of ₹50 crore."
+    ]
+  },
+  {
+    "id": "sbi-po-q2",
+    "chunkId": "chunk-55",
+    "approxPage": 89,
+    "topic": "Sovereign Gold Bond Scheme",
+    "questionType": "definition",
+    "question": "What is a Sovereign Gold Bond (SGB) and who issues it?",
+    "hint": "It acts as a substitute for physical gold and is denominated in grams.",
+    "expectedKeyPoints": [
+      "SGB is a government security denominated in grams of gold.",
+      "It is issued by the Reserve Bank of India (RBI) on behalf of the Government of India (GoI).",
+      "It serves as a substitute for physical gold and was introduced in October–November 2015."
+    ]
+  },
+  {
+    "id": "sbi-po-q3",
+    "chunkId": "chunk-56",
+    "approxPage": 91,
+    "topic": "Gold Monetisation Scheme",
+    "questionType": "factual",
+    "question": "What were the three categories of deposits under the Gold Monetisation Scheme before the recent changes, and what are their respective tenures and interest structures?",
+    "hint": "Short-Term, Medium-Term, and Long-Term deposits.",
+    "expectedKeyPoints": [
+      "1. Short-Term Bank Deposit (STBD): Tenure of 1 to 3 years; interest decided by banks.",
+      "2. Medium-Term Government Deposit (MTGD): Tenure of 5 to 7 years; interest of 2.25% fixed by GoI.",
+      "3. Long-Term Government Deposit (LTGD): Tenure of 12 to 15 years; interest of 2.5% fixed by GoI."
+    ]
+  },
+  {
+    "id": "sbi-po-q4",
+    "chunkId": "chunk-56",
+    "approxPage": 91,
+    "topic": "Gold Monetisation Scheme",
+    "questionType": "conceptual",
+    "question": "What are the key features regarding deposit limits, accepted forms of gold, and interest payouts under the Gold Monetisation Scheme?",
+    "hint": "Consider minimum/maximum limits and how interest is paid out.",
+    "expectedKeyPoints": [
+      "Minimum deposit is 10 grams of gold, with no maximum limit.",
+      "Gold is accepted in the form of bars, coins, and jewellery (without stones or other metals).",
+      "Interest is paid in gold (grams), not rupees, and is tax-free under the Income Tax Act."
+    ]
+  },
+  {
+    "id": "sbi-po-q5",
+    "chunkId": "chunk-56",
+    "approxPage": 91,
+    "topic": "Gold Monetisation Scheme",
+    "questionType": "factual",
+    "question": "What recent changes were made to the Gold Monetisation Scheme effective 26 March 2025?",
+    "hint": "Which deposit types were discontinued?",
+    "expectedKeyPoints": [
+      "MTGD and LTGD have been discontinued.",
+      "Only STBD (1–3 years) continues at the discretion of banks.",
+      "No new deposits or renewals are allowed for discontinued types, but existing deposits will continue till maturity."
+    ]
+  },
+  {
+    "id": "sbi-po-q6",
+    "chunkId": "chunk-56",
+    "approxPage": 91,
+    "topic": "Pradhan Mantri Garib Kalyan Deposit Scheme",
+    "questionType": "definition",
+    "question": "What is the Pradhan Mantri Garib Kalyan Yojana (PMGKY) in the context of financial and social support?",
+    "hint": "It supports economically weaker sections during difficult times.",
+    "expectedKeyPoints": [
+      "PMGKY is a welfare scheme of the Government of India.",
+      "Its objective is to provide financial and social support to economically weaker sections during times of need."
+    ]
+  },
+  {
+    "id": "sbi-po-q7",
+    "chunkId": "chunk-57",
+    "approxPage": 93,
+    "topic": "KYC Guidelines",
+    "questionType": "conceptual",
+    "question": "Why is KYC important in the financial system, and what does it help maintain?",
+    "hint": "It ensures integrity, security, transparency, and accountability.",
+    "expectedKeyPoints": [
+      "KYC helps maintain the integrity and security of the financial system.",
+      "It ensures transparency and accountability of customers.",
+      "It aids in preventing issues related to Financing (TF) and Proliferation Financing (PF)."
+    ]
+  },
+  {
+    "id": "sbi-po-q8",
+    "chunkId": "chunk-57",
+    "approxPage": 93,
+    "topic": "KYC Guidelines",
+    "questionType": "scenario",
+    "question": "Under what specific conditions or scenarios is a Regulated Entity (RE) mandatorily required to carry out KYC for a customer?",
+    "hint": "Think about account opening, walk-in cash transactions, and international money transfers.",
+    "expectedKeyPoints": [
+      "At the commencement of an account-based relationship (opening any type of account).",
+      "When a walk-in customer carries out an occasional transaction equal to or exceeding ₹50,000 (single or connected transactions).",
+      "When a walk-in customer carries out any international money transfer operations.",
+      "When the RE doubts the authenticity or adequacy of obtained customer identification data."
+    ]
+  },
+  {
+    "id": "sbi-po-q9",
+    "chunkId": "chunk-57",
+    "approxPage": 93,
+    "topic": "KYC Guidelines",
+    "questionType": "factual",
+    "question": "Are there specific product sales or services provided by a Regulated Entity (RE) that trigger mandatory KYC requirements?",
+    "hint": "Look at credit cards, prepaid cards, and third-party products.",
+    "expectedKeyPoints": [
+      "When the RE sells its own products or third-party products as an agent.",
+      "During payment of dues of credit cards.",
+      "During the sale and reloading of prepaid or travel cards."
+    ]
+  },
+  {
+    "id": "sbi-po-q10",
+    "chunkId": "chunk-56",
+    "approxPage": 91,
+    "topic": "Gold Monetisation Scheme",
+    "questionType": "factual",
+    "question": "Where is the purity of the gold tested under the Gold Monetisation Scheme before deposit?",
+    "hint": "These centers are abbreviated as CPTCs.",
+    "expectedKeyPoints": [
+      "Purity is tested at CPTCs (Collection & Purity Testing Centres)."
+    ]
+  },
+  {
+    "id": "pre-g3-q1",
+    "chunkId": "chunk-82",
+    "approxPage": 134,
+    "topic": "e-RUPI",
+    "questionType": "factual",
+    "question": "Which organization developed e-RUPI, and which key government ministries or authorities collaborated in its development?",
+    "hint": "Developed by NPCI with DFS, MoHFW, and NHA.",
+    "expectedKeyPoints": [
+      "Developed by National Payments Corporation of India (NPCI)",
+      "Collaborated with Department of Financial Services",
+      "Collaborated with Ministry of Health & Family Welfare",
+      "Collaborated with National Health Authority"
+    ]
+  },
+  {
+    "id": "pre-g3-q2",
+    "chunkId": "chunk-82",
+    "approxPage": 134,
+    "topic": "e-RUPI",
+    "questionType": "factual",
+    "question": "How many banks has NPCI partnered with for e-RUPI, and can you name a few public sector banks involved?",
+    "hint": "NPCI partnered with 11 banks including SBI and PNB.",
+    "expectedKeyPoints": [
+      "NPCI has partnered with 11 banks",
+      "Includes State Bank of India (SBI)",
+      "Includes Punjab National Bank (PNB)",
+      "Includes Bank of Baroda, Canara Bank, Indian Bank, and Union Bank of India"
+    ]
+  },
+  {
+    "id": "pre-g3-q3",
+    "chunkId": "chunk-82",
+    "approxPage": 134,
+    "topic": "Legal Tender",
+    "questionType": "definition",
+    "question": "How would you define 'Legal Tender' in the context of currency and debt settlement?",
+    "hint": "Valid and acceptable money for settling debts that must be recognized.",
+    "expectedKeyPoints": [
+      "Type of currency or medium of exchange",
+      "Money that is valid and acceptable for the settlement of debts",
+      "Must be recognized when issued",
+      "Creditors are lawfully responsible for accepting legal tender"
+    ]
+  },
+  {
+    "id": "pre-g3-q4",
+    "chunkId": "chunk-83",
+    "approxPage": 136,
+    "topic": "SEBI",
+    "questionType": "factual",
+    "question": "When was SEBI established, and when did it receive statutory powers?",
+    "hint": "Established in 1988 and given statutory powers under its 1992 Act.",
+    "expectedKeyPoints": [
+      "Established in 1988",
+      "Given statutory powers under the SEBI Act, 1992"
+    ]
+  },
+  {
+    "id": "pre-g3-q5",
+    "chunkId": "chunk-83",
+    "approxPage": 136,
+    "topic": "SEBI",
+    "questionType": "conceptual",
+    "question": "What were the primary historical reasons that led to the creation of SEBI and its subsequent grant of statutory powers?",
+    "hint": "Rapid market growth, malpractices, and the Harshad Mehta Scam 1992.",
+    "expectedKeyPoints": [
+      "Rapid market growth and rising malpractices led to its creation in 1988",
+      "The Harshad Mehta Scam 1992 exposed regulatory loopholes, leading to statutory powers"
+    ]
+  },
+  {
+    "id": "pre-g3-q6",
+    "chunkId": "chunk-83",
+    "approxPage": 136,
+    "topic": "SEBI",
+    "questionType": "factual",
+    "question": "Describe the organizational structure of the SEBI Board.",
+    "hint": "Chairman nominated by Union Govt, Ministry of Finance members, RBI member, and others.",
+    "expectedKeyPoints": [
+      "Chairman nominated by the Union Government",
+      "2 members from the Union Ministry of Finance",
+      "1 member from the Reserve Bank of India (RBI)",
+      "5 members nominated by the Union Government (at least 3 full-time members)"
+    ]
+  },
+  {
+    "id": "pre-g3-q7",
+    "chunkId": "chunk-84",
+    "approxPage": 137,
+    "topic": "Qualified Institutional Placement (QIP)",
+    "questionType": "definition",
+    "question": "What is a Qualified Institutional Placement (QIP), and who are considered Qualified Institutional Buyers (QIBs)?",
+    "hint": "Securities issued by listed companies to QIBs like Mutual Funds, Banks, etc.",
+    "expectedKeyPoints": [
+      "Securities issued by listed companies to Qualified Institutional Buyers (QIBs)",
+      "QIBs include Mutual Funds, Banks, Insurance Companies, Pension Funds, FIIs, and AIFs",
+      "Simpler and quicker than other issue methods"
+    ]
+  },
+  {
+    "id": "pre-g3-q8",
+    "chunkId": "chunk-84",
+    "approxPage": 137,
+    "topic": "Rights Issue & Bonus Issue",
+    "questionType": "conceptual",
+    "question": "What is the key difference between a Rights Issue and a Bonus Issue regarding shareholder pricing and capital generation?",
+    "hint": "Rights issue offers discounted shares to existing holders; Bonus issue gives free shares from reserves without fresh capital.",
+    "expectedKeyPoints": [
+      "Rights Issue offers additional shares to existing shareholders at a discounted price to help maintain ownership control",
+      "Bonus Issue company issues free additional shares as a reward from accumulated reserves",
+      "Bonus Issue does not bring fresh capital into the company"
+    ]
+  },
+  {
+    "id": "pre-g3-q9",
+    "chunkId": "chunk-84",
+    "approxPage": 137,
+    "topic": "Primary Market Reforms",
+    "questionType": "factual",
+    "question": "Which regulatory body and act preceded SEBI in regulating capital issues in India, and which committee recommended its abolition?",
+    "hint": "Regulated by CCI under Capital Issues Act 1947; Narasimham Committee recommended abolition.",
+    "expectedKeyPoints": [
+      "Regulated by the Controller of Capital Issues (CCI) under the Capital Issues (Control) Act, 1947",
+      "Narasimham Committee (1991) recommended abolishing CCI",
+      "Regulatory powers were transferred to Securities and Exchange Board of India"
+    ]
+  },
+  {
+    "id": "pre-g3-q10",
+    "chunkId": "chunk-83",
+    "approxPage": 136,
+    "topic": "SEBI Powers",
+    "questionType": "factual",
+    "question": "Under which code does SEBI derive powers similar to a civil court?",
+    "hint": "Code of Civil Procedure, 1908.",
+    "expectedKeyPoints": [
+      "Powers similar to a civil court under the Code of Civil Procedure, 1908",
+      "Can summon individuals"
+    ]
+  },
+  {
+    "id": "sbi-po-q1",
+    "chunkId": "chunk-136",
+    "approxPage": 223,
+    "topic": "Demand Loans vs Term Loans",
+    "questionType": "definition",
+    "question": "How is a demand loan fundamentally different from a term loan?",
+    "hint": "Think about the repayment terms and the lender's right to recall.",
+    "expectedKeyPoints": [
+      "Repayable on demand without prior notice",
+      "Lender has the right to recall the loan at any time",
+      "Borrower must repay immediately upon demand",
+      "Term loans have a fixed repayment schedule with a defined tenure and instalment structure"
+    ]
+  },
+  {
+    "id": "sbi-po-q2",
+    "chunkId": "chunk-136",
+    "approxPage": 223,
+    "topic": "Concessional Loans",
+    "questionType": "conceptual",
+    "question": "What is the primary objective of offering concessional loans?",
+    "hint": "Consider the sectors that benefit from reduced interest rates.",
+    "expectedKeyPoints": [
+      "Offered at reduced interest rates",
+      "Primary objective is promoting priority and development sectors"
+    ]
+  },
+  {
+    "id": "sbi-po-q3",
+    "chunkId": "chunk-137",
+    "approxPage": 224,
+    "topic": "Unsecured Loans",
+    "questionType": "definition",
+    "question": "What distinguishes unsecured loans from secured loans regarding collateral and assessment?",
+    "hint": "Focus on what is pledged and how the borrower's eligibility is evaluated.",
+    "expectedKeyPoints": [
+      "Sanctioned without any collateral",
+      "Depend entirely on the borrower's creditworthiness",
+      "Banks assess income stability, credit score, repayment history, and overall financial capacity"
+    ]
+  },
+  {
+    "id": "sbi-po-q4",
+    "chunkId": "chunk-137",
+    "approxPage": 224,
+    "topic": "Risk and Pricing in Unsecured Loans",
+    "questionType": "conceptual",
+    "question": "Why do unsecured loans generally carry higher interest rates compared to secured loans?",
+    "hint": "Analyze the risk borne by the lender in the absence of a tangible asset.",
+    "expectedKeyPoints": [
+      "No tangible asset is pledged as security",
+      "Lender bears higher credit risk",
+      "Recovery cannot be made through the sale of collateral"
+    ]
+  },
+  {
+    "id": "sbi-po-q5",
+    "chunkId": "chunk-138",
+    "approxPage": 226,
+    "topic": "Urban Co-operative Banks Regulations",
+    "questionType": "factual",
+    "question": "According to the December 2025 Master Circular for Urban Co-operative Banks, what percentage of advances must be small-value loans by March 2026?",
+    "hint": "Look at the specific target percentage set for March 2026.",
+    "expectedKeyPoints": [
+      "At least 50% of total advances",
+      "Must consist of small-value loans by March 2026"
+    ]
+  },
+  {
+    "id": "sbi-po-q6",
+    "chunkId": "chunk-138",
+    "approxPage": 226,
+    "topic": "Urban Co-operative Banks Objectives",
+    "questionType": "conceptual",
+    "question": "What is the core purpose behind mandating Urban Co-operative Banks to maintain at least 50% of advances as small-value loans?",
+    "hint": "It relates to encouraging focus on retail or specific lending structures.",
+    "expectedKeyPoints": [
+      "To encourage greater focus on retail and smaller borrowers"
+    ]
+  },
+  {
+    "id": "sbi-po-q7",
+    "chunkId": "chunk-136",
+    "approxPage": 223,
+    "topic": "Loan Classification",
+    "questionType": "scenario",
+    "question": "A corporate borrower takes a facility where the bank can recall the outstanding amount anytime without prior notice. What type of loan is this?",
+    "hint": "Refer to the definition where repayment can be demanded instantly.",
+    "expectedKeyPoints": [
+      "Demand loan"
+    ]
+  },
+  {
+    "id": "sbi-po-q8",
+    "chunkId": "chunk-137",
+    "approxPage": 224,
+    "topic": "Credit Assessment",
+    "questionType": "scenario",
+    "question": "If a customer applies for a loan without offering any property or assets as security, what parameters will the bank evaluate to determine eligibility?",
+    "hint": "Think about individual financial capacity and credit history indicators.",
+    "expectedKeyPoints": [
+      "Income stability",
+      "Credit score",
+      "Repayment history",
+      "Overall financial capacity"
+    ]
+  },
+  {
+    "id": "sbi-po-q9",
+    "chunkId": "chunk-138",
+    "approxPage": 226,
+    "topic": "Regulatory Guidelines",
+    "questionType": "factual",
+    "question": "Which regulatory master circular introduced the mandate regarding small-value loan targets for Urban Co-operative Banks, and when was it issued?",
+    "hint": "Check the month, year, and type of circular mentioned for UCBs.",
+    "expectedKeyPoints": [
+      "December 2025 Master Circular",
+      "Issued for Urban Co-operative Banks"
+    ]
+  },
+  {
+    "id": "sbi-po-q10",
+    "chunkId": "chunk-136",
+    "approxPage": 223,
+    "topic": "Lending Terms",
+    "questionType": "conceptual",
+    "question": "Are factors like collateral, interest rate, or government subsidy considered defining features that separate demand loans from term loans? Explain.",
+    "hint": "Look at how the excerpt distinguishes defining vs variable features.",
+    "expectedKeyPoints": [
+      "No, they are not defining features",
+      "Such factors may vary across both types of loans",
+      "The core difference lies in repayment on demand versus a fixed repayment schedule with a defined tenure"
+    ]
+  },
+  {
+    "id": "sbi-po-q1",
+    "chunkId": "chunk-163",
+    "approxPage": 267,
+    "topic": "RBI Internal Ombudsman Directions 2026",
+    "questionType": "factual",
+    "question": "Which entities are covered under the RBI (Internal Ombudsman) Directions, 2026 to strengthen internal grievance redressal mechanisms?",
+    "hint": "Think about commercial entities, financial companies, digital payment issuers, and credit information companies.",
+    "expectedKeyPoints": [
+      "Commercial Banks",
+      "Small Finance Banks",
+      "Payment Banks",
+      "Non-Banking Financial Companies (NBFCs)",
+      "Non-bank Prepaid Payment Instrument (PPI) Issuers",
+      "Credit Information Companies (CICs)"
+    ]
+  },
+  {
+    "id": "sbi-po-q2",
+    "chunkId": "chunk-163",
+    "approxPage": 267,
+    "topic": "RBI Internal Ombudsman Directions 2026",
+    "questionType": "conceptual",
+    "question": "Why are Non-bank Prepaid Payment Instrument (PPI) Issuers and Credit Information Companies (CICs) included under the RBI (Internal Ombudsman) Directions, 2026?",
+    "hint": "Consider their specific roles in the financial ecosystem regarding digital payments and credit access.",
+    "expectedKeyPoints": [
+      "Non-bank PPI Issuers are included due to their role in digital payments",
+      "Credit Information Companies are included because of their impact on credit access and consumer rights"
+    ]
+  },
+  {
+    "id": "sbi-po-q3",
+    "chunkId": "chunk-164",
+    "approxPage": 269,
+    "topic": "Internal Ombudsman Eligibility",
+    "questionType": "factual",
+    "question": "What is the mandatory professional experience required for an individual to serve as an Internal Ombudsman to ensure adequate domain expertise?",
+    "hint": "The requirement is expressed in terms of a specific number of years.",
+    "expectedKeyPoints": [
+      "Professional experience of 7 years is mandatory"
+    ]
+  },
+  {
+    "id": "sbi-po-q4",
+    "chunkId": "chunk-164",
+    "approxPage": 269,
+    "topic": "Internal Ombudsman Eligibility",
+    "questionType": "factual",
+    "question": "What is the age restriction prescribed for an individual to ensure they do not cross a certain age limit before the completion of their tenure as an Internal Ombudsman?",
+    "hint": "Check the maximum age limit specified before tenure completion.",
+    "expectedKeyPoints": [
+      "The individual shall not be above 70 years of age before completion of tenure"
+    ]
+  },
+  {
+    "id": "sbi-po-q5",
+    "chunkId": "chunk-164",
+    "approxPage": 269,
+    "topic": "e-Kuber System",
+    "questionType": "factual",
+    "question": "What is the proposed future targeted lower threshold for mandatory routing through the e-Kuber system under the revised guidelines for Central Government payments?",
+    "hint": "It represents a reduction from the current general threshold of ₹75 crore and earlier ₹500 crore.",
+    "expectedKeyPoints": [
+      "₹50 crore"
+    ]
+  },
+  {
+    "id": "sbi-po-q6",
+    "chunkId": "chunk-164",
+    "approxPage": 269,
+    "topic": "e-Kuber System",
+    "questionType": "factual",
+    "question": "What was the earlier threshold for mandatory routing through the e-Kuber system before the gradual reduction and the post-July change to ₹75 crore?",
+    "hint": "Think about the highest initial threshold mentioned in the reduction plan.",
+    "expectedKeyPoints": [
+      "₹500 crore"
+    ]
+  },
+  {
+    "id": "sbi-po-q7",
+    "chunkId": "chunk-165",
+    "approxPage": 270,
+    "topic": "Bonds and G-Secs",
+    "questionType": "definition",
+    "question": "How is the relationship between the issuer and the bondholder defined, and do bondholders possess voting rights like equity shareholders?",
+    "hint": "Consider whether bondholders are considered owners or creditors.",
+    "expectedKeyPoints": [
+      "Bondholders are creditors, not owners",
+      "They do not get voting rights (unlike equity shareholders)"
+    ]
+  },
+  {
+    "id": "sbi-po-q8",
+    "chunkId": "chunk-165",
+    "approxPage": 270,
+    "topic": "Bonds and G-Secs",
+    "questionType": "conceptual",
+    "question": "What happens regarding repayment priority in the case of liquidation for bondholders versus equity shareholders?",
+    "hint": "Look at who gets paid first when a company or entity liquidates.",
+    "expectedKeyPoints": [
+      "In case of liquidation, bondholders have priority over equity shareholders in repayment"
+    ]
+  },
+  {
+    "id": "sbi-po-q9",
+    "chunkId": "chunk-165",
+    "approxPage": 270,
+    "topic": "Bonds and G-Secs",
+    "questionType": "conceptual",
+    "question": "How do bonds appear on the balance sheet for both the issuer and the investor?",
+    "hint": "Differentiate between liability and financial asset.",
+    "expectedKeyPoints": [
+      "Bonds appear as liabilities for the issuer",
+      "Bonds appear as financial assets for the investor"
+    ]
+  },
+  {
+    "id": "sbi-po-q10",
+    "chunkId": "chunk-165",
+    "approxPage": 270,
+    "topic": "Bonds and G-Secs",
+    "questionType": "factual",
+    "question": "Why are government bonds considered gilt-edged securities?",
+    "hint": "Think about their backing and the level of default risk involved.",
+    "expectedKeyPoints": [
+      "Government bonds are considered sovereign-backed with negligible default risk"
+    ]
+  },
+  {
+    "id": "pre-g7-q1",
+    "chunkId": "chunk-190",
+    "approxPage": 311,
+    "topic": "TReDS Platforms",
+    "questionType": "factual",
+    "question": "Which institution stands for RXIL, and which two entities have jointly promoted it?",
+    "hint": "Refer to the expansion of RXIL and its promoters mentioned in the explanation.",
+    "expectedKeyPoints": [
+      "RXIL stands for Receivables Exchange of India Ltd.",
+      "It is jointly promoted by SIDBI and NSE."
+    ]
+  },
+  {
+    "id": "pre-g7-q2",
+    "chunkId": "chunk-190",
+    "approxPage": 311,
+    "topic": "TReDS Platforms",
+    "questionType": "definition",
+    "question": "What is the primary operational role of RXIL as an authorized TReDS platform under RBI approval?",
+    "hint": "Think about what RXIL facilitates for MSME trade receivables.",
+    "expectedKeyPoints": [
+      "Facilitates electronic discounting of MSME trade receivables.",
+      "Enables competitive financing through multiple financiers.",
+      "Supports improved liquidity for MSMEs dealing with corporates and PSUs."
+    ]
+  },
+  {
+    "id": "pre-g7-q3",
+    "chunkId": "chunk-191",
+    "approxPage": 313,
+    "topic": "TReDS Guidelines 2026",
+    "questionType": "factual",
+    "question": "Under the revised 2026 guidelines, what is the mandatory turnover threshold for companies to register on TReDS, and what was it reduced from?",
+    "hint": "Check the updated turnover threshold introduced in the 2026 reforms.",
+    "expectedKeyPoints": [
+      "The turnover threshold was reduced from ₹500 crore to ₹250 crore.",
+      "Companies with an annual turnover exceeding ₹250 crore must register on a TReDS platform."
+    ]
+  },
+  {
+    "id": "pre-g7-q4",
+    "chunkId": "chunk-191",
+    "approxPage": 313,
+    "topic": "TReDS Guidelines 2026",
+    "questionType": "conceptual",
+    "question": "What is the primary objective of reducing the turnover threshold for TReDS registration under the 2026 reforms?",
+    "hint": "Consider the expansion of coverage and payment settlements for MSMEs.",
+    "expectedKeyPoints": [
+      "Expands coverage to include more large buyers dealing with MSMEs.",
+      "Ensures timely settlement of MSME dues."
+    ]
+  },
+  {
+    "id": "pre-g7-q5",
+    "chunkId": "chunk-191",
+    "approxPage": 313,
+    "topic": "TReDS Reforms",
+    "questionType": "conceptual",
+    "question": "How do the revised TReDS guidelines affect government procurement and payments?",
+    "hint": "Look at public procurement alignment and payment delays.",
+    "expectedKeyPoints": [
+      "Aligns public procurement payments with RBI-regulated receivables financing systems.",
+      "Reduces payment delays from large government buyers."
+    ]
+  },
+  {
+    "id": "pre-g7-q6",
+    "chunkId": "chunk-191",
+    "approxPage": 313,
+    "topic": "Invoice Discounting",
+    "questionType": "factual",
+    "question": "Which credit guarantee support scheme complements the invoice discounting process on TReDS?",
+    "hint": "Look for the CGTMSE-backed support mentioned in the text.",
+    "expectedKeyPoints": [
+      "CGTMSE-backed credit guarantee support."
+    ]
+  },
+  {
+    "id": "pre-g7-q7",
+    "chunkId": "chunk-192",
+    "approxPage": 315,
+    "topic": "Cheque Truncation System (CTS)",
+    "questionType": "factual",
+    "question": "When was the second phase of the faster cheque clearing mechanism under CTS initially scheduled to be implemented?",
+    "hint": "Look at the initial implementation date mentioned for CTS phase two.",
+    "expectedKeyPoints": [
+      "Initially scheduled to be implemented from January 3."
+    ]
+  },
+  {
+    "id": "pre-g7-q8",
+    "chunkId": "chunk-192",
+    "approxPage": 315,
+    "topic": "Cheque Truncation System (CTS)",
+    "questionType": "definition",
+    "question": "What were the main objectives of introducing continuous clearing and settlement under the second phase of CTS?",
+    "hint": "Think about cheque realisation time and RBI's efficiency goals.",
+    "expectedKeyPoints": [
+      "Reduce cheque realisation time across banks.",
+      "Enhance efficiency in the cheque clearing ecosystem.",
+      "Align cheque processing timelines more closely with digital payment efficiency."
+    ]
+  },
+  {
+    "id": "pre-g7-q9",
+    "chunkId": "chunk-192",
+    "approxPage": 315,
+    "topic": "Cheque Truncation System (CTS)",
+    "questionType": "conceptual",
+    "question": "What infrastructure does the faster cheque clearing mechanism build upon, and why was its implementation later deferred?",
+    "hint": "Check the grid-based infrastructure and operational reasons.",
+    "expectedKeyPoints": [
+      "Built upon the existing grid-based CTS infrastructure.",
+      "Implementation was later deferred for operational preparedness."
+    ]
+  },
+  {
+    "id": "pre-g7-q10",
+    "chunkId": "chunk-190",
+    "approxPage": 311,
+    "topic": "TReDS & Government Portals",
+    "questionType": "factual",
+    "question": "TReDS has been linked with which government platform to facilitate the 'GeM Sahay' credit facility?",
+    "hint": "Look for the e-marketplace platform mentioned in Section 1 options.",
+    "expectedKeyPoints": [
+      "Government e-Marketplace"
+    ]
+  }
+]
